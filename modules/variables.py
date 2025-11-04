@@ -8,8 +8,8 @@ CANTIDAD_VIDAS = 3
 vOLUMEN_INICIAL = 50
 
 # Imagenes
-
-ICON_IMG = 'C:/Repositorio UTN/2025/PROG I/TPFinal_Div317_Heck_Nicole/modules/assets/gamepad_icon.png'
+ICON_IMG = 'modules/assets/icons/gamepad_icon.png'
+FONDO_MENU_IMG = 'modules/assets/backgrounds/fondo_menu.JPG'
 
 # Fuentes
 FONT_ALAGARD = 'modules/assets/fonts/alagard.ttf' 

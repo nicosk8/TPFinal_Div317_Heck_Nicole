@@ -10,7 +10,7 @@ def dbz_playing_cards():
 
     pg.display.set_caption(var.TITULO_JUEGO)
     pantalla_juego = pg.display.set_mode(var.DIMENSION_PANTALLA)
-    pg.display.set_icon(var.ICON_IMG)
+    pg.image.load(var.ICON_IMG) # cargo el icono del juego
 
     corriendo = True
     reloj = pg.time.Clock() # seteo de FPS
@@ -36,5 +36,12 @@ def dbz_playing_cards():
         form_controller.update(form_control) # <- aca actualiza los eventos en pantalla
         pg.display.flip() # <- aca muestra al usuario los cambios en pantalla
 
+    cerrar_juego()
+
+
+def cerrar_juego():
+    print('\n|---------------------------------------------------|')
+    print('|  cerrando el juego... ¡Muchas gracias por jugar!  |')
+    print('|---------------------------------------------------|\n')
     pg.quit()
     sys.exit()

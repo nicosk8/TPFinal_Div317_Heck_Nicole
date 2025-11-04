@@ -25,8 +25,8 @@ def create_form_controller(screen: pg.Surface, datos_juego: dict):
             "screen" : controller.get('main_screen'),
             "active" : True,
             "coord" : (0,0),
-            "music_path" : '',
-            "background" : '',
+            "music_path" : '...',
+            "background" : var.FONDO_MENU_IMG,
             "screen_dimensions" : var.DIMENSION_PANTALLA
         }
         )

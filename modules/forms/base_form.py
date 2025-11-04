@@ -1,4 +1,5 @@
 import pygame as pg
+import modules.variables as var
 
 def create_base_form(dict_form_data: dict) -> dict:
     """ Crea la estructura base , comùn, a todos los formularios de las pantallas
@@ -15,7 +16,7 @@ def create_base_form(dict_form_data: dict) -> dict:
     form['music_path'] = dict_form_data.get('music_path') # ruta del archivo de musica
     
     form['surface'] = pg.image.load(dict_form_data.get('background')).convert_alpha() # ruta de la imagen de fondo que tiene que cargar
-    form['surface'] = pg.transform.scale(form.get('surface'), dict_form_data.get('screen')) # <- ajusto la img al tamago de la pantalla 
+    form['surface'] = pg.transform.scale(form.get('surface'), var.DIMENSION_PANTALLA) # <- ajusto la img al tamago de la pantalla 
     form['rect'] = form.get('surface').get_rect() # aca seteo la superficie rectangulo 
 
     form['rect'].x = dict_form_data.get('coord')[0] # seteo desde donde quiero que se empiece a dibujar

@@ -22,7 +22,7 @@ def create_form_menu(dict_form_data: dict) -> dict:
     form['lbl_titulo'] = Label(
         x= var.DIMENSION_PANTALLA[0] // 2 , # <- lo ubico en la mitad de la pantalla en el eje x 
         y= 100,
-        text= 'Menu principal',
+        text= 'MENU PRINCIPAL',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
         font_size= 35,
