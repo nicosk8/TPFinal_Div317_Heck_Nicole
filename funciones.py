@@ -42,18 +42,19 @@ def manejador_de_eventos(configs: dict, heroes: list[dict]):
             configs['running_state'] = False
         
         if event.type == pg.MOUSEBUTTONDOWN:
+
+            position = (event.pos)
             print(event)
             if event.button == 1:
 
-                random_index_list = rd.randint(0, len(heroes) - 1)
-#                background_color_name = rd.choice(['cyan', 'red', 'blue', 'pink'])
-                background_color_name = 'pink'
-                color_random_name = 'black'
+                print('Click boton derecho')
+                
+                
 
-                configs['color_fondo'] = pg.Color(background_color_name)
-                configs['color_texto'] = pg.Color(color_random_name)
+                # aca tengo que validar evento click en alguna de las opciones del menu ?
+                
 
-                configs['selected_hero_info'] = heroes[random_index_list]
+                pass
                 
 def cerrar_juego():
     print('\n|---------------------------------------------------|')

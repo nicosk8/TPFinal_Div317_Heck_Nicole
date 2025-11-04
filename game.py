@@ -22,7 +22,9 @@ def run_game(game_name: str, heroes: list[dict]):
         
 
         manejador_de_eventos(configs, heroes)
-        pantallas.armar_background_menu(configs)
+        pantallas.armar_pantalla_menu_principal(configs)
+        # aca tengo que validar evento click en alguna de las opciones del menu ?
+
 
         if configs.get('selected_hero_info') != None:
             
