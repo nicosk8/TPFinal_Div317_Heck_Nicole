@@ -1,4 +1,5 @@
 import pygame as pg
+import sys
 import modules.variables as var
 import modules.assets
 import modules.forms.base_form as base_form
@@ -32,31 +33,67 @@ def create_form_menu(dict_form_data: dict) -> dict:
     # Aca voy a crear el boton "JUGAR"
     form['btn_play'] = Button(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
-        y= 150, # <- lo ubico 50 pixeles por debajo del texto "Menu principal"
+        y= 150, # <- lo ubico 150 pixeles por debajo del texto "Menu principal"
         text='JUGAR',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
+        align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
         font_size= 30,
-        on_click= None, 
-        on_click_param= None # <- llamado a la funcion que ejecuta la logica principal del juego
+        on_click= imprimir_texto_boton, # <- llamado a la funcion que ejecuta la logica principal del juego
+        on_click_param= None # <- transfiere parametros a la funcion
+    )
+
+    # Aca voy a crear el boton "EXIT"
+    form['btn_exit'] = Button(
+        x= var.DIMENSION_PANTALLA[0] // 2 ,
+        y= 500, # <- lo ubico 400 pixeles por debajo del texto "Menu principal"
+        text='SALIR',
+        screen= form.get('screen'), # <- dimension de la pantalla
+        font_path= var.FONT_ALAGARD,
+        font_size= 30,
+        on_click= salir_juego, # <- llamado a la funcion que ejecuta la logica principal del juego
+        on_click_param= None # <- transfiere parametros a la funcion
     )
 
     # Lista de widgets a dibujar en pantalla
     form['widgets_list'] = [
         form.get('lbl_titulo'), # <- Titulo
-        form.get('btn_play') # <- Boton "JUGAR"
+        form.get('btn_play'), # <- Boton "JUGAR"
+        form.get('btn_exit')
     ]
 
     # ahora, agrego el formulario para controlar cual form estoy activando y cual no.
     var.dict_forms_status[form.get('name')] = form  # <- el nombre del formulario activo en el momento + sus valores
     return form
 
+def imprimir_texto_boton(_):
+    """ [recibe una variable de descarte "_" que no utiliza]"""
+    print('Estamos presionando el boton "JUGAR"')
+
+def salir_juego(_):
+    """ Termina la ejecuciòn del juego """
+    print('\n|---------------------------------------------------|')
+    print('|  cerrando el juego... ¡Muchas gracias por jugar!  |')
+    print('|---------------------------------------------------|\n')
+    pg.quit()
+    sys.exit()
+
+
 def draw(dict_form_data: dict):
     """ Dibuja en pantalla el fondo y los widgets """
     base_form.draw(dict_form_data) # <- dibuja la imagen de fondo
     base_form.draw_widgets(dict_form_data) # <- dibuja los botones y labels (widgets)
 
+def events_handler():
+
+    events = pg.event.get()
+    for event in events:
+        if event.type == pg.MOUSEBUTTONDOWN:
+            x, y = event.pos
+            print(f'Coordenada mouse: X = {x} | Y = {y}')
+
 def update(dict_form_data: dict):
     """ Actualiza en pantalla el fondo y los widgets """
+    events_handler()
     base_form.update(dict_form_data)
 

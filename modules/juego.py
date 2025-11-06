@@ -34,14 +34,7 @@ def dbz_playing_cards():
                 corriendo = False
             
         form_controller.update(form_control) # <- aca actualiza los eventos en pantalla
-        pg.display.flip() # <- aca muestra al usuario los cambios en pantalla
-
-    cerrar_juego()
+        pg.display.flip() # <- aca muestra al usuario los cambios en pantalla. fLIP() actualiza todos los widgets <> Update() actualiza cosas concretas por parametros
 
 
-def cerrar_juego():
-    print('\n|---------------------------------------------------|')
-    print('|  cerrando el juego... ¡Muchas gracias por jugar!  |')
-    print('|---------------------------------------------------|\n')
-    pg.quit()
-    sys.exit()
+    

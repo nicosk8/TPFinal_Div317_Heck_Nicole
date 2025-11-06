@@ -37,7 +37,11 @@ def forms_update(form_controller: dict):
     """ Valida cual formulario està activo, lo actualiza y lo muestra en pantalla 
     :params: form_controller -> diccionario de formularios """
 
-    if form_controller.get('forms_list')[0].get('active'): # aca pregunto si el formulario de "Menu principal" esta activo
+    lista_formularios = form_controller.get('forms_list')
+
+    # Formulario "MENU"
+    if lista_formularios[0].get('active'): # aca pregunto si el formulario de "Menu principal" esta activo
+        
         menu_form.update(form_controller.get('forms_list')[0]) # <- lo actualizo
         menu_form.draw(form_controller.get('forms_list')[0]) # <- y lo dibujo en pantalla
 

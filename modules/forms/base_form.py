@@ -1,6 +1,7 @@
 import pygame as pg
 import modules.variables as var
 
+
 def create_base_form(dict_form_data: dict) -> dict:
     """ Crea la estructura base , comùn, a todos los formularios de las pantallas
     :params:
@@ -38,6 +39,18 @@ def update_widgets(form_data: dict):
     for widget in form_data.get('widgets_list'):
         widget.update()
 
+def set_active(form_name: str):
+    """ Activa un formulario 
+    1 - Setea en False todos los formularios
+    2 - Setea en True la clave del formulario que viene por parametro
+
+    :params: 
+        form_name -> nombre del formulario a activar """
+
+    for form in var.dict_forms_status.values():
+        form['active'] = False
+    
+    var.dict_forms_status[form_name]['active'] = True
 
 def update(form_data: dict):
     """ Actualiza en la pantalla el estado de los widgets 

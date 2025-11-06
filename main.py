@@ -1,5 +1,5 @@
-import modules.juego as game
+from modules.juego import dbz_playing_cards
 
 if __name__ == '__main__':
 
-    game.dbz_playing_cards()
+    dbz_playing_cards()
