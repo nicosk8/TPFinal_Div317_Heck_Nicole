@@ -52,6 +52,15 @@ def set_active(form_name: str):
     
     var.dict_forms_status[form_name]['active'] = True
 
+def cambiar_pantalla(form_name: str):
+    """ Recibe el nombre de un formulario y lo ejecuta
+    :params: form_name -> nombre del formualrio """
+    
+    print(f'Ingresando al formulario -> {form_name}')
+    
+    set_active(form_name)
+
+
 def update(form_data: dict):
     """ Actualiza en la pantalla el estado de los widgets 
     :params: form_data -> diccionario de formularios """

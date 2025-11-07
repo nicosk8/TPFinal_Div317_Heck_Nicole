@@ -1,6 +1,7 @@
 import pygame as pg
 import modules.forms.menu_form as menu_form
 import modules.variables as var
+import modules.forms.ranking_form as ranking_form
 
 def create_form_controller(screen: pg.Surface, datos_juego: dict):
     """ Funcion creadora de formularios 
@@ -28,8 +29,18 @@ def create_form_controller(screen: pg.Surface, datos_juego: dict):
             "music_path" : '...',
             "background" : var.FONDO_MENU_IMG,
             "screen_dimensions" : var.DIMENSION_PANTALLA
-        }
-        )
+        }),
+
+        ranking_form.create_form_ranking(
+        {
+            "name" : 'form_ranking',
+            "screen" : controller.get('main_screen'),
+            "active" : False,
+            "coord" : (0,0),
+            "music_path" : '...',
+            "background" : var.FONDO_RANKING_IMG,
+            "screen_dimensions" : var.DIMENSION_PANTALLA
+        })
     ] 
     return controller
 
@@ -39,11 +50,19 @@ def forms_update(form_controller: dict):
 
     lista_formularios = form_controller.get('forms_list')
 
-    # Formulario "MENU"
-    if lista_formularios[0].get('active'): # aca pregunto si el formulario de "Menu principal" esta activo
+    # Form "MENU"
+    if lista_formularios[0].get('active'): # aca pregunto si el formulario de menu_form esta activo y lo llamo
         
-        menu_form.update(form_controller.get('forms_list')[0]) # <- lo actualizo
-        menu_form.draw(form_controller.get('forms_list')[0]) # <- y lo dibujo en pantalla
+        form_menu = lista_formularios[0]
+        menu_form.update(form_menu) # <- lo actualizo
+        menu_form.draw(form_menu) # <- y lo dibujo en pantalla
+    
+    # Form "RANKING"
+    elif lista_formularios[1].get('active'): # aca pregunto si el formulario raking_form esta activo y lo llamo
+
+        form_ranking = lista_formularios[1]
+        ranking_form.update(form_ranking) # <- lo actualizo
+        ranking_form.draw(form_ranking) # <- y lo dibujo en pantalla
 
 def update(form_controller: dict):
     """ Valida cual formulario està activo, lo actualiza y lo muestra en pantalla 

@@ -43,6 +43,19 @@ def create_form_menu(dict_form_data: dict) -> dict:
         on_click_param= None # <- transfiere parametros a la funcion
     )
 
+    # Aca voy a crear el boton "RANKING"
+    form['btn_ranking'] = Button(
+        x= var.DIMENSION_PANTALLA[0] // 2 ,
+        y= 210, # <- lo ubico 210 pixeles por debajo del texto "Menu principal"
+        text='RANKING',
+        screen= form.get('screen'), # <- dimension de la pantalla
+        font_path= var.FONT_ALAGARD,
+        align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
+        font_size= 30,
+        on_click= base_form.cambiar_pantalla, # <- llamado a la funcion que ejecuta el cambio de pantalla a RANKING
+        on_click_param= 'form_ranking' # <- transfiere parametros a la funcion
+    )
+
     # Aca voy a crear el boton "EXIT"
     form['btn_exit'] = Button(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
@@ -59,6 +72,7 @@ def create_form_menu(dict_form_data: dict) -> dict:
     form['widgets_list'] = [
         form.get('lbl_titulo'), # <- Titulo
         form.get('btn_play'), # <- Boton "JUGAR"
+        form.get('btn_ranking'), # <- Boton "RANKING"
         form.get('btn_exit')
     ]
 
@@ -69,6 +83,8 @@ def create_form_menu(dict_form_data: dict) -> dict:
 def imprimir_texto_boton(_):
     """ [recibe una variable de descarte "_" que no utiliza]"""
     print('Estamos presionando el boton "JUGAR"')
+
+
 
 def salir_juego(_):
     """ Termina la ejecuciòn del juego """

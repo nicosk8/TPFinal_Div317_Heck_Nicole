@@ -10,6 +10,7 @@ vOLUMEN_INICIAL = 50
 # Imagenes
 ICON_IMG = 'modules/assets/icons/gamepad_icon.png'
 FONDO_MENU_IMG = 'modules/assets/backgrounds/fondo_menu.JPG'
+FONDO_RANKING_IMG = 'modules/assets/backgrounds/FONDO_RANKING.jpg'
 
 # Fuentes
 FONT_ALAGARD = 'modules/assets/fonts/alagard.ttf' 
