@@ -17,3 +17,7 @@ FONT_ALAGARD = 'modules/assets/fonts/alagard.ttf'
 
 # Diccionario de formularios activos en el juego
 dict_forms_status = {}
+
+# File ranking
+RANKING_CSV_FILE = 'C:/Repositorio UTN/2025/PROG I/TPFinal_Div317_Heck_Nicole/puntajes.csv'
+

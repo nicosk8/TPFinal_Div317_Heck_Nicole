@@ -61,10 +61,12 @@ def create_form_ranking(dict_form_data: dict) -> dict:
     return form 
 
 def cambiar_pantalla(param_list : tuple):
-    """ Recibe el nombre de un formulario y lo ejecuta.
+    """ Vacìa los datos del formulario Ranking para su salida, para cuando se vuelva a ingresar
+    pueda reiniciarse. Por ultimo, recibe el nombre de un formulario y lo ejecuta.
         1 - Muestra un mensaje de salida
-        2 - Establece en False la carga de datos
-        3 - LLamado a funcion de cambio de pantalla
+        2 - Vacìa la lista de widgets
+        3 - Establece en False la carga de datos
+        4 - LLamado a funcion de cambio de pantalla
     :params: 
         form_ranking -> datos del formulario
         form_name -> nombre del formualrio """
@@ -72,9 +74,78 @@ def cambiar_pantalla(param_list : tuple):
     form_ranking, form_name = param_list # <- desempaqueto los datos
 
     print('Saliendo del formulario -> "RANKING" ...')
+    form_ranking['lista_ranking_GUI'] = []
+    form_ranking['lista_ranking_file'] = []
     form_ranking['data_loaded'] = False
-
     base_form.cambiar_pantalla(form_name)
+
+def init_ranking_data(form_dict_data: dict):
+    """
+    Arma la siguiente pantalla con los datos obtenidos del archivo puntajes.csv
+    POSICION        NOMBRE          PUNTAJE
+    POSICION        NOMBRE          PUNTAJE
+    POSICION        NOMBRE          PUNTAJE
+    POSICION        NOMBRE          PUNTAJE
+    POSICION        NOMBRE          PUNTAJE
+
+    """
+    form_dict_data['lista_ranking_GUI'] = []
+    matriz = form_dict_data.get('lista_ranking_file')
+    y_coord_inicial = 190 # establezco la posicion para el primer registro
+    color_texto = (255,255,255) # blanco
+
+    for indice_fila in range(len(matriz)):
+        fila = matriz[indice_fila]
+        nombre_jugador = fila[0]
+        puntaje_jugador = fila[1]
+        mensaje = f'Jugador: {nombre_jugador}  - puntaje: {puntaje_jugador}'
+        print(mensaje)
+
+
+        # me tengo que crear un label por cada dato
+        posicion = Label(
+            x= var.DIMENSION_PANTALLA[0] // 2 - 220,
+            y= y_coord_inicial ,
+            text= f'{indice_fila + 1}', # <- convierto a string : "1" ... "1" ... "1"
+            screen= form_dict_data.get('screen'),
+            font_size=40,
+            font_path= var.FONT_ALAGARD, color=color_texto
+        )
+        nombre = Label(
+            x= var.DIMENSION_PANTALLA[0] // 2 ,
+            y= y_coord_inicial,
+            text= nombre_jugador, # <- nombre del jugador
+            screen= form_dict_data.get('screen'),
+            font_size=40,
+            font_path= var.FONT_ALAGARD, color=color_texto       
+        )
+        puntaje = Label(
+            x= var.DIMENSION_PANTALLA[0] // 2 + 220,
+            y= y_coord_inicial,
+            text= f'{puntaje_jugador}', # <- puntaje del jugador
+            screen= form_dict_data.get('screen'),
+            font_size=40,
+            font_path= var.FONT_ALAGARD, color=color_texto
+        )
+
+        y_coord_inicial += 50 # actualizo la posision para el siguiente registro
+
+        form_dict_data['lista_ranking_GUI'].append(posicion)
+        form_dict_data['lista_ranking_GUI'].append(nombre)
+        form_dict_data['lista_ranking_GUI'].append(puntaje)
+
+        if indice_fila == 0:
+            color_texto = (255,0,0)
+
+
+def inicializar_ranking_archivo(form_dict_data: dict):
+    """ Carga la lista de ranking con toda su informacion 
+        con los datos obtenidos desde el archivo de entrada puntajes.csv"""
+    
+    if not form_dict_data.get('data_loaded'):
+        form_dict_data['lista_ranking_file'] = load_data.cargar_ranking(file_path= var.RANKING_CSV_FILE, top=7)
+        init_ranking_data(form_dict_data) # llamado a funcion que agarra la amtriz y se encarga de dibujar todo lo necesario en el form
+        form_dict_data['data_loaded'] = True
 
 def draw(form_dict_data: dict):
     """ Dibuja la pantalla del formulario RANKING y sus widgets 
@@ -82,9 +153,14 @@ def draw(form_dict_data: dict):
     base_form.draw(form_dict_data)
     base_form.draw_widgets(form_dict_data)
     
+    # dibujo los widgets lbl del ranking
+    for widget in form_dict_data.get('lista_ranking_GUI'):
+        widget.draw()
+    
 
 def update(form_dict_data: dict):
+    """ Carga los datos, los actualiza y los muestra en pantalla """
 
-    if form_dict_data.get('data_loaded'):
-        pass
+    if not form_dict_data.get('data_loaded'):
+        inicializar_ranking_archivo(form_dict_data)
     base_form.update(form_dict_data)

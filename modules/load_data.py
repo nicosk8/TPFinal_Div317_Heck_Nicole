@@ -9,15 +9,15 @@ def parsear_valor(valor: str):
     """ Convierte un valor a entero o flotante segun sea el caso
     :params: valor -> dato sting """
     if valor.isdigit(): 
-        int(valor)
+        return int(valor)
     
     elif "." in valor: 
-        float(valor)
+        return float(valor)
     
     return valor
 
 
-def cargar_ranking(top: int = 7) -> list:
+def cargar_ranking(file_path: str, top: int = 7) -> list:
     """ Carga datos a una matriz desde una rchivo csv:
         1 - Apertura , lectura y cierra de archivo 
         2 - Adiciona linea por linea a la lista 
@@ -31,7 +31,7 @@ def cargar_ranking(top: int = 7) -> list:
     """
     
     ranking = []
-    with open('','r', encoding='utf-8') as file:
+    with open(file_path,'r', encoding='utf-8') as file:
         
         texto = file.read()
 
@@ -39,9 +39,13 @@ def cargar_ranking(top: int = 7) -> list:
             if linea: 
                 lista_datos_linea = linea.split(';')
                 ranking.append(lista_datos_linea)
+
     mapear_valores(ranking, columna_a_mapear= 1, callback= parsear_valor) # parseo de datos
 
-    ranking.sort(key= lambda fila: fila[1], reverse=True) # ordena DES por puntaje numerico
+    ranking = ranking[1:] # ignora el encabezado y empieza desde las 2da linea
+    ranking.sort(key=lambda fila: fila[1], reverse=True) # ordena DES por puntaje numerico
 
     return ranking[:top] # Devuelve los primeros 7 valores 
      
+if __name__ == '__main__':
+    print(cargar_ranking('C:/Repositorio UTN/2025/PROG I/TPFinal_Div317_Heck_Nicole/puntajes.csv', top=7))
