@@ -3,6 +3,7 @@ import sys
 import modules.variables as var
 import modules.assets
 import modules.forms.base_form as base_form
+import modules.load_data as load_data
 from utn_fra.pygame_widgets import (
     Label , # <- class
     Button, # <- boton simple
