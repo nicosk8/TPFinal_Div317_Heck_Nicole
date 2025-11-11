@@ -1,5 +1,6 @@
 import pygame as pg
 import modules.variables as var
+import modules.sonido as sonido
 
 
 def create_base_form(dict_form_data: dict) -> dict:
@@ -22,6 +23,7 @@ def create_base_form(dict_form_data: dict) -> dict:
 
     form['rect'].x = dict_form_data.get('coord')[0] # seteo desde donde quiero que se empiece a dibujar
     form['rect'].y = dict_form_data.get('coord')[1]
+    form['music_config'] = dict_form_data.get('music_config')
 
     return form
 
@@ -37,6 +39,7 @@ def update_widgets(form_data: dict):
     :params: form_data -> diccionario de formularios """
 
     for widget in form_data.get('widgets_list'):
+        print(f'\n\n ESTOY EN BASE_FORM : UPDATE WIDGETS -> "widgets_list" -> \n\n{form_data.get('widgets_list')}\n')
         widget.update()
 
 def set_active(form_name: str):
@@ -49,8 +52,24 @@ def set_active(form_name: str):
 
     for form in var.dict_forms_status.values():
         form['active'] = False
+    form_activo = var.dict_forms_status[form_name]
+    form_activo['active'] = True
+    music_off(form_activo) # freno una musica anterior, si habìa
+    music_on(form_activo) # doy play a la musica propia del form activo
+
+def music_on(form_dict_data: dict):
+    """ Si no hay una musica activada, la configura y da play """
     
-    var.dict_forms_status[form_name]['active'] = True
+    if form_dict_data.get('music_config').get('music_on'):
+        ruta_musica = form_dict_data.get('music_path')
+        sonido.set_music_path(ruta_musica)
+        sonido.play_music()
+
+def music_off(form_dict_data: dict):
+    """ Si hay una musica activada, la desactiva """
+
+    if form_dict_data.get('music_config').get('music_off'):
+        sonido.stop_music()
 
 def cambiar_pantalla(form_name: str):
     """ Recibe el nombre de un formulario y lo ejecuta

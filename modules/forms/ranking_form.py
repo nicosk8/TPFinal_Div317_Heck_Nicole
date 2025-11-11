@@ -70,7 +70,7 @@ def cambiar_pantalla(param_list : tuple):
     :params: 
         form_ranking -> datos del formulario
         form_name -> nombre del formualrio """
-
+    
     form_ranking, form_name = param_list # <- desempaqueto los datos
 
     print('Saliendo del formulario -> "RANKING" ...')

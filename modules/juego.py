@@ -18,7 +18,12 @@ def dbz_playing_cards():
         "puntaje" : 0,
         "cantidad_vidas" : var.CANTIDAD_VIDAS,
         "player" : {},
-        "music_volume" : var.vOLUMEN_INICIAL,
+        "music_config" : 
+        {
+            "music_volume" : var.vOLUMEN_INICIAL,
+            "music_on": True,
+            "music_init" : False
+        }
     }
 
     form_control = form_controller.create_form_controller(pantalla_juego, datos_juego) # modulo controlador de formularios para eventos

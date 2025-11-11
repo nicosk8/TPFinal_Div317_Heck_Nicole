@@ -56,10 +56,23 @@ def create_form_menu(dict_form_data: dict) -> dict:
         on_click_param= 'form_ranking' # <- transfiere parametros a la funcion
     )
 
+    # Aca voy a crear el boton "OPCIONES"
+    form['btn_options'] = Button(
+        x= var.DIMENSION_PANTALLA[0] // 2 ,
+        y= 400, # <- lo ubico 400 pixeles por debajo del texto "Menu principal"
+        text='OPCIONES',
+        screen= form.get('screen'), # <- dimension de la pantalla
+        font_path= var.FONT_ALAGARD,
+        align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
+        font_size= 30,
+        on_click= base_form.cambiar_pantalla, # <- llamado a la funcion que ejecuta el cambio de pantalla a RANKING
+        on_click_param= 'form_options'
+    )
+
     # Aca voy a crear el boton "EXIT"
     form['btn_exit'] = Button(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
-        y= 500, # <- lo ubico 400 pixeles por debajo del texto "Menu principal"
+        y= 500, # <- lo ubico 500 pixeles por debajo del texto "Menu principal"
         text='SALIR',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
@@ -73,7 +86,8 @@ def create_form_menu(dict_form_data: dict) -> dict:
         form.get('lbl_titulo'), # <- Titulo
         form.get('btn_play'), # <- Boton "JUGAR"
         form.get('btn_ranking'), # <- Boton "RANKING"
-        form.get('btn_exit')
+        form.get('btn_exit'),
+        form.get('btn_options')
     ]
 
     # ahora, agrego el formulario para controlar cual form estoy activando y cual no.
@@ -112,4 +126,7 @@ def update(dict_form_data: dict):
     """ Actualiza en pantalla el fondo y los widgets """
     events_handler()
     base_form.update(dict_form_data)
-
+    if not dict_form_data.get('music_config').get('music_init'):
+        base_form.music_on(dict_form_data)
+        dict_form_data['music_config']['music_init'] = True
+        
