@@ -39,7 +39,7 @@ def update_widgets(form_data: dict):
     :params: form_data -> diccionario de formularios """
 
     for widget in form_data.get('widgets_list'):
-        print(f'\n\n ESTOY EN BASE_FORM : UPDATE WIDGETS -> "widgets_list" -> \n\n{form_data.get('widgets_list')}\n')
+        
         widget.update()
 
 def set_active(form_name: str):

@@ -68,10 +68,7 @@ def forms_update(form_controller: dict):
     :params: form_controller -> diccionario de formularios """
 
     lista_formularios = form_controller.get('forms_list')
-
-    for form in lista_formularios:
-        print(f'>>> FORMULARIO -> {form}')
-
+        
     for form in lista_formularios:
         if form.get('active'):
             match form.get('name'):
@@ -85,7 +82,6 @@ def forms_update(form_controller: dict):
                     ranking_form.draw(form_ranking)
                 case 'form_options':
                     form_options = lista_formularios[2]
-                    print(f'>>>>>>>>>>> FORM_LIST -> {form_options}')
                     options_form.update(form_options)
                     options_form.draw(form_options)
 
