@@ -119,14 +119,15 @@ def modificar_volumen(volumen: int):
 
     vol_actual = sonido.get_actual_volume()
 
-    print(f'\n >>> Valor del volumen a agregar/disminuir -> {volumen}')
+    print(f'\nMusica volumen actual -> {vol_actual}')
+    print(f'>>> Valor del volumen a agregar/disminuir -> {volumen}')
 
     if  vol_actual > 0 and volumen < 0 or\
         vol_actual < 100 and volumen > 0:
 
         vol_actual += volumen # ej : 90 + 10 = 100 | 90 + (-10) = 80
         sonido.set_volume(vol_actual)
-        
+
         if volumen > 0:
             print(f'Volumen aumentado -> {volumen}')
         else:

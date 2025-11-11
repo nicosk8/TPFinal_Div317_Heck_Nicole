@@ -15,20 +15,21 @@ def play_music():
      Contempla si ya habìa una musica anterior sonando, por lo tanto la cambia a la musica que le corresponde al formulario """
     if music_configs.get('actual_music_path'):
         mixer.music.load(music_configs.get('actual_music_path'))
-        mixer.music.set_volume(0.3) # 30%
+        #mixer.music.set_volume(0.3) # 30%
         mixer.music.play(-1,0,2500) # (reproduccion en loop, inicio en el seg. 0 de la cancion, volumen inicial hasta un vol. alto [fade in])
 
 
 def get_actual_volume() -> int:
     """ devuelve el volumen actual de la musica """
     actual_vol = mixer.music.get_volume() * 100 
-    return actual_vol
+    return int(actual_vol)
 
 def set_volume(volume: int):
     " Setea el valor actual del volumen  de la musica "
     actual_vol = volume / 100
+    actual_vol = round(actual_vol,1)
     mixer.music.set_volume(actual_vol)
-    print(f'Musica volumen actual -> {actual_vol}')
+    
  
 
 def stop_music():
