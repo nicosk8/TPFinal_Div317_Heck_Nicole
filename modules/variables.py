@@ -10,7 +10,9 @@ vOLUMEN_INICIAL = 50
 # Imagenes
 ICON_IMG = 'modules/assets/icons/gamepad_icon.png'
 FONDO_MENU_IMG = 'modules/assets/backgrounds/fondo_menu.JPG'
-FONDO_RANKING_IMG = 'modules/assets/backgrounds/FONDO_RANKING.jpg'
+FONDO_RANKING_IMG = 'modules/assets/backgrounds/FONDO_RANKING.jpg' 
+FONDO_OPCIONES_IMG = r'modules\assets\backgrounds\fondo_6.png' 
+FONDO_PAUSA_IMG = r'modules\assets\backgrounds\fondo_6.png'
 
 # Fuentes
 FONT_ALAGARD = 'modules/assets/fonts/alagard.ttf' 
@@ -19,6 +21,7 @@ FONT_ALAGARD = 'modules/assets/fonts/alagard.ttf'
 MUSICA_RANKING = 'modules/assets/sound/level_2.mp3'
 MUSICA_MENU = 'modules/assets/sound/music.ogg'
 MUSICA_OPTIONS = 'modules/assets/sound/level_3.mp3'
+MUSICA_PAUSA = 'modules/assets/sound/level_1.mp3'
 
 # Diccionario de formularios activos en el juego
 dict_forms_status = {}

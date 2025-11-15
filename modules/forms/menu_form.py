@@ -118,9 +118,14 @@ def events_handler():
 
     events = pg.event.get()
     for event in events:
-        if event.type == pg.MOUSEBUTTONDOWN:
-            x, y = event.pos
-            print(f'Coordenada mouse: X = {x} | Y = {y}')
+        if event.type == pg.QUIT:
+            salir_juego()
+
+        if event.type == pg.KEYDOWN:
+             if event.key == pg.K_ESCAPE:
+                base_form.set_active('form_pause')
+
+            
 
 def update(dict_form_data: dict):
     """ Actualiza en pantalla el fondo y los widgets """

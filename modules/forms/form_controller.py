@@ -2,8 +2,8 @@ import pygame as pg
 import modules.forms.menu_form as menu_form
 import modules.variables as var
 import modules.forms.ranking_form as ranking_form
-#import modules.forms.options_form_copy as options_form
 import modules.forms.options_form as options_form
+import modules.forms.pause_form as pause_form 
 
 def create_form_controller(screen: pg.Surface, datos_juego: dict):
     """ Funcion creadora de formularios 
@@ -54,10 +54,24 @@ def create_form_controller(screen: pg.Surface, datos_juego: dict):
             "active" : False,
             "coord" : (0,0),
             "music_path" : var.MUSICA_OPTIONS,
-            "background" : var.FONDO_RANKING_IMG,
+            "background" : var.FONDO_OPCIONES_IMG,
             "screen_dimensions" : var.DIMENSION_PANTALLA,
             "music_config" : controller.get('music_config')
-        })
+        }),
+
+        pause_form.create_form_pause(
+            {
+            "name" : 'form_pause',
+            "screen" : controller.get('main_screen'),
+            "active" : False,
+            "coord" : (0,0),
+            "music_path" : var.MUSICA_PAUSA,
+            "background" : var.FONDO_PAUSA_IMG,
+            "screen_dimensions" : var.DIMENSION_PANTALLA,
+            "music_config" : controller.get('music_config')
+            }
+
+        )
 
     ] 
     return controller
@@ -84,6 +98,10 @@ def forms_update(form_controller: dict):
                     form_options = lista_formularios[2]
                     options_form.update(form_options)
                     options_form.draw(form_options)
+                case 'form_pause':
+                    form_options = lista_formularios[3]
+                    pause_form.update(form_options)
+                    pause_form.draw(form_options)
 
 
 def update(form_controller: dict):
