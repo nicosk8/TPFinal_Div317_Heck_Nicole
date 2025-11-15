@@ -38,7 +38,7 @@ def dbz_playing_cards():
             if evento.type == pg.QUIT:
                 corriendo = False
             
-        form_controller.update(form_control) # <- aca actualiza los eventos en pantalla
+        form_controller.update(form_control,eventos) # <- aca actualiza los eventos en pantalla
         pg.display.flip() # <- aca muestra al usuario los cambios en pantalla. fLIP() actualiza todos los widgets <> Update() actualiza cosas concretas por parametros
 
 

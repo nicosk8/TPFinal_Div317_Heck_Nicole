@@ -11,11 +11,8 @@ from utn_fra.pygame_widgets import (
 )
 
 def create_form_pause(dict_form_data: dict) -> dict:
-    """ Crea el formulario "OPTIONS" desde donde se puede controlar 
-    el volumen de la musica 
-        1 - Levanta los del archivo ranking y carga una lista
-        2 - Ordena e itera a lista
-        3 - Dibuja los formularios """
+    """ Crea el formulario "PAUSE" """
+
     form = base_form.create_base_form(dict_form_data)
 
     form['lbl_titulo'] = Label(
@@ -24,7 +21,7 @@ def create_form_pause(dict_form_data: dict) -> dict:
         text= var.TITULO_JUEGO,
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
-        font_size= 40,
+        font_size= 35,
         color= pg.Color('red'),
     )
 
@@ -34,7 +31,7 @@ def create_form_pause(dict_form_data: dict) -> dict:
         text= 'PAUSE',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
-        font_size= 35,
+        font_size= 30,
         color= pg.Color('red'),
     )
 
@@ -45,7 +42,7 @@ def create_form_pause(dict_form_data: dict) -> dict:
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
         font_size= 30,
-        on_click= base_form.cambiar_pantalla, on_click_param= 'form_menu')
+        on_click= base_form.cambiar_pantalla, on_click_param= 'form_stage')
 
     form['btn_restart'] = Button( 
         x= var.DIMENSION_PANTALLA[0] // 2,
@@ -54,7 +51,7 @@ def create_form_pause(dict_form_data: dict) -> dict:
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
         font_size= 30,
-        on_click= None, on_click_param= None)
+        on_click= base_form.cambiar_pantalla, on_click_param= 'form_stage')
      
     form['btn_back_menu'] = Button( 
         x= var.DIMENSION_PANTALLA[0] // 2,

@@ -39,8 +39,9 @@ def create_form_menu(dict_form_data: dict) -> dict:
         font_path= var.FONT_ALAGARD,
         align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
         font_size= 30,
-        on_click= imprimir_texto_boton, # <- llamado a la funcion que ejecuta la logica principal del juego
-        on_click_param= None # <- transfiere parametros a la funcion
+#        on_click= imprimir_texto_boton,
+        on_click= base_form.cambiar_pantalla, # <- llamado a la funcion que ejecuta la logica principal del juego
+        on_click_param= 'form_stage' # <- transfiere parametros a la funcion
     )
 
     # Aca voy a crear el boton "RANKING"
@@ -114,18 +115,14 @@ def draw(dict_form_data: dict):
     base_form.draw(dict_form_data) # <- dibuja la imagen de fondo
     base_form.draw_widgets(dict_form_data) # <- dibuja los botones y labels (widgets)
 
+
 def events_handler():
 
     events = pg.event.get()
     for event in events:
         if event.type == pg.QUIT:
             salir_juego()
-
-        if event.type == pg.KEYDOWN:
-             if event.key == pg.K_ESCAPE:
-                base_form.set_active('form_pause')
-
-            
+         
 
 def update(dict_form_data: dict):
     """ Actualiza en pantalla el fondo y los widgets """
