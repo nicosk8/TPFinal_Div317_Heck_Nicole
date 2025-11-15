@@ -84,8 +84,8 @@ def cambiar_pantalla(params: dict):
     y se ejecuta el cambio de pantalla al panel de pausa """
 
     last_vol = params.get('form').get('last_volume')
-    set_last_volume(last_vol)
     base_form.cambiar_pantalla(params.get('form_name'))
+    set_last_volume(last_vol)
 
 
 def set_last_volume(vol: int):
