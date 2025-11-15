@@ -23,7 +23,7 @@ FONT_ALAGARD = 'modules/assets/fonts/alagard.ttf'
 MUSICA_RANKING = 'modules/assets/sound/level_2.mp3'
 MUSICA_MENU = 'modules/assets/sound/music.ogg'
 MUSICA_OPTIONS = 'modules/assets/sound/level_3.mp3'
-MUSICA_PAUSA = 'modules/assets/sound/level_1.mp3'
+MUSICA_PAUSA = 'modules/assets/sound/music.ogg'
 MUSICA_STAGE = 'modules/assets/sound/music.ogg'
 
 # Diccionario de formularios activos en el juego

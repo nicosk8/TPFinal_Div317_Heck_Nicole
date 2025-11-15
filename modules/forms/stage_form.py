@@ -5,6 +5,7 @@ from utn_fra.pygame_widgets import (
     Label, Button
 )
 import modules.variables as var
+import modules.forms.pause_form as pause_form
 
 def create_form_stage(dict_form_data: dict) -> dict:
     """ Crea el formulario stage_form: puntajes, imagenes, posicion, musica, contador """
@@ -16,6 +17,7 @@ def create_form_stage(dict_form_data: dict) -> dict:
     form['actual_level'] = 1
     form['stage_timer'] = var.STAGE_TIMER # cantidad de seg desde donde arranca el juego
     form['last_timer'] = pg.time.get_ticks()
+    
 
     form['bonus_shield_available'] = True
     form['bonus_heal_available'] = True
@@ -58,7 +60,7 @@ def timer_update(dict_form_data: dict):
 
         tiempo_actual = pg.time.get_ticks() # capturo el tiempo actual en milisegs
 
-        if tiempo_actual - dict_form_data.get('last_timer') > 1000:
+        if (tiempo_actual - dict_form_data.get('last_timer')) > 1000:
             dict_form_data['stage_timer'] -= 1
             dict_form_data['last_timer'] = tiempo_actual
 
@@ -68,7 +70,14 @@ def events_handler(events: list[pg.event.Event]):
 
         if event.type == pg.KEYDOWN:
              if event.key == pg.K_ESCAPE:
+
                 base_form.set_active('form_pause')
+
+                # cuando se activa el form de pausa, le baja el sonido al minimo
+                form_pause = var.dict_forms_status.get('form_pause')
+                pause_form.save_last_volume(form_pause)
+                 
+
 
 
 def draw(form_dict_data: dict):
