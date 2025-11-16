@@ -1,8 +1,10 @@
-
+# -----     configs del juego     ----- #
 DIMENSION_PANTALLA = (800,600)
 TITULO_JUEGO = 'DBZ Playing Cards - PROG I - TP FINAL'
 FPS = 30
 STAGE_TIMER = 500
+JSON_CONFIGS_FILE = './configs.json'
+JSON_INFO_CARDS_FILE = './info_cartas.json'
 
 # Datos juego
 CANTIDAD_VIDAS = 3
