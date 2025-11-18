@@ -6,6 +6,7 @@ from utn_fra.pygame_widgets import (
 )
 import modules.variables as var
 import modules.forms.pause_form as pause_form
+import modules.stage as stage_juego
 
 def create_form_stage(dict_form_data: dict) -> dict:
     """ Crea el formulario stage_form: puntajes, imagenes, posicion, musica, contador """
@@ -22,8 +23,10 @@ def create_form_stage(dict_form_data: dict) -> dict:
     form['bonus_shield_available'] = True
     form['bonus_heal_available'] = True
     form['bonus_shield_applied'] = False
+    form['jugador'] = dict_form_data.get('jugador')
    
-    form['stage'] = None # crear un modulo para el stage
+    form['stage'] = stage_juego.inicializar_stage(jugador=form.get('jugador'), pantalla=form.get('screen'),
+                                                  nro_stage=form.get('actual_level')) 
     form['clock'] = pg.time.Clock() # 
 
     form['lbl_timer'] = Label(

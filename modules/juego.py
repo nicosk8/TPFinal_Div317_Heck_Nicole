@@ -1,6 +1,7 @@
 import pygame as pg
 import modules.variables as var
 import modules.forms.form_controller as form_controller
+import modules.participante as participante
 import sys
 
 def dbz_playing_cards():
@@ -17,7 +18,7 @@ def dbz_playing_cards():
     datos_juego = {
         "puntaje" : 0,
         "cantidad_vidas" : var.CANTIDAD_VIDAS,
-        "player" : {},
+        "player" : participante.inicializar_participante(pantalla=pantalla_juego, nombre='Player'),
         "music_config" : 
         {
             "music_volume" : var.vOLUMEN_INICIAL,

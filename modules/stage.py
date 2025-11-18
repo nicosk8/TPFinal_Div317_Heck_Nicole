@@ -21,12 +21,20 @@ def inicializar_stage(jugador: dict, pantalla: pg.Surface, nro_stage: int):
     stage_data['screen'] = pantalla
 
     stage_data['jugador'] = jugador
-    stage_data['coordenada_inicial_mazo_enemigo'] = (0,0)
     stage_data['coordenada_inicial_mazo_jugador'] = (0,0)
+    stage_data['coordenada_final_mazo_jugador'] = (0,0)
+
+    stage_data['coordenada_inicial_mazo_enemigo'] = (0,0)
+    stage_data['coordenada_final_mazo_enemigo'] = (0,0)
+
     stage_data['cantidad_cartas_jugadores'] = 0
 
+    stage_data['enemigo'] = participante.inicializar_participante(stage_data.get('screen'), nombre='Enemigo')
+    participante.setear_stat_participante(stage_data.get('enemigo'), stat='pos_deck_inicial', valor=stage_data.get('coordenada_inicial_mazo_enemigo'))
+    participante.setear_stat_participante(stage_data.get('enemigo'), stat='pos_deck_jugado', valor=stage_data.get('coordenada_final_mazo_enemigo'))
 
-    stage_data['enemigo'] = {}
+    participante.setear_stat_participante(stage_data.get('jugador'), stat='pos_deck_inicial', valor=stage_data.get('coordenada_inicial_mazo_jugador'))
+    participante.setear_stat_participante(stage_data.get('jugador'), stat='pos_deck_jugado', valor=stage_data.get('coordenada_final_mazo_jugador'))
 
     stage_data['juego_finalizado'] = False
     stage_data['puntaje_guardado'] = False
@@ -58,13 +66,16 @@ def generar_mazo(stage_data: dict):
 
         
 def barajar_mazos_stage(stage_data: dict): 
-    """ Si la partida esta en curso, asigna cartas a los participantes.
+    """ Si la partida esta en curso, asigna cartas a los participantes y
+    establece los stats iniciales (hp,atk y def).
     :params:
         stage_data -> datos del juego  
     """  
     if not stage_data.get('stage_finalizado'):
         asignar_cartas_stage(stage_data, stage_data.get('jugador'))
         asignar_cartas_stage(stage_data, stage_data.get('enemigo'))
+        participante.asignar_stats_iniciales_participante(stage_data.get('jugador'))
+        participante.asignar_stats_iniciales_participante(stage_data.get('enemigo'))
         stage_data['data_cargada'] = True
 
 
@@ -72,6 +83,8 @@ def restart_stage(stage_data: dict, jugador: dict, pantalla: pg.Surface, nro_sta
     """ Restablece el nivel. Devuelve el seteo de las configuraciones a como estaban al inicio 
     :params:  """
     stage_data = inicializar_stage(jugador, pantalla, nro_stage)
+    participante.set_score_participante(jugador, 0)
+    participante.reiniciar_datos_participante(jugador)
     inicializar_data_stage(stage_data)
 
 def draw_jugadores(stage_data: dict):

@@ -4,9 +4,9 @@ import modules.variables as var
 import modules.load_data as load_data
 from functools import reduce
 
-def inicializar_participante(pantalla: pg.Surface):
+def inicializar_participante(pantalla: pg.Surface, nombre: str = 'PC'):
     participante = {}
-    participante['nombre'] = ''
+    participante['nombre'] = nombre
     participante['hp_actual'] = 1
     participante['hp_inicial'] = 1
     participante['atk'] = 1
@@ -63,6 +63,10 @@ def get_ultima_carta_jugada(participante: dict):
     """ Devuelve la ultima carta del mazo de cartas usadas/jugadas (dadas vuelta) """
     return participante.get('cartas_usadas')[-1]
 
+def setear_stat_participante(participante: dict, stat: str, valor: int):
+    """ """
+    participante['stat'] = valor    
+
 def set_cartas_participante(participante: dict, lista_cartas: list[dict]):
     """ Setea las cartas del participante:
             1 - Asigna las coordenadas - obtenidas por medio de una funcion - a todas las cartas del mazo 
@@ -103,8 +107,15 @@ def asignar_stats_iniciales_participante(participante: dict):
         participante.get('mazo_asignado') 
     )
 
+def verficar_estado_negativo(stat: int):
+    """ Valida stat de poder menor o superior a 0"""
+    if stat < 0:
+        return 0
+    return stat
+
 def restar_stats_participante(participante: dict, carta_g: dict, is_critic : bool):
-    """ Calcula el daño generado y lo resta al hp_inicial
+    """ Calcula el daño generado por la carta del participante y lo resta a
+    la vida, ataque y defensa actuales.
     :params:
         participante -> participante
         carta_g: dict -> carta del oponente
@@ -112,11 +123,17 @@ def restar_stats_participante(participante: dict, carta_g: dict, is_critic : boo
     """
     daño_multiplicado = 1
     if is_critic:
-        daño_multiplicado = 2
+        daño_multiplicado = 3
     
     carta_jugador = participante.get('cartas_usadas')[-1]
     damage = carta.get_atk_carta(carta_g) - carta.get_def_carta(carta_jugador)
     damage *= daño_multiplicado
+
+    # si el daño a restar deja al oponente en puntos de vida en negativo, seteo la vida en 0
+    participante['hp_actual'] = verficar_estado_negativo(participante.get('hp_actual') - damage) 
+    
+    participante['atk'] -= carta.get_atk_carta(carta_jugador)
+    participante['def'] -= carta.get_def_carta(carta_jugador) 
 
 def info_to_csv(participante: dict):
     return f'{get_nombre_participante(participante)},{participante.get('score')}\n'
@@ -128,6 +145,18 @@ def draw_participante(participante: dict, screen: pg.Surface):
     else:
         carta.draw_carta(participante.get('cartas_usadas')[-1], screen) 
 
+def reiniciar_datos_participante(participante: dict):
+    """ Restablece el puntaje en 0 y vacìa la lista mazo de cartas """
+    set_score_participante(participante,0)
+    set_cartas_participante(participante, list())
+    participante['cartas_usadas'].clear()
+    setear_stat_participante(participante, stat='hp_inicial', valor=0)
+    setear_stat_participante(participante, stat='hp_actual', valor=0)
+    setear_stat_participante(participante, stat='atk', valor=0)
+    setear_stat_participante(participante, stat='def', valor=0)
+    
+
+
 
 def jugar_carta(participante: dict):
     """ Logica de jugado de una carta:
@@ -137,6 +166,7 @@ def jugar_carta(participante: dict):
         
     if participante.get('cartas_mazo'):
         carta_actual = participante.get('cartas_mazo').pop()
+        carta.asignar_coordenadas_carta(carta_actual,  get_coordenadas_mazo_jugado(participante))
         participante.get('cartas_mazo_usadas').append(carta_actual)
     else:
         print('Modulo Participante.py -> Funcion: jugar_carta() -> Lista mazo de cartas VACIO')

@@ -19,7 +19,6 @@ def create_form_controller(screen: pg.Surface, datos_juego: dict):
     controller['current_stage'] = 1
     controller['game_started'] = False
     controller['player'] = datos_juego.get('player')
-    controller['enemy'] = None
     controller['music_config'] = datos_juego.get('music_config')
 
 # aca contengo todos los formularios que usa mi juego, y que contienen: Botones, rutas a sonidos, superficies, textos, etc...
@@ -81,7 +80,8 @@ def create_form_controller(screen: pg.Surface, datos_juego: dict):
             "music_path" : var.MUSICA_STAGE,
             "background" : var.FONDO_STAGE_IMG,
             "screen_dimensions" : var.DIMENSION_PANTALLA,
-            "music_config" : controller.get('music_config')  
+            "music_config" : controller.get('music_config'),
+            "jugador" :  controller.get('player')
         }
         )
 
