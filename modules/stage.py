@@ -21,11 +21,11 @@ def inicializar_stage(jugador: dict, pantalla: pg.Surface, nro_stage: int):
     stage_data['screen'] = pantalla
 
     stage_data['jugador'] = jugador
-    stage_data['coordenada_inicial_mazo_jugador'] = (0,0)
-    stage_data['coordenada_final_mazo_jugador'] = (0,0)
+    stage_data['coordenada_inicial_mazo_jugador'] = (20,370)
+    stage_data['coordenada_final_mazo_jugador'] = (390,370)
 
-    stage_data['coordenada_inicial_mazo_enemigo'] = (0,0)
-    stage_data['coordenada_final_mazo_enemigo'] = (0,0)
+    stage_data['coordenada_inicial_mazo_enemigo'] = (20,65)
+    stage_data['coordenada_final_mazo_enemigo'] = (390,65)
 
     stage_data['cantidad_cartas_jugadores'] = 0
 
