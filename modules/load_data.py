@@ -73,9 +73,7 @@ def cargar_configs_stage(stage_data: dict):
         configs_globales = cargar_configs(var.JSON_CONFIGS_FILE) 
         stage_data['configs'] = configs_globales.get('nivel_1')
         stage_data['ruta_mazo'] = stage_data.get('configs').get('ruta_mazo')
-        stage_data['coordenada_inicial_mazo_enemigo'] = stage_data.get('configs').get('coordenada_mazo_enemigo')
-        stage_data['coordenada_inicial_mazo_jugador'] = stage_data.get('configs').get('coordenada_mazo_jugador')
-        stage_data['cantidad_cartas_jugadores'] = stage_data.get('configs').get('cantidad_cartas_jugadores')
+        
 
 def leer_bd_cartas(path_mazo: str) -> dict:
     """ Realiza la carga de datos tecnicos de las cartas y arma un diccionario 
@@ -141,6 +139,11 @@ def cargar_bd_data(stage_data: dict):
             print(' >>>>>>>>>>>>>>>>>>>  CARGANDO BD CARTAS DESDE DIR   <<<<<<<<<<<<<<<<<<<<')
             stage_data['cartas_mazo_inicial'] = leer_bd_cartas(stage_data.get('ruta_mazo'))
 
+def reducir(callback, iterable: list):
+    suma = 0
+    for elemento in iterable:
+        suma += callback(elemento)
+    return suma
 
 if __name__ == '__main__':
     #print(cargar_ranking('C:/Repositorio UTN/2025/PROG I/TPFinal_Div317_Heck_Nicole/puntajes.csv', top=7))

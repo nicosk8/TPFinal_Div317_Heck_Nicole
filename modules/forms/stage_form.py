@@ -64,7 +64,7 @@ def timer_update(dict_form_data: dict):
             dict_form_data['last_timer'] = tiempo_actual
 
 def events_handler(events: list[pg.event.Event]):
-
+    """ Manejador de eventos del stage  """
     for event in events:
 
         if event.type == pg.KEYDOWN:
