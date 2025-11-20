@@ -86,7 +86,6 @@ def set_cartas_participante(participante: dict, lista_cartas: list[dict]):
     participante['mazo_asignado'] = lista_cartas      # cartas boca arriba
     participante['cartas_mazo'] = lista_cartas.copy() # cartas boca abajo
 
-
 def set_score_participante(participante: dict, score: int):
     """ Guarda puntaje del participante en su clave """
     participante['score'] = score

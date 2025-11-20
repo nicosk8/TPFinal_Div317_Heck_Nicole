@@ -138,7 +138,7 @@ def comparar_damage(stage_data: dict) -> str:
     ganador_mano = None
     jugador = stage_data.get('jugador')
     enemigo = stage_data.get('enemigo')
-    
+    critical = False
     carta_jugador = participante.get_carta_actual_participante(jugador)
     carta_enemigo = participante.get_carta_actual_participante(enemigo)
 
@@ -151,10 +151,11 @@ def comparar_damage(stage_data: dict) -> str:
             ganador_mano = 'PC'
             participante.restar_stats_participante(jugador, carta_enemigo, critical)
         else:
+            score = atk_jugador - carta.get_def_carta(carta_enemigo)
             ganador_mano = 'PLAYER'
             participante.restar_stats_participante(enemigo, carta_jugador, critical)
-
-    return ganador_mano
+            participante.add_score_participante(jugador, )
+    return critical, ganador_mano
 
 def chequear_ganador(stage_data: dict):
     """ Si el jugador llegò a 0 de vida o la vida del jugador es menor que la del enemigo,
@@ -177,10 +178,13 @@ def chequear_ganador(stage_data: dict):
 
 def jugar_mano(stage_data: dict) -> str:
     """ Ejecuta la jugada de cartas, compara daños, resta stats a los participantes, verifica el ganador de la ronda y lo retorna """
-    jugar_mano_stage(stage_data)
-    ganador_mano = comparar_damage(stage_data)
-    chequear_ganador(stage_data)
-    return ganador_mano
+    if not stage_data.get('juego_finalizado'):
+        jugar_mano_stage(stage_data)
+        critical, ganador_mano = comparar_damage(stage_data)
+        chequear_ganador(stage_data)
+        return critical, ganador_mano
+    
+    return None
 
 def draw_jugadores(stage_data: dict):
     """ Dibuja en pantalla las cartas del jugador y oponente """

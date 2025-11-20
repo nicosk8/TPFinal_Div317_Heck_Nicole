@@ -3,6 +3,7 @@ import sys
 import modules.variables as var
 import modules.assets
 import modules.forms.base_form as base_form
+import modules.forms.stage_form as form_stage
 import modules.load_data as load_data
 import modules.sonido as sonido
 from utn_fra.pygame_widgets import (
@@ -57,7 +58,7 @@ def create_form_pause(dict_form_data: dict) -> dict:
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
         font_size= 30,
-        on_click= base_form.cambiar_pantalla, on_click_param= 'form_stage')
+        on_click= restart_stage, on_click_param= {'form': form,'form_name': 'form_stage'})
      
     form['btn_back_menu'] = Button( 
         x= var.DIMENSION_PANTALLA[0] // 2,
@@ -86,6 +87,12 @@ def cambiar_pantalla(params: dict):
     last_vol = params.get('form').get('last_volume')
     base_form.cambiar_pantalla(params.get('form_name'))
     set_last_volume(last_vol)
+
+def restart_stage(params: dict):
+    """ Reinicia la partida """
+    stage_form = var.dict_forms_status.get(params.get('form_name'))
+    cambiar_pantalla(params)
+    form_stage.iniciar_nueva_partida(stage_form)
 
 
 def set_last_volume(vol: int):
