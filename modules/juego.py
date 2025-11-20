@@ -9,7 +9,7 @@ def dbz_playing_cards():
     
     pg.init()
 
-    pg.display.set_caption(var.TITULO_JUEGO)
+    pg.display.set_caption(var.TITULO_JUEGO_CAPTION)
     pantalla_juego = pg.display.set_mode(var.DIMENSION_PANTALLA)
     pg.image.load(var.ICON_IMG) # cargo el icono del juego
 

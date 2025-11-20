@@ -1,10 +1,11 @@
 # -----     configs del juego     ----- #
 DIMENSION_PANTALLA = (800,600)
+TITULO_JUEGO_CAPTION = 'DBZ Playing Cards - PROG I - TP FINAL - Heck, Nicole Denise'
 TITULO_JUEGO = 'DBZ Playing Cards - PROG I - TP FINAL'
 FPS = 30
 STAGE_TIMER = 500
-JSON_CONFIGS_FILE = './configs.json'
-JSON_INFO_CARDS_FILE = './info_cartas.json'
+JSON_CONFIGS_FILE = r'C:\Repositorio UTN\2025\PROG I\TPFinal_Div317_Heck_Nicole\configs.json'
+JSON_INFO_CARDS_FILE = r'C:\Repositorio UTN\2025\PROG I\TPFinal_Div317_Heck_Nicole\info_cartas.json'
 
 # Datos juego
 CANTIDAD_VIDAS = 3

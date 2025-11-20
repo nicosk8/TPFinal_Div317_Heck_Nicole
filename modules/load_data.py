@@ -73,9 +73,14 @@ def cargar_configs_stage(stage_data: dict):
         configs_globales = cargar_configs(var.JSON_CONFIGS_FILE) 
         stage_data['configs'] = configs_globales.get('nivel_1')
         stage_data['ruta_mazo'] = stage_data.get('configs').get('ruta_mazo')
+        stage_data['nombre_mazo_enemigo'] = stage_data.get('configs').get('mazo_enemigo')
+        stage_data['nombre_mazo_jugador'] = stage_data.get('configs').get('mazo_jugador')
+        stage_data['ruta_mazo_jugador'] = stage_data.get('configs').get('ruta_mazo_player')
+        stage_data['coordenada_inicial_mazo_enemigo'] = stage_data.get('configs').get('coordenada_mazo_enemigo') # configs.json
+        stage_data['coordenada_inicial_mazo_jugador'] = stage_data.get('configs').get('coordenada_mazo_jugador') # configs.json
         
 
-def leer_bd_cartas(path_mazo: str) -> dict:
+def generar_bd_cartas(path_mazo: str) -> dict:
     """ Realiza la carga de datos tecnicos de las cartas y arma un diccionario 
     :params:
         path_mazo -> ruta de carpeta de imagenes de las cartas con sus datos (nombre)
@@ -87,12 +92,15 @@ def leer_bd_cartas(path_mazo: str) -> dict:
     }
 
     for root, dir, files in os.walk(path_mazo):
-        reverse_path = ''
+        reverse_path = '' 
         deck_cards = []
+        deck_name = ''
 
         for carta in files:
+
             card_path = os.path.join(root, carta)
-            
+            deck_name = root.replace('\\', '/').split('/')[-1] # nombre de la carpeta del mazo
+
             if 'reverse' in card_path:
                 reverse_path = card_path.replace('\\','/')
             else:
@@ -116,6 +124,9 @@ def leer_bd_cartas(path_mazo: str) -> dict:
         for index_carta in range(len(deck_cards)):
             deck_cards[index_carta]['ruta_reverso'] = reverse_path # cargo la ruta de la img reverso
         
+        if deck_name:
+            cartas_dict['cartas'][deck_name] = deck_cards
+
         cartas_dict['cartas'] = deck_cards # cargo los datos de la carta en el dict
         return cartas_dict
             
@@ -126,7 +137,8 @@ def guardar_info_cartas(ruta_archivo: str, dict_cards: dict):
 
 
 def cargar_bd_data(stage_data: dict):
-    """ Realiza la carga de los datos de las cartas cuando la partida està en curso
+    """ Realiza la carga de los datos de las cartas desde archivo info_cartas.json,
+        cuando la partida està en curso
     :params:
         stage_data -> datos del stage
     """
@@ -134,10 +146,15 @@ def cargar_bd_data(stage_data: dict):
 
         if os.path.exists(var.JSON_INFO_CARDS_FILE) and os.path.isfile(var.JSON_INFO_CARDS_FILE): 
             print(' >>>>>>>>>>>>>>>>>>>  CARGANDO BD CARTAS DESDE FILE  <<<<<<<<<<<<<<<<<<<<')
-            stage_data['cartas_mazo_inicial'] = cargar_configs(var.JSON_INFO_CARDS_FILE)
+            cartas = cargar_configs(var.JSON_INFO_CARDS_FILE)
+            stage_data['cartas_mazo_inicial_e'] = cartas.get('cartas').get(stage_data.get('nombre_mazo_enemigo'))
+            stage_data['cartas_mazo_inicial_p'] = cartas.get('cartas').get(stage_data.get('nombre_mazo_jugador'))
         else:
             print(' >>>>>>>>>>>>>>>>>>>  CARGANDO BD CARTAS DESDE DIR   <<<<<<<<<<<<<<<<<<<<')
-            stage_data['cartas_mazo_inicial'] = leer_bd_cartas(stage_data.get('ruta_mazo'))
+            cartas = generar_bd_cartas(stage_data.get('ruta_mazo'))
+            guardar_info_cartas(var.JSON_INFO_CARDS_FILE, cartas)
+            stage_data['cartas_mazo_inicial_e'] = cartas.get('cartas').get(stage_data.get('nombre_mazo_enemigo'))
+            stage_data['cartas_mazo_inicial_p'] = cartas.get('cartas').get(stage_data.get('nombre_mazo_jugador'))
 
 def reducir(callback, iterable: list):
     suma = 0
@@ -147,7 +164,7 @@ def reducir(callback, iterable: list):
 
 if __name__ == '__main__':
     #print(cargar_ranking('C:/Repositorio UTN/2025/PROG I/TPFinal_Div317_Heck_Nicole/puntajes.csv', top=7))
-    cartas = leer_bd_cartas("modules/assets/decks/platinum_deck_expansion_1")
+    cartas = generar_bd_cartas("modules/assets/decks/platinum_deck_expansion_1")
 
     #for clave, valor in cartas.items():
     #    print(f'{clave} : {valor}')

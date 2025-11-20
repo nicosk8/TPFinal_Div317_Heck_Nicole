@@ -13,9 +13,9 @@ def inicializar_participante(pantalla: pg.Surface, nombre: str = 'PC'):
     participante['def'] = 1
     participante['score'] = 0
 
-    participante['mazo_asignado'] = []
-    participante['cartas_mazo'] = []
-    participante['cartas_usadas'] = []
+    participante['mazo_asignado'] = []  # cartas iniciales
+    participante['cartas_mazo'] = []    # cartas restantes
+    participante['cartas_usadas'] = []  # cartas que ya fueron jugadas
 
     participante['screen'] = pantalla
     participante['pos_deck_inicial'] = (0,0)
@@ -47,9 +47,17 @@ def set_nombre_participante(participante: dict, nuevo_nombre: str):
     """ Asigna nuevo nombre en la clave 'nombre' """
     participante['nombre'] = nuevo_nombre
 
-def get_cartas_participante(participante: dict) -> list[dict]:
-    """ Devuelve las cartas que tiene asignadas el participante """
+def get_cartas_iniciales_participante(participante: dict) -> list[dict]:
+    """ Devuelve las cartas iniciales que tiene asignadas el participante """
     return participante.get('mazo_asignado')
+
+def get_cartas_restantes_participante(participante: dict) -> list[dict]:
+    """ Devuelve las cartas restantes del participante que estan en juego """
+    return participante.get('cartas_mazo')
+
+def get_cartas_jugadas_participante(participante: dict) -> list[dict]:
+    """ Devuelve las cartas que ya fueron jugadas """
+    return participante.get('cartas_usadas')
 
 def get_coordenadas_mazo_inicial(participante: dict):
     """ Devuelve la posicion en pantalla inicial del mazo de cartas """
@@ -59,7 +67,7 @@ def get_coordenadas_mazo_jugado(participante: dict):
     """ Devuelve la posicion en pantalla del mazo de cartas que fue jugado """
     return participante.get('pos_deck_jugado')
 
-def get_ultima_carta_jugada(participante: dict):
+def get_carta_actual_participante(participante: dict):
     """ Devuelve la ultima carta del mazo de cartas usadas/jugadas (dadas vuelta) """
     return participante.get('cartas_usadas')[-1]
 
@@ -75,8 +83,9 @@ def set_cartas_participante(participante: dict, lista_cartas: list[dict]):
     for carta_base in lista_cartas:
         carta_base['coordenadas'] = get_coordenadas_mazo_inicial(participante)
     
-    participante['mazo_asignado'] = lista_cartas
-    participante['cartas_mazo'] = lista_cartas.copy()
+    participante['mazo_asignado'] = lista_cartas      # cartas boca arriba
+    participante['cartas_mazo'] = lista_cartas.copy() # cartas boca abajo
+
 
 def set_score_participante(participante: dict, score: int):
     """ Guarda puntaje del participante en su clave """
@@ -138,13 +147,6 @@ def restar_stats_participante(participante: dict, carta_g: dict, is_critic : boo
 def info_to_csv(participante: dict):
     return f'{get_nombre_participante(participante)},{participante.get('score')}\n'
 
-def draw_participante(participante: dict, screen: pg.Surface):
-    """ Dibuja las cartas en pantalla del participante """
-    if participante.get('cartas_mazo'):
-        carta.draw_carta(participante.get('cartas_mazo')[-1], screen)
-    else:
-        carta.draw_carta(participante.get('cartas_usadas')[-1], screen) 
-
 def reiniciar_datos_participante(participante: dict):
     """ Restablece el puntaje en 0 y vacìa la lista mazo de cartas """
     set_score_participante(participante,0)
@@ -155,9 +157,6 @@ def reiniciar_datos_participante(participante: dict):
     setear_stat_participante(participante, stat='atk', valor=0)
     setear_stat_participante(participante, stat='def', valor=0)
     
-
-
-
 def jugar_carta(participante: dict):
     """ Logica de jugado de una carta:
     Si hay cartas disponibles en el mazo:
@@ -165,9 +164,20 @@ def jugar_carta(participante: dict):
         2 - Anexa esa ultima carta a la lista del mazo de cartas usadas """
         
     if participante.get('cartas_mazo'):
+        print(f'El jugador {participante.get('nombre')} tiene {len(participante.get('cartas_mazo'))} cartas')
         carta_actual = participante.get('cartas_mazo').pop()
+        carta.cambiar_visibilidad(carta_actual)
         carta.asignar_coordenadas_carta(carta_actual,  get_coordenadas_mazo_jugado(participante))
-        participante.get('cartas_mazo_usadas').append(carta_actual)
-    else:
-        print('Modulo Participante.py -> Funcion: jugar_carta() -> Lista mazo de cartas VACIO')
+        participante.get('cartas_usadas').append(carta_actual)
 
+    else:
+        print(f'El jugador {participante.get('nombre')} no tiene cartas')
+
+def draw_participante(participante: dict, screen: pg.Surface):
+    """ Dibuja las cartas en pantalla del participante """
+   
+    if participante.get('cartas_mazo'):
+        carta.draw_carta(participante.get('cartas_mazo')[-1], screen)
+    
+    if participante.get('cartas_usadas'):
+        carta.draw_carta(participante.get('cartas_usadas')[-1], screen) 

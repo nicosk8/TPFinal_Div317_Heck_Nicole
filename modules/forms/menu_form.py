@@ -1,8 +1,8 @@
 import pygame as pg
 import sys
 import modules.variables as var
-import modules.assets
 import modules.forms.base_form as base_form
+import modules.forms.stage_form as stage_form
 from utn_fra.pygame_widgets import (
     Label , # <- class
     Button, # <- boton simple
@@ -39,8 +39,7 @@ def create_form_menu(dict_form_data: dict) -> dict:
         font_path= var.FONT_ALAGARD,
         align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
         font_size= 30,
-#        on_click= imprimir_texto_boton,
-        on_click= base_form.cambiar_pantalla, # <- llamado a la funcion que ejecuta la logica principal del juego
+        on_click= iniciar_stage, # <- llamado a la funcion que ejecuta la logica principal del juego
         on_click_param= 'form_stage' # <- transfiere parametros a la funcion
     )
 
@@ -95,9 +94,13 @@ def create_form_menu(dict_form_data: dict) -> dict:
     var.dict_forms_status[form.get('name')] = form  # <- el nombre del formulario activo en el momento + sus valores
     return form
 
-def imprimir_texto_boton(_):
-    """ [recibe una variable de descarte "_" que no utiliza]"""
-    print('Estamos presionando el boton "JUGAR"')
+def iniciar_stage(form_name: str):
+    """ Boton de entrada al juego. """
+    print(f'Ingresando al form -> {form_name}')
+    print('Estamos presionando el boton "JUGAR"...')
+    base_form.cambiar_pantalla(form_name)
+    form_stage = var.dict_forms_status.get(form_name)
+    stage_form.iniciar_nueva_partida(form_stage)
 
 
 

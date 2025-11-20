@@ -118,6 +118,8 @@ def forms_update(form_controller: dict, eventos: list[pg.event.Event]):
                     form_stage = lista_formularios[4]
                     stage_form.update(form_stage, eventos)
                     pause_form.draw(form_stage)
+                    stage_form.draw(form_stage)
+                    
 
 
 def update(form_controller: dict, eventos: list[pg.event.Event]):

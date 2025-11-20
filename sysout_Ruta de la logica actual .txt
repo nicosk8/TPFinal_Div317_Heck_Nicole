@@ -1,0 +1,194 @@
+PS C:\Repositorio UTN\2025\PROG I\TPFinal_Div317_Heck_Nicole> & C:/Users/nicol/AppData/Local/Programs/Python/Python313/python.exe "c:/Repositorio UTN/2025/PROG I/TPFinal_Div317_Heck_Nicole/main.py"
+C:\Users\nicol\AppData\Local\Programs\Python\Python313\Lib\site-packages\pygame\pkgdata.py:25: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream, resource_exists
+pygame 2.6.1 (SDL 2.28.4, Python 3.13.7)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+Ingresando al form -> form_stage
+Estamos presionando el boton "JUGAR"...
+Ingresando al formulario -> form_stage
+
+
+ participante.py -> set_cartas_participante() -> []
+
+
+ participante.py -> set_cartas_participante() -> []
+Cargando los datos del stage...
+ >>>>>>>>>>>>>>>>>>>  CARGANDO BD CARTAS DESDE FILE  <<<<<<<<<<<<<<<<<<<<
+stage.py -> generar_mazo()
+         cartas_mazo_preparadas -> [{'id': '0.0.1', 'hp': 9999, 'atk': 30000, 'def': 9999, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/0.0.1_HP_9999_ATK_30000_DEF_9999_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.0', 'hp': 8000, 'atk': 20000, 'def': 8000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.0_HP_8000_ATK_20000_DEF_8000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.10', 'hp': 6000, 'atk': 15000, 'def': 6000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.10_HP_6000_ATK_15000_DEF_6000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.11', 'hp': 6000, 'atk': 15000, 'def': 6000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.11_HP_6000_ATK_15000_DEF_6000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.12', 'hp': 6000, 'atk': 15000, 'def': 6000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.12_HP_6000_ATK_15000_DEF_6000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.13', 'hp': 6000, 'atk': 15000, 'def': 6000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.13_HP_6000_ATK_15000_DEF_6000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.14', 'hp': 6000, 'atk': 15000, 'def': 6000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.14_HP_6000_ATK_15000_DEF_6000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.15', 'hp': 6000, 'atk': 15000, 'def': 6000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.15_HP_6000_ATK_15000_DEF_6000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.16', 'hp': 6000, 'atk': 15000, 'def': 6000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.16_HP_6000_ATK_15000_DEF_6000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.17', 'hp': 6000, 'atk': 15000, 'def': 6000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.17_HP_6000_ATK_15000_DEF_6000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.18', 'hp': 6000, 'atk': 15000, 'def': 6000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.18_HP_6000_ATK_15000_DEF_6000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.2', 'hp': 8000, 'atk': 20000, 'def': 8000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.2_HP_8000_ATK_20000_DEF_8000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.3.0', 'hp': 7500, 'atk': 18500, 'def': 7500, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.3.0_HP_7500_ATK_18500_DEF_7500_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.3', 'hp': 7000, 'atk': 17000, 'def': 7000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.3_HP_7000_ATK_17000_DEF_7000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.4', 'hp': 7000, 'atk': 17000, 'def': 7000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.4_HP_7000_ATK_17000_DEF_7000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.5', 'hp': 7000, 'atk': 17000, 'def': 7000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.5_HP_7000_ATK_17000_DEF_7000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.6', 'hp': 7000, 'atk': 17000, 'def': 7000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.6_HP_7000_ATK_17000_DEF_7000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.7', 'hp': 7000, 'atk': 17000, 'def': 7000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.7_HP_7000_ATK_17000_DEF_7000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.8', 'hp': 7000, 'atk': 17000, 'def': 7000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.8_HP_7000_ATK_17000_DEF_7000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}, {'id': '1.9', 'hp': 6000, 'atk': 15000, 'def': 6000, 'ruta_frente': 'modules/assets/decks/platinum_deck_expansion_1/1.9_HP_6000_ATK_15000_DEF_6000_7.png', 'ruta_reverso': 'modules/assets/decks/platinum_deck_expansion_1/reverse.png', 'visible': False, 'coordenadas': (0, 0), 'imagen': None, 'rect': None}]
+stage.py -> barajar_mazos_stage()
+ *** data cargada : True
+
+stage.py -> inicializar_data_stage() -> INICIALIZACION FINALIZADA
+stage_form.py -> draw()
+================================================================================================
+stage.py -> draw_jugadores() ->  jugador : {'nombre': 'Player', 'hp_actual': 0, 'hp_inicial': 0, 'atk': 0, 'def': 0, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': 0, 'cartas_mazo_preparadas': []}
+
+
+stage.py -> draw_jugadores() ->  enemigo : {'nombre': 'Enemigo', 'hp_actual': 1, 'hp_inicial': 1, 'atk': 1, 'def': 1, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': (390, 70)}
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+stage_form.py -> draw()
+================================================================================================
+stage.py -> draw_jugadores() ->  jugador : {'nombre': 'Player', 'hp_actual': 0, 'hp_inicial': 0, 'atk': 0, 'def': 0, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': 0, 'cartas_mazo_preparadas': []}
+
+
+stage.py -> draw_jugadores() ->  enemigo : {'nombre': 'Enemigo', 'hp_actual': 1, 'hp_inicial': 1, 'atk': 1, 'def': 1, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': (390, 70)}
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+stage_form.py -> draw()
+================================================================================================
+stage.py -> draw_jugadores() ->  jugador : {'nombre': 'Player', 'hp_actual': 0, 'hp_inicial': 0, 'atk': 0, 'def': 0, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': 0, 'cartas_mazo_preparadas': []}
+
+
+stage.py -> draw_jugadores() ->  enemigo : {'nombre': 'Enemigo', 'hp_actual': 1, 'hp_inicial': 1, 'atk': 1, 'def': 1, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': (390, 70)}
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+stage_form.py -> draw()
+================================================================================================
+stage.py -> draw_jugadores() ->  jugador : {'nombre': 'Player', 'hp_actual': 0, 'hp_inicial': 0, 'atk': 0, 'def': 0, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': 0, 'cartas_mazo_preparadas': []}
+
+
+stage.py -> draw_jugadores() ->  enemigo : {'nombre': 'Enemigo', 'hp_actual': 1, 'hp_inicial': 1, 'atk': 1, 'def': 1, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': (390, 70)}
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+stage_form.py -> draw()
+================================================================================================
+stage.py -> draw_jugadores() ->  jugador : {'nombre': 'Player', 'hp_actual': 0, 'hp_inicial': 0, 'atk': 0, 'def': 0, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': 0, 'cartas_mazo_preparadas': []}
+
+
+stage.py -> draw_jugadores() ->  enemigo : {'nombre': 'Enemigo', 'hp_actual': 1, 'hp_inicial': 1, 'atk': 1, 'def': 1, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': (390, 70)}
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+stage_form.py -> draw()
+================================================================================================
+stage.py -> draw_jugadores() ->  jugador : {'nombre': 'Player', 'hp_actual': 0, 'hp_inicial': 0, 'atk': 0, 'def': 0, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': 0, 'cartas_mazo_preparadas': []}
+
+
+stage.py -> draw_jugadores() ->  enemigo : {'nombre': 'Enemigo', 'hp_actual': 1, 'hp_inicial': 1, 'atk': 1, 'def': 1, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': (390, 70)}
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+stage_form.py -> draw()
+================================================================================================
+stage.py -> draw_jugadores() ->  jugador : {'nombre': 'Player', 'hp_actual': 0, 'hp_inicial': 0, 'atk': 0, 'def': 0, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': 0, 'cartas_mazo_preparadas': []}
+
+
+stage.py -> draw_jugadores() ->  enemigo : {'nombre': 'Enemigo', 'hp_actual': 1, 'hp_inicial': 1, 'atk': 1, 'def': 1, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': (390, 70)}
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+stage_form.py -> draw()
+================================================================================================
+stage.py -> draw_jugadores() ->  jugador : {'nombre': 'Player', 'hp_actual': 0, 'hp_inicial': 0, 'atk': 0, 'def': 0, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': 0, 'cartas_mazo_preparadas': []}
+
+
+stage.py -> draw_jugadores() ->  enemigo : {'nombre': 'Enemigo', 'hp_actual': 1, 'hp_inicial': 1, 'atk': 1, 'def': 1, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': (390, 70)}
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+stage_form.py -> draw()
+================================================================================================
+stage.py -> draw_jugadores() ->  jugador : {'nombre': 'Player', 'hp_actual': 0, 'hp_inicial': 0, 'atk': 0, 'def': 0, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': 0, 'cartas_mazo_preparadas': []}
+
+
+stage.py -> draw_jugadores() ->  enemigo : {'nombre': 'Enemigo', 'hp_actual': 1, 'hp_inicial': 1, 'atk': 1, 'def': 1, 'score': 0, 'mazo_asignado': [], 'cartas_mazo': [], 'cartas_usadas': [], 'screen': <Surface(800x600x32 SW)>, 'pos_deck_inicial': (0, 0), 'pos_deck_jugado': (0, 0), 'stat': (390, 70)}
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+================================================================================================
+participante.py -> draw_participante() ->  cartas_mazo : []
+
+
+participante.py -> draw_participante() ->  cartas_usadas : []
+================================================================================================
+
