@@ -19,7 +19,6 @@ def parsear_valor(valor: str):
     
     return valor
 
-
 def cargar_ranking(file_path: str, top: int = 7) -> list:
     """ Carga datos a una matriz desde una rchivo csv:
         1 - Apertura , lectura y cierra de archivo 
@@ -78,7 +77,11 @@ def cargar_configs_stage(stage_data: dict):
         stage_data['ruta_mazo_jugador'] = stage_data.get('configs').get('ruta_mazo_player')
         stage_data['coordenada_inicial_mazo_enemigo'] = stage_data.get('configs').get('coordenada_mazo_enemigo') # configs.json
         stage_data['coordenada_inicial_mazo_jugador'] = stage_data.get('configs').get('coordenada_mazo_jugador') # configs.json
-        
+
+def guardar_info_csv(informacion: str):
+    with open(var.RANKING_CSV_FILE, 'a', encoding='utf-8') as file:
+        file.write(informacion)
+        print(f'INFORMACION GUARDADA -> {informacion}')   
 
 def generar_bd_cartas(path_mazo: str) -> dict:
     """ Realiza la carga de datos tecnicos de las cartas y arma un diccionario 
@@ -134,7 +137,6 @@ def guardar_info_cartas(ruta_archivo: str, dict_cards: dict):
     """ Graba info tecnica de las cartas en un archivo json """
     with open(ruta_archivo, 'w', encoding='utf-8') as file:
         json.dump(dict_cards, file, indent=4)
-
 
 def cargar_bd_data(stage_data: dict):
     """ Realiza la carga de los datos de las cartas desde archivo info_cartas.json,

@@ -3,6 +3,7 @@ import modules.variables as var
 import modules.forms.form_controller as form_controller
 import modules.participante as participante
 import sys
+import modules.sonido as sonido
 
 def dbz_playing_cards():
     """ Puerta de entrada al juego DBZ Playing Cards"""
@@ -12,6 +13,7 @@ def dbz_playing_cards():
     pg.display.set_caption(var.TITULO_JUEGO_CAPTION)
     pantalla_juego = pg.display.set_mode(var.DIMENSION_PANTALLA)
     pg.image.load(var.ICON_IMG) # cargo el icono del juego
+    sonido.set_volume(var.vOLUMEN_INICIAL)
 
     corriendo = True
     reloj = pg.time.Clock() # seteo de FPS

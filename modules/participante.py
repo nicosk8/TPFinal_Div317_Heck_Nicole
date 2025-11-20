@@ -94,6 +94,9 @@ def add_score_participante(participante: dict, score: int):
     """ Acumula el puntaje del participante a medida que incrementa los puntos durante la partida """
     participante['score'] += score
  
+def get_score_participante(participante: dict) -> int: 
+    return participante.get('score')
+
 def asignar_stats_iniciales_participante(participante: dict):
     """ Calcula el total de hp, atk y defensa de todas las cartas del mazo y guarda los totales 
     en la estructura de claves del participante  """

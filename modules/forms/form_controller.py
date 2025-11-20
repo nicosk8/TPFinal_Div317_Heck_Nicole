@@ -5,6 +5,7 @@ import modules.forms.ranking_form as ranking_form
 import modules.forms.options_form as options_form
 import modules.forms.pause_form as pause_form
 import modules.forms.stage_form as stage_form
+import modules.forms.form_name as name_form
 
 def create_form_controller(screen: pg.Surface, datos_juego: dict):
     """ Funcion creadora de formularios 
@@ -83,6 +84,19 @@ def create_form_controller(screen: pg.Surface, datos_juego: dict):
             "music_config" : controller.get('music_config'),
             "jugador" :  controller.get('player')
         }
+        ),
+        name_form.create_form_name(
+        {
+            "name" : 'form_name',
+            "screen" : controller.get('main_screen'),
+            "active" : False,
+            "coord" : (0,0),
+            "music_path" : var.MUSICA_RANKING,
+            "background" : var.FONDO_STAGE_IMG,
+            "screen_dimensions" : var.DIMENSION_PANTALLA,
+            "music_config" : controller.get('music_config'),
+            "jugador" :  controller.get('player')
+        }
         )
 
     ] 
@@ -117,8 +131,11 @@ def forms_update(form_controller: dict, eventos: list[pg.event.Event]):
                 case 'form_stage':
                     form_stage = lista_formularios[4]
                     stage_form.update(form_stage, eventos)
-                    pause_form.draw(form_stage)
                     stage_form.draw(form_stage)
+                case 'form_name':
+                    form_name = lista_formularios[5]
+                    name_form.update(form_name, eventos)
+                    name_form.draw(form_name)
                     
 
 

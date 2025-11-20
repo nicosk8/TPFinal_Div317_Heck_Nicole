@@ -9,7 +9,7 @@ JSON_INFO_CARDS_FILE = r'C:\Repositorio UTN\2025\PROG I\TPFinal_Div317_Heck_Nico
 
 # Datos juego
 CANTIDAD_VIDAS = 3
-vOLUMEN_INICIAL = 50
+vOLUMEN_INICIAL = 10
 
 # Imagenes
 ICON_IMG = 'modules/assets/icons/gamepad_icon.png'

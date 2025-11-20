@@ -9,6 +9,7 @@ import modules.forms.pause_form as pause_form
 import modules.stage as stage_juego
 import modules.carta as carta_jugador
 import modules.participante as participante_juego
+import modules.forms.form_name as form_name
 
 def create_form_stage(dict_form_data: dict) -> dict:
     """ Crea el formulario stage_form: puntajes, imagenes, posicion, musica, contador """
@@ -18,8 +19,7 @@ def create_form_stage(dict_form_data: dict) -> dict:
     form['stage_restart'] = False # bandera para saber si debe reiniciar el juego o no
     form['time_finished'] = False # indicador de finalizacion de tiempo de juego
     form['actual_level'] = 1
-    form['stage_timer'] = var.STAGE_TIMER # cantidad de seg desde donde arranca el juego
-    form['last_timer'] = pg.time.get_ticks()
+    
     form['bonus_shield_available'] = True
     form['bonus_heal_available'] = True
     form['bonus_shield_applied'] = False
@@ -31,7 +31,7 @@ def create_form_stage(dict_form_data: dict) -> dict:
 
     form['lbl_timer'] = Label(
         x=50, y=15,
-        text=f'{form.get('stage_timer')}',
+        text=f'{stage_juego.obtener_tiempo(form.get('stage'))}',
         screen= form.get('screen'),
         align= 'top-left',
         font_path= var.FONT_ALAGARD,
@@ -157,15 +157,33 @@ def update_lbls_participante(form_dict_data: dict, tipo_participante: str):
     form_dict_data[f'lbl_{tipo_participante}_def'].update_text(text=f'DEF: {participante_juego.get_def_participante(participante)}', color= pg.Color('cian'))
 
 def jugar_mano(form_dict_data: dict):
-    """ Ejecuta la logica principal del juego:
+    """ Ejecuta la logica principal del juego, solo si los participantes tienen cartas. Caso contrario
+        muestra mensaje de juego finalizado y al ganador de la ronda:
             1 - Ejecuta la jugada de cartas 
             2 - compara daños 
             3 - Resta stats a los participantes 
             4 - Verifica el ganador de la ronda
             5 - Imprime el ganador de la ronda """
     stage = form_dict_data.get('stage')
-    critical, ganador_mano = stage_juego.jugar_mano(stage)
-    print(f'El ganador de la mano es : {ganador_mano}')
+    if stage_juego.hay_jugadores_con_cartas(stage):
+        critical, ganador_mano = stage_juego.jugar_mano(stage)
+        print(f'El ganador de la mano es : {ganador_mano}')
+
+    elif not stage_juego.hay_jugadores_con_cartas(stage) and stage_juego.esta_finalizado(stage):
+        print('JUEGO TERMINADO')
+        #print(f'Ganador: {stage_juego.obtener_ganador(stage)}')
+
+        if participante_juego.get_nombre_participante(
+            stage_juego.obtener_ganador(stage)) == 'enemigo':
+                win_status = False
+        else:
+                win_status = True
+
+    # ACTIVAR EL FORM PARA ENTER NOMBRE 
+    name_form = var.dict_forms_status.get('form_name')
+    form_name.update_texto_victoria(name_form, win_status)
+    base_form.set_active('form_name')
+    
 
 def iniciar_nueva_partida(form_dict_data: dict):
     """ Funcion que setea las configs para una nueva partida """
@@ -174,17 +192,6 @@ def iniciar_nueva_partida(form_dict_data: dict):
     pantalla = form_dict_data.get('screen')
     nro_stage = stage.get('nro_stage')
     form_dict_data['stage'] = stage_juego.restart_stage(stage, jugador, pantalla, nro_stage)
-
-def timer_update(dict_form_data: dict):
-    """ Actualiza el tiempo restante de partida """
-
-    if dict_form_data.get('stage_timer') > 0:
-
-        tiempo_actual = pg.time.get_ticks() # capturo el tiempo actual en milisegs
-
-        if (tiempo_actual - dict_form_data.get('last_timer')) > 1000:
-            dict_form_data['stage_timer'] -= 1
-            dict_form_data['last_timer'] = tiempo_actual
 
 def events_handler(events: list[pg.event.Event]):
     """ Manejador de eventos del stage  """
@@ -236,8 +243,13 @@ def update_score(form_dict_data: dict):
 
 def update(form_dict_data: dict, eventos: list[pg.event.Event]):
     """ Actualiza los widgets del formulario"""
-    form_dict_data['lbl_timer'].update_text(f'{form_dict_data.get('stage_timer')}', pg.Color('white'))
+
+    form_dict_data['lbl_timer'].update_text(f'{stage_juego.obtener_tiempo(form_dict_data.get('stage'))}', pg.Color('white'))
+
     base_form.update(form_dict_data)
+
+    stage_juego.update(form_dict_data.get('stage'))
+
     update_lbls_card_info(form_dict_data) 
 
     update_lbls_participante(form_dict_data, tipo_participante='jugador')   
@@ -246,5 +258,5 @@ def update(form_dict_data: dict, eventos: list[pg.event.Event]):
     update_score(form_dict_data)
 
     events_handler(eventos)
-    timer_update(form_dict_data)
+
     
