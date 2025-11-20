@@ -18,7 +18,7 @@ FONDO_RANKING_IMG = 'modules/assets/backgrounds/FONDO_RANKING.jpg'
 FONDO_OPCIONES_IMG = r'modules\assets\backgrounds\fondo_6.png' 
 FONDO_PAUSA_IMG = r'modules\assets\backgrounds\fondo_6.png'
 FONDO_STAGE_IMG = r'modules\assets\backgrounds\fondo_5.png'
-
+FONDO_WISH_IMG = r'modules\assets\backgrounds\form_wish.jpg'
 # Fuentes
 FONT_ALAGARD = 'modules/assets/fonts/alagard.ttf' 
 

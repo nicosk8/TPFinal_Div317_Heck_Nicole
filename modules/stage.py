@@ -33,6 +33,8 @@ def inicializar_stage(jugador: dict, pantalla: pg.Surface, nro_stage: int):
     stage_data['coordenada_inicial_mazo_enemigo'] = (20,70)
     stage_data['coordenada_final_mazo_enemigo'] = (390,70)
 
+    stage_data['heal_available'] = True
+    stage_data['jackpot_available'] = True
     
     stage_data['enemigo'] = participante.inicializar_participante(stage_data.get('screen'), nombre='Enemigo')
     participante.setear_stat_participante(stage_data.get('enemigo'), stat='pos_deck_inicial', valor=stage_data.get('coordenada_inicial_mazo_enemigo'))
@@ -49,6 +51,9 @@ def inicializar_stage(jugador: dict, pantalla: pg.Surface, nro_stage: int):
     stage_data['data_cargada'] = False              # indicador de datos cargados
 
     return stage_data
+
+def modificar_estado_bonus(stage_data: dict, bonus: str):
+    stage_data[f'{bonus}_available'] = False
 
 def timer_update(stage_data: dict):
     """ Actualiza el tiempo restante de partida """

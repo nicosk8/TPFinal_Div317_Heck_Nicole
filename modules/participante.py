@@ -23,6 +23,9 @@ def inicializar_participante(pantalla: pg.Surface, nombre: str = 'PC'):
 
     return participante
 
+def set_hp_participante(participante: dict, hp_actual: int):
+    participante['hp_actual'] = hp_actual
+
 def get_hp_participante(participante: dict) -> int:
     """ Devuelve el contenido de la clave 'hp' """
     return participante.get('hp_actual')

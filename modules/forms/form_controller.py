@@ -6,6 +6,7 @@ import modules.forms.options_form as options_form
 import modules.forms.pause_form as pause_form
 import modules.forms.stage_form as stage_form
 import modules.forms.form_name as name_form
+import modules.forms.wish_form as wish_form
 
 def create_form_controller(screen: pg.Surface, datos_juego: dict):
     """ Funcion creadora de formularios 
@@ -97,6 +98,19 @@ def create_form_controller(screen: pg.Surface, datos_juego: dict):
             "music_config" : controller.get('music_config'),
             "jugador" :  controller.get('player')
         }
+        ),
+        wish_form.create_form_wish(
+            {
+                "name": 'form_wish',
+                "screen": controller.get('main_screen'),
+                "active": False,
+                "coord": (0, 0),
+                "music_path": var.MUSICA_MENU,
+                "background": var.FONDO_WISH_IMG,
+                "screen_dimentions": var.DIMENSION_PANTALLA,
+                "music_config": controller.get('music_config'),
+                'jugador': controller.get('player')
+            }
         )
 
     ] 
@@ -136,6 +150,12 @@ def forms_update(form_controller: dict, eventos: list[pg.event.Event]):
                     form_name = lista_formularios[5]
                     name_form.update(form_name, eventos)
                     name_form.draw(form_name)
+                case 'form_wish':
+                    form_wish = lista_formularios[6]
+                    wish_form.update(form_wish)
+                    wish_form.draw(form_wish)
+
+                    
                     
 
 
