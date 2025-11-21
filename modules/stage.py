@@ -3,7 +3,7 @@ import modules.variables as var
 import modules.load_data as load_data
 import random as rd
 import modules.carta as carta
-import modules.participante as participante
+import modules.participante as participante_juego
 
 def inicializar_stage(jugador: dict, pantalla: pg.Surface, nro_stage: int):
     """ Inicializa el nivel/stage.
@@ -36,12 +36,13 @@ def inicializar_stage(jugador: dict, pantalla: pg.Surface, nro_stage: int):
     stage_data['heal_available'] = True
     stage_data['jackpot_available'] = True
     
-    stage_data['enemigo'] = participante.inicializar_participante(stage_data.get('screen'), nombre='Enemigo')
-    participante.setear_stat_participante(stage_data.get('enemigo'), stat='pos_deck_inicial', valor=stage_data.get('coordenada_inicial_mazo_enemigo'))
-    participante.setear_stat_participante(stage_data.get('enemigo'), stat='pos_deck_jugado', valor=stage_data.get('coordenada_final_mazo_enemigo'))
+    stage_data['enemigo'] = participante_juego.inicializar_participante(stage_data.get('screen'), nombre='Enemigo')
 
-    participante.setear_stat_participante(stage_data.get('jugador'), stat='pos_deck_inicial', valor=stage_data.get('coordenada_inicial_mazo_jugador'))
-    participante.setear_stat_participante(stage_data.get('jugador'), stat='pos_deck_jugado', valor=stage_data.get('coordenada_final_mazo_jugador'))
+    participante_juego.setear_stat_participante(stage_data.get('enemigo'), stat='pos_deck_inicial', valor=stage_data.get('coordenada_inicial_mazo_enemigo'))
+    participante_juego.setear_stat_participante(stage_data.get('enemigo'), stat='pos_deck_jugado', valor=stage_data.get('coordenada_final_mazo_enemigo'))
+
+    participante_juego.setear_stat_participante(stage_data.get('jugador'), stat='pos_deck_inicial', valor=stage_data.get('coordenada_inicial_mazo_jugador'))
+    participante_juego.setear_stat_participante(stage_data.get('jugador'), stat='pos_deck_jugado', valor=stage_data.get('coordenada_final_mazo_jugador'))
 
     stage_data['juego_finalizado'] = False
     stage_data['puntaje_guardado'] = False
@@ -70,18 +71,18 @@ def timer_update(stage_data: dict):
 def obtener_tiempo(stage_data: dict):
     return stage_data.get('stage_timer')
 
-def asignar_cartas_stage(stage_data: dict, player: dict):
+def asignar_cartas_stage(stage_data: dict, participante: dict):
     """ Mezcla las cartas y las asigna a los participantes"""
 
     cantidad_cartas = stage_data.get('cantidad_cartas_jugadores')
-    if participante.get_nombre_participante(participante) != 'Enemigo':
+    if participante_juego.get_nombre_participante(participante) != 'Enemigo':
         rd.shuffle(stage_data.get('cartas_mazo_preparadas_p'))
         cartas_participante = stage_data.get('cartas_mazo_preparadas_p')[:cantidad_cartas]
     else: 
         rd.shuffle(stage_data.get('cartas_mazo_preparadas_e'))
         cartas_participante = stage_data.get('cartas_mazo_preparadas_e')[:cantidad_cartas]
 
-    participante.set_cartas_participante(player, cartas_participante)
+    participante_juego.set_cartas_participante(participante, cartas_participante)
 
 def generar_mazo(stage_data: dict):
     """ Genera el mazo de cartas de los participantes.
@@ -109,8 +110,8 @@ def barajar_mazos_stage(stage_data: dict):
     if not stage_data.get('stage_finalizado'):
         asignar_cartas_stage(stage_data, stage_data.get('jugador'))
         asignar_cartas_stage(stage_data, stage_data.get('enemigo'))
-        participante.asignar_stats_iniciales_participante(stage_data.get('jugador'))
-        participante.asignar_stats_iniciales_participante(stage_data.get('enemigo'))
+        participante_juego.asignar_stats_iniciales_participante(stage_data.get('jugador'))
+        participante_juego.asignar_stats_iniciales_participante(stage_data.get('enemigo'))
         stage_data['data_cargada'] = True
         print(f' *** data cargada : {stage_data.get('data_cargada')}')
 
@@ -132,22 +133,22 @@ def inicializar_data_stage(stage_data: dict):
 
 def hay_jugadores_con_cartas(stage_data: dict) -> bool:
 
-    jugador_con_cartas = participante.get_cartas_restantes_participante(stage_data.get('jugador'))
-    enemigo_con_cartas = participante.get_cartas_restantes_participante(stage_data.get('enemigo'))
+    jugador_con_cartas = participante_juego.get_cartas_restantes_participante(stage_data.get('jugador'))
+    enemigo_con_cartas = participante_juego.get_cartas_restantes_participante(stage_data.get('enemigo'))
     return jugador_con_cartas or enemigo_con_cartas
 
 def restart_stage(stage_data: dict, jugador: dict, pantalla: pg.Surface, nro_stage: int):
     """ Restablece el nivel. Devuelve el seteo de las configuraciones a como estaban al inicio 
     :params:  """
     stage_data = inicializar_stage(jugador, pantalla, nro_stage)
-    participante.reiniciar_datos_participante(jugador)
+    participante_juego.reiniciar_datos_participante(jugador)
     inicializar_data_stage(stage_data)
     return stage_data
 
 def jugar_mano_stage(stage_data: dict):
     """ Juega la carta actual de los participantes """
-    participante.jugar_carta(stage_data.get('jugador'))
-    participante.jugar_carta(stage_data.get('enemigo'))
+    participante_juego.jugar_carta(stage_data.get('jugador'))
+    participante_juego.jugar_carta(stage_data.get('enemigo'))
 
 def es_golpe_critico() -> bool:
     """ Bandera de golpe critico : Setea una funcion para asignar True o False 
@@ -166,8 +167,8 @@ def comparar_damage(stage_data: dict) -> str:
     jugador = stage_data.get('jugador')
     enemigo = stage_data.get('enemigo')
     critical = False
-    carta_jugador = participante.get_carta_actual_participante(jugador)
-    carta_enemigo = participante.get_carta_actual_participante(enemigo)
+    carta_jugador = participante_juego.get_carta_actual_participante(jugador)
+    carta_enemigo = participante_juego.get_carta_actual_participante(enemigo)
 
     if carta_enemigo and carta_jugador:
         critical = es_golpe_critico()
@@ -176,13 +177,13 @@ def comparar_damage(stage_data: dict) -> str:
         
         if atk_enemigo > atk_jugador:
             ganador_mano = 'PC'
-            participante.restar_stats_participante(jugador, carta_enemigo, critical)
+            participante_juego.restar_stats_participante(jugador, carta_enemigo, critical)
         else:
             score = atk_jugador - carta.get_def_carta(carta_enemigo)
             ganador_mano = 'PLAYER'
-            participante.restar_stats_participante(enemigo, carta_jugador, critical)
-            participante.add_score_participante(jugador, )
-    return critical, ganador_mano
+            participante_juego.restar_stats_participante(enemigo, carta_jugador, critical)
+            participante_juego.add_score_participante(jugador, score)
+    return ganador_mano
 
 def setear_ganador(stage_data: dict, participante: dict):
     """ Setea al ganador de la ronda """
@@ -197,17 +198,17 @@ def chequear_ganador(stage_data: dict):
     jugador = stage_data.get('jugador')
     enemigo = stage_data.get('enemigo')
 
-    if (participante.get_hp_participante(jugador) <= 0 or\
-        (participante.get_hp_participante(jugador) < participante.get_hp_participante(enemigo)) and\
-        (len(participante.get_cartas_restantes_participante(enemigo)) == 0)):
+    if (participante_juego.get_hp_participante(jugador) <= 0 or\
+        (participante_juego.get_hp_participante(jugador) < participante_juego.get_hp_participante(enemigo)) and\
+        (len(participante_juego.get_cartas_restantes_participante(enemigo)) == 0)):
             
             setear_ganador(stage_data, enemigo)            
-            puntaje_jugador_actual = participante.get_score_participante(jugador) // 2
-            participante.set_score_participante(jugador, puntaje_jugador_actual)
+            puntaje_jugador_actual = participante_juego.get_score_participante(jugador) // 2
+            participante_juego.set_score_participante(jugador, puntaje_jugador_actual)
 
-    elif (participante.get_hp_participante(enemigo) <= 0 or\
-          (participante.get_hp_participante(enemigo) < participante.get_hp_participante(jugador)) and\
-         (len(participante.get_cartas_restantes_participante(jugador)) == 0)):
+    elif (participante_juego.get_hp_participante(enemigo) <= 0 or\
+          (participante_juego.get_hp_participante(enemigo) < participante_juego.get_hp_participante(jugador)) and\
+         (len(participante_juego.get_cartas_restantes_participante(jugador)) == 0)):
             
             setear_ganador(stage_data, jugador)
 
@@ -221,18 +222,20 @@ def jugar_mano(stage_data: dict) -> str:
     """ Ejecuta la jugada de cartas, compara daños, resta stats a los participantes, verifica el ganador de la ronda y lo retorna """
     if not stage_data.get('juego_finalizado'):
         jugar_mano_stage(stage_data)
-        critical, ganador_mano = comparar_damage(stage_data)
+        ganador_mano = comparar_damage(stage_data)
         chequear_ganador(stage_data)
-        return critical, ganador_mano
-    
-    return None
+        return ganador_mano
+    else:
+        print(' ¡ JUEGO FINALIZADO !')    
+        return None
 
 def draw_jugadores(stage_data: dict):
     """ Dibuja en pantalla las cartas del jugador y oponente """
 
-    participante.draw_participante(stage_data.get('jugador'), stage_data.get('screen'))
-    participante.draw_participante(stage_data.get('enemigo'), stage_data.get('screen'))
+    participante_juego.draw_participante(stage_data.get('jugador'), stage_data.get('screen'))
+    participante_juego.draw_participante(stage_data.get('enemigo'), stage_data.get('screen'))
 
 def update(stage_data: dict):
     """ Actualiza el stage """
     timer_update(stage_data)
+    chequear_ganador(stage_data)

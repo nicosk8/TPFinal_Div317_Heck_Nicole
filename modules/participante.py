@@ -76,7 +76,7 @@ def get_carta_actual_participante(participante: dict):
 
 def setear_stat_participante(participante: dict, stat: str, valor: int):
     """ """
-    participante['stat'] = valor    
+    participante[stat] = valor 
 
 def set_cartas_participante(participante: dict, lista_cartas: list[dict]):
     """ Setea las cartas del participante:
@@ -172,7 +172,7 @@ def jugar_carta(participante: dict):
         print(f'El jugador {participante.get('nombre')} tiene {len(participante.get('cartas_mazo'))} cartas')
         carta_actual = participante.get('cartas_mazo').pop()
         carta.cambiar_visibilidad(carta_actual)
-        carta.asignar_coordenadas_carta(carta_actual,  get_coordenadas_mazo_jugado(participante))
+        carta.asignar_coordenadas_carta(carta_actual, get_coordenadas_mazo_jugado(participante))
         participante.get('cartas_usadas').append(carta_actual)
 
     else:

@@ -31,65 +31,65 @@ def create_form_stage(dict_form_data: dict) -> dict:
     form['clock'] = pg.time.Clock() # 
 
     form['lbl_timer'] = Label(
-        x=50, y=15,
+        x=50, y=25,
         text=f'{stage_juego.obtener_tiempo(form.get('stage'))}',
         screen= form.get('screen'),
-        align= 'top-left',
-        font_path= var.FONT_ALAGARD,
-        font_size=20, color= pg.Color('white')
+        align='top-left',
+        font_path=var.FONT_ALAGARD,
+        font_size=45, color= pg.Color('white')
     )
 
     form['lbl_score'] = Label(
-        x= 450, y=15,
+        x=450, y=25,
         text=f'Score: 0',
         screen= form.get('screen'),
-        align= 'top-left',
+        align='top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=20, color= pg.Color('white')
+        font_size=45, color= pg.Color('white')
     )
     
     form['lbl_carta_e'] = Label(
-        x=390, y=275,
+        x=405, y=300,
         text=f'',
         screen= form.get('screen'),
-        align= 'top-left',
+        align='top-left',
         font_path= var.FONT_ALAGARD,
         font_size=20, color= pg.Color('white')
     )
 
     form['lbl_carta_p'] = Label(
-        x=390 , y=563,
+        x=405 , y=330,
         text=f'',
         screen= form.get('screen'),
-        align= 'top-left',
-        font_path= var.FONT_ALAGARD,
+        align='top-left',
+        font_path=var.FONT_ALAGARD,
         font_size=20, color= pg.Color('white')
     )
 
     # Stats Enemigo
     form['lbl_enemigo_hp'] = Label(
-        x=617 , y=85,
+        x=617, y=85,
         text=f'',
         screen= form.get('screen'),
-        align= 'top-left',
+        align='top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=20, color= pg.Color('white')
+        font_size=25, color= pg.Color('white')
     )
     form['lbl_enemigo_atk'] = Label(
         x=617 , y=120,
         text=f'',
         screen= form.get('screen'),
-        align= 'top-left',
+        align='top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=30, color= pg.Color('white')
+        font_size=25, color= pg.Color('white')
     )
     form['lbl_enemigo_def'] = Label(
         x=617 , y=155,
         text=f'',
         screen= form.get('screen'),
-        align= 'top-left',
+        align='top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=20, color= pg.Color('white')
+        font_size=25, color= pg.Color('white')
     )
 
     # Stats Jugador
@@ -97,9 +97,9 @@ def create_form_stage(dict_form_data: dict) -> dict:
         x=617 , y=365,
         text=f'',
         screen= form.get('screen'),
-        align= 'top-left',
+        align='top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=20, color= pg.Color('white')
+        font_size=25, color= pg.Color('white')
     )
     form['lbl_jugador_atk'] = Label(
         x=617 , y=395,
@@ -107,7 +107,7 @@ def create_form_stage(dict_form_data: dict) -> dict:
         screen= form.get('screen'),
         align= 'top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=20, color= pg.Color('white')
+        font_size=25, color= pg.Color('white')
     )
     form['lbl_jugador_def'] = Label(
         x=617 , y=425,
@@ -115,17 +115,16 @@ def create_form_stage(dict_form_data: dict) -> dict:
         screen= form.get('screen'),
         align= 'top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=20, color= pg.Color('white')
+        font_size=25, color= pg.Color('white')
     )
 
     # ================ BUTTONS =================
     form['btn_play'] = Button( 
-        x= var.DIMENSION_PANTALLA[0] // 2 + 175,
-        y= var.DIMENSION_PANTALLA[0] // 2,
+        x=616, y=250,
         text= 'JUGAR',
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
-        font_size= 30,
+        font_size= 20, align='topleft',
         on_click= jugar_mano, on_click_param= form
     ) 
 
@@ -170,14 +169,13 @@ def create_form_stage(dict_form_data: dict) -> dict:
     var.dict_forms_status[form.get('name')] = form 
     return form
 
-
 def update_lbls_participante(form_dict_data: dict, tipo_participante: str):
     """ """
     participante = form_dict_data.get('stage').get(tipo_participante)
 
-    form_dict_data[f'lbl_{tipo_participante}_hp'].update_text(text=f'HP: {participante_juego.get_hp_participante(participante)}', color= pg.Color('cian'))
-    form_dict_data[f'lbl_{tipo_participante}_atk'].update_text(text=f'ATK: {participante_juego.get_atk_participante(participante)}', color= pg.Color('cian'))
-    form_dict_data[f'lbl_{tipo_participante}_def'].update_text(text=f'DEF: {participante_juego.get_def_participante(participante)}', color= pg.Color('cian'))
+    form_dict_data[f'lbl_{tipo_participante}_hp'].update_text(text=f'HP: {participante_juego.get_hp_participante(participante)}', color= pg.Color('cyan'))
+    form_dict_data[f'lbl_{tipo_participante}_atk'].update_text(text=f'ATK: {participante_juego.get_atk_participante(participante)}', color= pg.Color('cyan'))
+    form_dict_data[f'lbl_{tipo_participante}_def'].update_text(text=f'DEF: {participante_juego.get_def_participante(participante)}', color= pg.Color('cyan'))
 
 def jugar_mano_NO_USAR_(form_dict_data: dict):
     """ Ejecuta la logica principal del juego, solo si los participantes tienen cartas. Caso contrario
@@ -210,7 +208,7 @@ def jugar_mano_NO_USAR_(form_dict_data: dict):
 def jugar_mano(form_dict_data: dict):
     stage = form_dict_data.get('stage')
     if stage_juego.hay_jugadores_con_cartas(stage):
-        critical, ganador_mano = stage_juego.jugar_mano(stage)
+        ganador_mano = stage_juego.jugar_mano(stage)
         print(f'El ganador de la mano es: {ganador_mano}')
 
 def verificar_terminado(form_dict_data: dict):
@@ -248,15 +246,11 @@ def update_lbls_card_info(form_dict_data: dict):
         ultima_carta_p = participante_juego.get_carta_actual_participante(form_dict_data.get('stage').get('jugador'))
 
         form_dict_data['lbl_carta_e'].update_text(
-            f'HP: {carta_jugador.get_hp_carta(ultima_carta_e)} \
-            ATK: {carta_jugador.get_atk_carta(ultima_carta_e)} \
-            DEF: {carta_jugador.get_def_carta(ultima_carta_e)}',
+            f'HP: {carta_jugador.get_hp_carta(ultima_carta_e)} ATK: {carta_jugador.get_atk_carta(ultima_carta_e)} DEF: {carta_jugador.get_def_carta(ultima_carta_e)}',
             pg.Color('white')  )
         
-        form_dict_data['lbl_carta_p'].update.text(
-            f'HP: {carta_jugador.get_hp_carta(ultima_carta_p)} \
-            ATK: {carta_jugador.get_atk_carta(ultima_carta_p)} \
-            DEF: {carta_jugador.get_def_carta(ultima_carta_p)}',
+        form_dict_data['lbl_carta_p'].update_text(
+            f'HP: {carta_jugador.get_hp_carta(ultima_carta_p)} ATK: {carta_jugador.get_atk_carta(ultima_carta_p)} DEF: {carta_jugador.get_def_carta(ultima_carta_p)}',
             pg.Color('white')
         )
 

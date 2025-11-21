@@ -1,7 +1,7 @@
 import pygame as pg
 import modules.load_data as load_data
 
-def inicializar_carta(dict_card: dict, coords: tuple) -> dict:
+def inicializar_carta(dict_card: dict, coords: list) -> dict:
     """ 
         'id'  : datos_crudo[0],
         'hp' : int(datos_crudo[2]),
@@ -40,7 +40,7 @@ def get_def_carta(dict_card: dict) -> int:
     """ Devuelve el contenido de la clave "def" """
     return dict_card.get('def')
 
-def asignar_coordenadas_carta(dict_card: dict, coordenadas: tuple[int]):
+def asignar_coordenadas_carta(dict_card: dict, coordenadas: list[int]):
     """ Asigna coordenadas a la clave 'coordenadas' """
     dict_card['coordenadas'] = coordenadas
 
@@ -64,8 +64,6 @@ def draw_carta(dict_card: dict, screen: pg.Surface):
     """ Dibuja la superficie de la carta, si està visible dibuja la portada,
     caso contrario dibuja el reverso de la misma"""
     
-    visible = dict_card.get('visible')
-    print(f'>>>> draw_carta() -> dict_card.get("visible") : {visible}')
     if dict_card.get('visible'):
         dict_card['imagen'] = redimensionar_imagen(dict_card.get('ruta_frente'), 40)
     else:

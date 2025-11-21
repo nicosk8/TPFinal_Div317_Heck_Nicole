@@ -75,9 +75,14 @@ def cargar_configs_stage(stage_data: dict):
         stage_data['nombre_mazo_enemigo'] = stage_data.get('configs').get('mazo_enemigo')
         stage_data['nombre_mazo_jugador'] = stage_data.get('configs').get('mazo_jugador')
         stage_data['ruta_mazo_jugador'] = stage_data.get('configs').get('ruta_mazo_player')
-        stage_data['coordenada_inicial_mazo_enemigo'] = stage_data.get('configs').get('coordenada_mazo_enemigo') # configs.json
-        stage_data['coordenada_inicial_mazo_jugador'] = stage_data.get('configs').get('coordenada_mazo_jugador') # configs.json
 
+        stage_data['coordenada_inicial_mazo_jugador'] = stage_data.get('configs').get('coordenada_mazo_jugador') # configs.json
+        stage_data['coordenada_final_mazo_jugador'] = stage_data.get('configs').get('coordenada_final_mazo_jugador')
+
+        stage_data['coordenada_inicial_mazo_enemigo'] = stage_data.get('configs').get('coordenada_inicial_mazo_enemigo') # configs.json
+        stage_data['coordenada_final_mazo_enemigo'] = stage_data.get('configs').get('coordenada_final_mazo_enemigo')
+
+        
 def guardar_info_csv(informacion: str):
     with open(var.RANKING_CSV_FILE, 'a', encoding='utf-8') as file:
         file.write(informacion)
@@ -91,7 +96,7 @@ def generar_bd_cartas(path_mazo: str) -> dict:
         cartas_dict -> dict de datos
         """
     cartas_dict = {
-        "cartas": []
+        "cartas": {}
     }
 
     for root, dir, files in os.walk(path_mazo):
@@ -112,8 +117,7 @@ def generar_bd_cartas(path_mazo: str) -> dict:
 
                 filename = filename.replace('.png','')
                 datos_crudo = filename.split('_')
-            
-
+    
                 datos_card = { # '0.0.1 HP 9999 ATK 30000 DEF 9999 7 ', '1.0_HP_8000_ATK_20000_DEF_8000_7.png'
                     'id'  : datos_crudo[0],
                     'hp' : int(datos_crudo[2]),
@@ -130,8 +134,8 @@ def generar_bd_cartas(path_mazo: str) -> dict:
         if deck_name:
             cartas_dict['cartas'][deck_name] = deck_cards
 
-        cartas_dict['cartas'] = deck_cards # cargo los datos de la carta en el dict
-        return cartas_dict
+        #cartas_dict['cartas'] = deck_cards # cargo los datos de la carta en el dict
+    return cartas_dict
             
 def guardar_info_cartas(ruta_archivo: str, dict_cards: dict):
     """ Graba info tecnica de las cartas en un archivo json """

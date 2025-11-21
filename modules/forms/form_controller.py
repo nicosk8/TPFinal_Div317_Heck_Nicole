@@ -104,7 +104,7 @@ def create_form_controller(screen: pg.Surface, datos_juego: dict):
                 "name": 'form_wish',
                 "screen": controller.get('main_screen'),
                 "active": False,
-                "coord": (0, 0),
+                "coord": (0,0),
                 "music_path": var.MUSICA_MENU,
                 "background": var.FONDO_WISH_IMG,
                 "screen_dimentions": var.DIMENSION_PANTALLA,
