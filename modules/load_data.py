@@ -1,12 +1,11 @@
-import variables as var
+#import variables as var
+import modules.variables as var
 import json
 import os
 
 def mapear_valores(matriz: list[list], columna_a_mapear: int, callback):
     
     for indice_fila in range(len(matriz)):
-
-        if ((indice_fila != 0  or None) and (columna_a_mapear != 0 or None)):
             print()
             print('ESTOY EN LOAD_DATA.py -> MAPEAR_VALORES() -> "for indice_fila in range(len(matriz))..."')
             print(F'MATRIZ : {matriz}')
@@ -14,19 +13,13 @@ def mapear_valores(matriz: list[list], columna_a_mapear: int, callback):
             print(f'COLUMNA_A_MAPEAR : {columna_a_mapear}')
 
             print()
-            print(f'ANTES DEL matriz[indice_fila][columna_a_mapear] = callback(valor) -> {matriz[indice_fila][columna_a_mapear]}')
+            print(f'ANTES DEL PARSEO A INT -> type: {type(matriz[indice_fila][columna_a_mapear])}')
 
             valor  = matriz[indice_fila][columna_a_mapear] 
             matriz[indice_fila][columna_a_mapear] = callback(valor)
             print()
-            print(f'DESPUES DEL matriz[indice_fila][columna_a_mapear] = callback(valor) -> {matriz[indice_fila][columna_a_mapear]}')
-        else:
-            print()
-            print('ESTOY EN LOAD_DATA.py -> MAPEAR_VALORES() -> "for indice_fila in range(len(matriz))..."')
-            print('FALTA DEFINIR INDICES_DE_FILA O COLUMNA_A_MAPEAR\n')
-            print(F'MATRIZ : {matriz}')
-            print(f'INDICE_FILA : {indice_fila}')
-            print(f'COLUMNA_A_MAPEAR : {columna_a_mapear}')
+            print(f'DESPUES DEL PARSEO A INT -> type: {type(matriz[indice_fila][columna_a_mapear])}')
+
 
 def parsear_valor(valor: str):
     """ Convierte un valor a entero o flotante segun sea el caso
@@ -55,16 +48,17 @@ def cargar_ranking(file_path: str, top: int = 7) -> list:
 
         for linea in texto.split('\n'):
             if linea: 
-                lista_datos_linea = linea.split(';')
+# NDH           lista_datos_linea = linea.split(';')
+                lista_datos_linea = linea.split(',')
                 ranking.append(lista_datos_linea)
     print()
     print('ESTOY EN LOAD_DATA.py -> CARGAR_RANKING()')
     print(f'ANTES DE MAPEAR VALORES -> lista ranking -> {ranking}\n\n')
     
-    
-    mapear_valores(ranking[1:], columna_a_mapear=1, callback= parsear_valor) # parseo de datos
-
     ranking = ranking[1:] # ignora el encabezado y empieza desde las 2da linea
+
+    mapear_valores(ranking, columna_a_mapear=1, callback= parsear_valor) # parseo de datos
+
     ranking.sort(key=lambda fila: fila[1], reverse=True) # ordena DES por puntaje numerico
 
     return ranking[:top] # Devuelve los primeros 7 valores 

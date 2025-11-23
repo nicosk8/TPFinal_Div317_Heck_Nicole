@@ -33,7 +33,7 @@ def create_form_ranking(dict_form_data: dict) -> dict:
     form['lbl_subtitulo'] = Label( # <- sub titulo : "TOP SCORE RANKING"
         x= var.DIMENSION_PANTALLA[0] // 2,
         y= 130,
-        text= 'TOP 10 RANKING SCORE',
+        text= 'TOP 7 RANKING SCORE',
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
         font_size= 50

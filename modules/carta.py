@@ -26,7 +26,8 @@ def esta_visible(dict_card: dict) -> bool:
 
 def cambiar_visibilidad(dict_card: dict):
     """ Cambia la visibilidad de la carta actual. Si esta boca abajo, la voltea """
-    dict_card['visible'] = not dict_card.get('visible')
+    dict_card['visible'] = True
+# NDH dict_card['visible'] = not dict_card.get('visible')
 
 def get_hp_carta(dict_card: dict) -> int:
     """ Devuelve el contenido de la clave "hp" """
