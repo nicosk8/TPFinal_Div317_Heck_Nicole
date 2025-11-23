@@ -174,7 +174,7 @@ def comparar_damage(stage_data: dict) -> str:
         critical = es_golpe_critico()
         atk_jugador = carta.get_atk_carta(carta_jugador)
         atk_enemigo = carta.get_atk_carta(carta_enemigo)
-        
+
         if atk_enemigo > atk_jugador:
             ganador_mano = 'PC'
             participante_juego.restar_stats_participante(jugador, carta_enemigo, critical)
@@ -183,7 +183,8 @@ def comparar_damage(stage_data: dict) -> str:
             ganador_mano = 'PLAYER'
             participante_juego.restar_stats_participante(enemigo, carta_jugador, critical)
             participante_juego.add_score_participante(jugador, score)
-    return ganador_mano
+    
+    return critical, ganador_mano
 
 def setear_ganador(stage_data: dict, participante: dict):
     """ Setea al ganador de la ronda """
@@ -222,12 +223,11 @@ def jugar_mano(stage_data: dict) -> str:
     """ Ejecuta la jugada de cartas, compara daños, resta stats a los participantes, verifica el ganador de la ronda y lo retorna """
     if not stage_data.get('juego_finalizado'):
         jugar_mano_stage(stage_data)
-        ganador_mano = comparar_damage(stage_data)
-        chequear_ganador(stage_data)
-        return ganador_mano
-    else:
-        print(' ¡ JUEGO FINALIZADO !')    
-        return None
+
+        critical, ganador_mano = comparar_damage(stage_data)
+
+        return critical, ganador_mano
+    return None
 
 def draw_jugadores(stage_data: dict):
     """ Dibuja en pantalla las cartas del jugador y oponente """
@@ -236,6 +236,6 @@ def draw_jugadores(stage_data: dict):
     participante_juego.draw_participante(stage_data.get('enemigo'), stage_data.get('screen'))
 
 def update(stage_data: dict):
-    """ Actualiza el stage """
+    """ Actualiza el stage el tiempo en pantalla y chequea el ganador  """
     timer_update(stage_data)
     chequear_ganador(stage_data)

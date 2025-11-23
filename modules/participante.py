@@ -137,7 +137,7 @@ def restar_stats_participante(participante: dict, carta_g: dict, is_critic : boo
     """
     daño_multiplicado = 1
     if is_critic:
-        daño_multiplicado = 3
+        daño_multiplicado = 2
     
     carta_jugador = participante.get('cartas_usadas')[-1]
     damage = carta.get_atk_carta(carta_g) - carta.get_def_carta(carta_jugador)

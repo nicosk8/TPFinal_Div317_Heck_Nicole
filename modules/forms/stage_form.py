@@ -206,9 +206,10 @@ def jugar_mano_NO_USAR_(form_dict_data: dict):
     base_form.set_active('form_name')
 
 def jugar_mano(form_dict_data: dict):
+    
     stage = form_dict_data.get('stage')
     if stage_juego.hay_jugadores_con_cartas(stage):
-        ganador_mano = stage_juego.jugar_mano(stage)
+        critical, ganador_mano = stage_juego.jugar_mano(stage)
         print(f'El ganador de la mano es: {ganador_mano}')
 
 def verificar_terminado(form_dict_data: dict):
@@ -320,9 +321,10 @@ def update(form_dict_data: dict, eventos: list[pg.event.Event]):
     stage_juego.update(form_dict_data.get('stage'))
     update_lbls_card_info(form_dict_data) 
     update_lbls_participante(form_dict_data, tipo_participante='jugador')   
+    update_score(form_dict_data)
     update_lbls_participante(form_dict_data, tipo_participante='enemigo')  
     update_bonus_widgets(form_dict_data)
-    update_score(form_dict_data)
+    
     events_handler(eventos)
     verificar_terminado(form_dict_data)
 

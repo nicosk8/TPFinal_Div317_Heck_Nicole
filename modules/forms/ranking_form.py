@@ -144,7 +144,7 @@ def inicializar_ranking_archivo(form_dict_data: dict):
     
     if not form_dict_data.get('data_loaded'):
         form_dict_data['lista_ranking_file'] = load_data.cargar_ranking(file_path= var.RANKING_CSV_FILE, top=7)
-        init_ranking_data(form_dict_data) # llamado a funcion que agarra la amtriz y se encarga de dibujar todo lo necesario en el form
+        init_ranking_data(form_dict_data) # llamado a funcion que agarra la matriz y se encarga de dibujar todo lo necesario en el form
         form_dict_data['data_loaded'] = True
 
 def draw(form_dict_data: dict):
