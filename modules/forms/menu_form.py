@@ -20,9 +20,29 @@ def create_form_menu(dict_form_data: dict) -> dict:
 
     form = base_form.create_base_form(dict_form_data)
 
-    form['lbl_titulo'] = Label(
+    form['lbl_titulo_1'] = Label(
         x= var.DIMENSION_PANTALLA[0] // 2 , # <- lo ubico en la mitad de la pantalla en el eje x 
-        y= 100,
+        y= 90,
+        text= 'DBZ',
+        screen= form.get('screen'), # <- dimension de la pantalla
+        font_path= var.FONT_ALAGARD,
+        font_size= 45,
+        color= pg.Color('red'),
+    )
+
+    form['lbl_titulo_2'] = Label(
+        x= var.DIMENSION_PANTALLA[0] // 2 , # <- lo ubico en la mitad de la pantalla en el eje x 
+        y= 140,
+        text= 'PLAYING CARDS',
+        screen= form.get('screen'), # <- dimension de la pantalla
+        font_path= var.FONT_ALAGARD,
+        font_size= 45,
+        color= pg.Color('red'),
+    )
+
+    form['lbl_menu'] = Label(
+        x= var.DIMENSION_PANTALLA[0] // 2 , # <- lo ubico en la mitad de la pantalla en el eje x 
+        y= 300,
         text= 'MENU PRINCIPAL',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
@@ -33,7 +53,7 @@ def create_form_menu(dict_form_data: dict) -> dict:
     # Aca voy a crear el boton "JUGAR"
     form['btn_play'] = Button(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
-        y= 150, # <- lo ubico 150 pixeles por debajo del texto "Menu principal"
+        y= 350, # <- lo ubico 150 pixeles por debajo del texto "Menu principal"
         text='JUGAR',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
@@ -46,7 +66,7 @@ def create_form_menu(dict_form_data: dict) -> dict:
     # Aca voy a crear el boton "RANKING"
     form['btn_ranking'] = Button(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
-        y= 210, # <- lo ubico 210 pixeles por debajo del texto "Menu principal"
+        y= 390, # <- lo ubico 210 pixeles por debajo del texto "Menu principal"
         text='RANKING',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
@@ -59,7 +79,7 @@ def create_form_menu(dict_form_data: dict) -> dict:
     # Aca voy a crear el boton "OPCIONES"
     form['btn_options'] = Button(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
-        y= 400, # <- lo ubico 400 pixeles por debajo del texto "Menu principal"
+        y= 430, # <- lo ubico 400 pixeles por debajo del texto "Menu principal"
         text='OPCIONES',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
@@ -72,7 +92,7 @@ def create_form_menu(dict_form_data: dict) -> dict:
     # Aca voy a crear el boton "EXIT"
     form['btn_exit'] = Button(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
-        y= 500, # <- lo ubico 500 pixeles por debajo del texto "Menu principal"
+        y= 495, # <- lo ubico 500 pixeles por debajo del texto "Menu principal"
         text='SALIR',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
@@ -83,7 +103,9 @@ def create_form_menu(dict_form_data: dict) -> dict:
 
     # Lista de widgets a dibujar en pantalla
     form['widgets_list'] = [
-        form.get('lbl_titulo'), # <- Titulo
+        form.get('lbl_titulo_1'),
+        form.get('lbl_titulo_2'),
+        form.get('lbl_menu'), # <- Titulo
         form.get('btn_play'), # <- Boton "JUGAR"
         form.get('btn_ranking'), # <- Boton "RANKING"
         form.get('btn_exit'),

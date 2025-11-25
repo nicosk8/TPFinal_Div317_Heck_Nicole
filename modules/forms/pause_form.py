@@ -28,7 +28,7 @@ def create_form_pause(dict_form_data: dict) -> dict:
         text= var.TITULO_JUEGO,
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
-        font_size= 35,
+        font_size= 40,
         color= pg.Color('red'),
     )
 
@@ -62,7 +62,7 @@ def create_form_pause(dict_form_data: dict) -> dict:
      
     form['btn_back_menu'] = Button( 
         x= var.DIMENSION_PANTALLA[0] // 2,
-        y= 550,
+        y= 495,
         text= 'BACK TO MENU',
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,

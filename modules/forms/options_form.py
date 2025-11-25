@@ -21,18 +21,18 @@ def create_form_options(dict_form_data: dict) -> dict:
 
     form['lbl_titulo'] = Label(
         x= var.DIMENSION_PANTALLA[0] // 2 , # <- lo ubico en la mitad de la pantalla en el eje x 
-        y= 100,
+        y= 115,
         text= 'OPCIONES',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
-        font_size= 35,
+        font_size= 75,
         color= pg.Color('red'),
     )
 
     # Aca voy a crear el boton "MUSIC ON"
     form['btn_music_on'] = Button(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
-        y= 200, # <- lo ubico 200 pixeles por debajo del texto "Menu principal"
+        y= 270, # <- lo ubico 200 pixeles por debajo del texto "Menu principal"
         text='MUSIC ON',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD, 
@@ -45,7 +45,7 @@ def create_form_options(dict_form_data: dict) -> dict:
     # Aca voy a crear el boton "MUSIC OFF"
     form['btn_music_off'] = Button(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
-        y= 260, # <- lo ubico 260 pixeles por debajo del texto "Menu principal"
+        y= 300, # <- lo ubico 260 pixeles por debajo del texto "Menu principal"
         text='MUSIC OFF', 
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
@@ -57,32 +57,32 @@ def create_form_options(dict_form_data: dict) -> dict:
 
     form['btn_vol_down'] = Button(
         x= var.DIMENSION_PANTALLA[0] // 2 - 150,
-        y= 360, # <- lo ubico 360 pixeles por debajo del texto "Menu principal"
+        y= 335, # <- lo ubico 360 pixeles por debajo del texto "Menu principal"
         text='<', 
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
         align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
         font_size= 60,
-        color= pg.Color('white'),
+        color= pg.Color('red'),
         on_click= modificar_volumen, 
         on_click_param=(-10) 
     )
     form['btn_vol_up'] = Button(
         x= var.DIMENSION_PANTALLA[0] // 2 + 150 ,
-        y= 360, # <- lo ubico 360 pixeles por debajo del texto "Menu principal"
+        y= 335, # <- lo ubico 360 pixeles por debajo del texto "Menu principal"
         text='>', 
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
         align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
         font_size= 60,
-        color= pg.Color('white'),
+        color= pg.Color('red'),
         on_click= modificar_volumen, 
         on_click_param=10
     )
 
     form['lbl_vol'] = Label(
         x= var.DIMENSION_PANTALLA[0] // 2 , # <- lo ubico en la mitad de la pantalla en el eje x 
-        y= 360, # <- lo ubico 360 pixeles por debajo del texto "Menu principal"
+        y= 335, # <- lo ubico 360 pixeles por debajo del texto "Menu principal"
         text= f'{sonido.get_actual_volume()}',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
@@ -92,7 +92,7 @@ def create_form_options(dict_form_data: dict) -> dict:
     
     form['btn_volver'] = Button( # <- volver a la pantalla del menu principal
         x= var.DIMENSION_PANTALLA[0] // 2,
-        y= 550,
+        y= 500,
         text= 'VOLVER',
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,

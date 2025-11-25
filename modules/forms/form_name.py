@@ -84,13 +84,23 @@ def create_form_name(dict_form_data: dict) -> dict:
 
     return form
 
+def update_background_victory_defeat(form_data: dict):
+    """ Actualiza el background segùn el jugador haya ganado o perdido la partida """
+
+    fondo_background = var.FONDO_VICTORY_IMG 
+    fondo_background = var.FONDO_DEFEAT_IMG
+
+    form_data['surface'] = pg.image.load(fondo_background.convert_alpha()) # ruta de la imagen de fondo que tiene que cargar
+    form_data['surface'] = pg.transform.scale(form_data.get('surface'), var.DIMENSION_PANTALLA) # <- ajusto la img al tamago de la pantalla 
+    form_data['rect'] = form_data.get('surface').get_rect() # aca seteo la superficie rectangulo
+
 def update_texto_victoria(form_data: dict, win_status: bool):
     """ Actualiza el titulo segun el jugador haya ganado o perdido la partida """
     if win_status:
         mensaje = '¡VICTORIA!'
         color_texto = pg.Color('green')
     else: 
-        mensaje = 'DERROTA'
+        mensaje = 'DERROTA...'
         color_texto = pg.Color('red')
 
     form_data.get('widgets_list')[0].update_text(text=mensaje, color=color_texto)
@@ -123,6 +133,7 @@ def submit_name(form_data: dict):
 
 def update(form_dict_data: dict, event_list: list[pg.event.Event]):
 
+#    update_background_victory_defeat(form_dict_data) # falta completar esta parte 
     form_dict_data['score'] = participante_juego.get_score_participante(form_dict_data.get('jugador'))
 
     form_dict_data.get('widgets_list')[2].update_text(text=f'SCORE: {form_dict_data.get("score")}', color=pg.Color('red'))
