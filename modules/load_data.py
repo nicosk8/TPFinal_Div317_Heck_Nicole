@@ -90,13 +90,16 @@ def cargar_configs_stage(stage_data: dict):
         stage_data['nombre_mazo_jugador'] = stage_data.get('configs').get('mazo_jugador')
         stage_data['ruta_mazo_jugador'] = stage_data.get('configs').get('ruta_mazo_player')
 
-        stage_data['coordenada_inicial_mazo_jugador'] = stage_data.get('configs').get('coordenada_mazo_jugador') # configs.json
+        stage_data['coordenada_inicial_mazo_jugador'] = stage_data.get('configs').get('coordenada_inicial_mazo_jugador') # configs.json
+        print(f'\nLOAD_DATA.py -> CARGAR_CONFIGS_STAGE() -> "coordenada_mazo_jugador": {stage_data.get('configs').get('coordenada_inicial_mazo_enemigo')}')
+        
         stage_data['coordenada_final_mazo_jugador'] = stage_data.get('configs').get('coordenada_final_mazo_jugador')
+        print(f'\nLOAD_DATA.py -> CARGAR_CONFIGS_STAGE() -> "coordenada_final_mazo_jugador": {stage_data.get('configs').get('coordenada_final_mazo_jugador')}\n')
 
         stage_data['coordenada_inicial_mazo_enemigo'] = stage_data.get('configs').get('coordenada_inicial_mazo_enemigo') # configs.json
         stage_data['coordenada_final_mazo_enemigo'] = stage_data.get('configs').get('coordenada_final_mazo_enemigo')
-
         
+               
 def guardar_info_csv(informacion: str):
     with open(var.RANKING_CSV_FILE, 'a', encoding='utf-8') as file:
         file.write(informacion)
@@ -138,7 +141,7 @@ def generar_bd_cartas(path_mazo: str) -> dict:
                     'atk' : int(datos_crudo[4]),
                     'def' : int(datos_crudo[6]),
                     'ruta_frente' : card_path,
-                    'ruta_reverso' : ''
+                    'ruta_reverso' : ''                     
                 }
                 deck_cards.append(datos_card)
 
@@ -147,8 +150,6 @@ def generar_bd_cartas(path_mazo: str) -> dict:
         
         if deck_name:
             cartas_dict['cartas'][deck_name] = deck_cards
-
-        #cartas_dict['cartas'] = deck_cards # cargo los datos de la carta en el dict
     return cartas_dict
             
 def guardar_info_cartas(ruta_archivo: str, dict_cards: dict):
@@ -169,6 +170,7 @@ def cargar_bd_data(stage_data: dict):
             cartas = cargar_configs(var.JSON_INFO_CARDS_FILE)
             stage_data['cartas_mazo_inicial_e'] = cartas.get('cartas').get(stage_data.get('nombre_mazo_enemigo'))
             stage_data['cartas_mazo_inicial_p'] = cartas.get('cartas').get(stage_data.get('nombre_mazo_jugador'))
+            
         else:
             print(' >>>>>>>>>>>>>>>>>>>  CARGANDO BD CARTAS DESDE DIR   <<<<<<<<<<<<<<<<<<<<')
             cartas = generar_bd_cartas(stage_data.get('ruta_mazo'))

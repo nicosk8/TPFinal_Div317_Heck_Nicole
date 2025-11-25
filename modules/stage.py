@@ -27,11 +27,12 @@ def inicializar_stage(jugador: dict, pantalla: pg.Surface, nro_stage: int):
     stage_data['screen'] = pantalla
 
     stage_data['jugador'] = jugador
-    stage_data['coordenada_inicial_mazo_jugador'] = (20,360)
-    stage_data['coordenada_final_mazo_jugador'] = (390,360)
 
-    stage_data['coordenada_inicial_mazo_enemigo'] = (20,70)
-    stage_data['coordenada_final_mazo_enemigo'] = (390,70)
+    stage_data['coordenada_inicial_mazo_enemigo'] = [20,70]
+    stage_data['coordenada_final_mazo_enemigo'] = [390,70]
+
+    stage_data['coordenada_inicial_mazo_jugador'] = [20,360]
+    stage_data['coordenada_final_mazo_jugador'] = [390,360]
 
     stage_data['heal_available'] = True
     stage_data['jackpot_available'] = True
@@ -94,8 +95,8 @@ def generar_mazo(stage_data: dict):
         stage_data.get('cartas_mazo_inicial_e'),
         stage_data.get('cartas_mazo_inicial_p')
     ):
-        carta_power_e = carta.inicializar_carta(carta_inicial_e, (0,0))
-        carta_power_p = carta.inicializar_carta(carta_inicial_p, (0,0))
+        carta_power_e = carta.inicializar_carta(carta_inicial_e,(0,0))
+        carta_power_p = carta.inicializar_carta(carta_inicial_p,(0,0))
         stage_data.get('cartas_mazo_preparadas_e').append(carta_power_e)
         stage_data.get('cartas_mazo_preparadas_p').append(carta_power_p)
          
@@ -147,8 +148,16 @@ def restart_stage(stage_data: dict, jugador: dict, pantalla: pg.Surface, nro_sta
 
 def jugar_mano_stage(stage_data: dict):
     """ Juega la carta actual de los participantes """
+
+    primera_vez = True
+    if primera_vez:
+        contador_ronda = 0
+        primera_vez = False
+
     participante_juego.jugar_carta(stage_data.get('jugador'))
     participante_juego.jugar_carta(stage_data.get('enemigo'))
+    contador_ronda += 1
+    print(f'Ronda nro.: {contador_ronda}')
 
 def es_golpe_critico() -> bool:
     """ Bandera de golpe critico : Setea una funcion para asignar True o False 

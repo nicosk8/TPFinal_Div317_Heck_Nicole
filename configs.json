@@ -3,9 +3,9 @@
         "ruta_mazo" : "modules/assets/decks/",
         "mazo_enemigo" : "blue_deck_expansion_1",
         "mazo_jugador" : "blue_deck_expansion_1",
-        "coordenada_inicial_mazo_jugador": [20,360] ,
+        "coordenada_inicial_mazo_jugador": [20,360],
         "coordenada_final_mazo_jugador": [390,360],
-        "coordenada_inicial_mazo_enemigo": [20,70] ,
+        "coordenada_inicial_mazo_enemigo": [20,70],
         "coordenada_final_mazo_enemigo": [390,70],
         "cantidad_cartas_jugadores": 10
     },

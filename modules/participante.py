@@ -20,6 +20,7 @@ def inicializar_participante(pantalla: pg.Surface, nombre: str = 'PC'):
     participante['screen'] = pantalla
     participante['pos_deck_inicial'] = (0,0)
     participante['pos_deck_jugado'] = (0,0)
+    
 
     return participante
 
@@ -84,7 +85,8 @@ def set_cartas_participante(participante: dict, lista_cartas: list[dict]):
             2 - Carga la lista de cartas en la clave 'mazo_asignado' donde las aloja inicialmente  
             3 - Genera una copia superficial del mazo de cartas y la guarda en la clave 'cartas_mazo' """
     for carta_base in lista_cartas:
-        carta_base['coordenadas'] = get_coordenadas_mazo_inicial(participante)
+        #carta_base['coordenadas'] = get_coordenadas_mazo_inicial(participante)
+        carta_base['coordenadas'] = participante.get('pos_deck_inicial')
     
     participante['mazo_asignado'] = lista_cartas      # cartas boca arriba
     participante['cartas_mazo'] = lista_cartas.copy() # cartas boca abajo
@@ -167,22 +169,36 @@ def jugar_carta(participante: dict):
     Si hay cartas disponibles en el mazo:
         1 - Obtiene la ultima carta de la lista del mazo actual
         2 - Anexa esa ultima carta a la lista del mazo de cartas usadas """
-        
+   
     if participante.get('cartas_mazo'):
-        print(f'El jugador {participante.get('nombre')} tiene {len(participante.get('cartas_mazo'))} cartas')
+
+        participante_nombre = participante.get('nombre')
+        print(f'El jugador {participante_nombre} tiene {len(participante.get('cartas_mazo'))} cartas')
         carta_actual = participante.get('cartas_mazo').pop()
+
+        print(f' PARTICIPANTE.py -> JUGAR_CARTA() -> {participante_nombre} -> Carta actual ANTES : {carta_actual}\n\n')
+        
         carta.cambiar_visibilidad(carta_actual)
-        carta.asignar_coordenadas_carta(carta_actual, get_coordenadas_mazo_jugado(participante))
+        #carta.asignar_coordenadas_carta(carta_actual, get_coordenadas_mazo_jugado(participante))
+
+        pos_deck_jugado = participante.get('pos_deck_jugado')
+        carta.asignar_coordenadas_carta(carta_actual, pos_deck_jugado)
         participante.get('cartas_usadas').append(carta_actual)
 
+        print(f' PARTICIPANTE.py -> JUGAR_CARTA() -> {participante_nombre} -> Carta actual DESP : {carta_actual}\n\n')
+        
     else:
-        print(f'El jugador {participante.get('nombre')} no tiene cartas')
+        print(f'El jugador {participante_nombre} no tiene cartas')
+
 
 def draw_participante(participante: dict, screen: pg.Surface):
     """ Dibuja las cartas en pantalla del participante """
-   
-    if participante.get('cartas_mazo'):
-        carta.draw_carta(participante.get('cartas_mazo')[-1], screen)
     
+    if participante.get('cartas_mazo'):
+        print(f' PARTICIPANTE.py -> draw_participante() -> DIBUJAR CARTA DE PARTICIPANTE: {participante.get('nombre')}\n')
+        carta.draw_carta(participante.get('cartas_mazo')[-1], screen)
+            
     if participante.get('cartas_usadas'):
-        carta.draw_carta(participante.get('cartas_usadas')[-1], screen) 
+        print(f' PARTICIPANTE.py -> draw_participante() -> DIBUJAR CARTA DE PARTICIPANTE: {participante.get('nombre')}\n')
+        carta.draw_carta(participante.get('cartas_usadas')[-1], screen)
+        

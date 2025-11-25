@@ -21,11 +21,13 @@ def inicializar_carta(dict_card: dict, coords: list) -> dict:
     return card
 
 def esta_visible(dict_card: dict) -> bool:
-    """ Devuelve el contenido de la clave 'visible' """
+    """ Devuelve True si esta visible, False si no esta visible """
     return dict_card.get('visible')
 
 def cambiar_visibilidad(dict_card: dict):
-    """ Cambia la visibilidad de la carta actual. Si esta boca abajo, la voltea """
+    """ Cambia la visibilidad de la carta actual.
+        Valor True -> para dibujar superficie frente
+        Valor False -> para dibujar superficie reverso  """
     dict_card['visible'] = True
 # NDH dict_card['visible'] = not dict_card.get('visible')
 
@@ -62,16 +64,23 @@ def redimensionar_imagen(ruta_img: str, porcentaje_a_ajustar: int):
     return imagen_final
 
 def draw_carta(dict_card: dict, screen: pg.Surface):
-    """ Dibuja la superficie de la carta, si està visible dibuja la portada,
-    caso contrario dibuja el reverso de la misma"""
+    """ Dibuja la superficie de la carta, si 'visible' = True, dibuja la portada,
+    caso contrario, si 'visible' = False dibuja la img del reverso """
     
     if dict_card.get('visible'):
         dict_card['imagen'] = redimensionar_imagen(dict_card.get('ruta_frente'), 40)
+        
+        
     else:
         dict_card['imagen'] = redimensionar_imagen(dict_card.get('ruta_reverso'), 40)
 
     dict_card['rect'] = dict_card.get('imagen').get_rect()
     dict_card['rect'].topleft = dict_card.get('coordenadas')
+
+    print()
+    print(f'CARTA.PY -> DRAW_CARTA() -> VISIBILIDAD -> {dict_card.get('visible')}')
+    print(f'CARTA.PY -> DRAW_CARTA() -> IMAGEN A DIBUJAR -> {dict_card.get('imagen')}')
+    print(f'CARTA.PY -> DRAW_CARTA() -> COORDENADAS DEL RECT A DIBUJAR -> {dict_card.get('coordenadas')}\n')
 
     screen.blit(dict_card.get('imagen'), dict_card.get('rect'))
 
