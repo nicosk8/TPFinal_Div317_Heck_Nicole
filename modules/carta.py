@@ -72,13 +72,12 @@ def draw_carta(dict_card: dict, screen: pg.Surface):
     
 #    if dict_card.get('visible'):
     if visible_resultado:
-        dict_card['visible'] = True
+
         dict_card['imagen'] = redimensionar_imagen(img_frente, 35)
 #        print(f'CARTA.PY -> DRAW_CARTA() -> VISIBILIDAD: {dict_card.get('visible')}')
 #        print(f'CARTA.PY -> DRAW_CARTA() -> IMAGEN A DIBUJAR: {img_frente}')
 #        print(f'CARTA.PY -> DRAW_CARTA() -> COORDENADAS DEL RECT A DIBUJAR: {dict_card.get('coordenadas')}\n')
     else:
-        dict_card['visible'] = False
         dict_card['imagen'] = redimensionar_imagen(img_reverso, 35)
 #        print(f'CARTA.PY -> DRAW_CARTA() -> VISIBILIDAD: {dict_card.get('visible')}')
 #        print(f'CARTA.PY -> DRAW_CARTA() -> IMAGEN A DIBUJAR: {img_reverso}')
