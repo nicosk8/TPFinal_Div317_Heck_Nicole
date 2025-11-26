@@ -79,6 +79,15 @@ def cambiar_pantalla(param_list : tuple):
     form_ranking['data_loaded'] = False
     base_form.cambiar_pantalla(form_name)
 
+def armar_encabezado_top_ranking():
+    """ Arma e imprime por consola el encabezado de top ranking """
+    print(' ________________________________________')
+    print('|                                        |')
+    print('|    RANKING  TOP 7 MEJORES PUNTAJES     |')
+    print('|________________________________________|')
+    print('|____  NOMBRE  ____|____  PUNTAJE  ______|')
+    
+
 def init_ranking_data(form_dict_data: dict):
     """
     Arma la siguiente pantalla con los datos obtenidos del archivo puntajes.csv
@@ -93,12 +102,13 @@ def init_ranking_data(form_dict_data: dict):
     matriz = form_dict_data.get('lista_ranking_file')
     y_coord_inicial = 190 # establezco la posicion para el primer registro
     color_texto = (255,255,255) # blanco
-
+    armar_encabezado_top_ranking()
     for indice_fila in range(len(matriz)):
         fila = matriz[indice_fila]
         nombre_jugador = fila[0]
         puntaje_jugador = fila[1]
-        mensaje = f'Jugador: {nombre_jugador}  - puntaje: {puntaje_jugador}'
+        mensaje = f'       {nombre_jugador:15}    {puntaje_jugador}'
+        
         print(mensaje)
 
 
@@ -146,6 +156,7 @@ def inicializar_ranking_archivo(form_dict_data: dict):
         form_dict_data['lista_ranking_file'] = load_data.cargar_ranking(file_path= var.RANKING_CSV_FILE, top=7)
         init_ranking_data(form_dict_data) # llamado a funcion que agarra la matriz y se encarga de dibujar todo lo necesario en el form
         form_dict_data['data_loaded'] = True
+    lista_ranking_file = form_dict_data['lista_ranking_file']
 
 def draw(form_dict_data: dict):
     """ Dibuja la pantalla del formulario RANKING y sus widgets 

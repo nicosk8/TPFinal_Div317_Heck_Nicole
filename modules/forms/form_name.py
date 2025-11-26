@@ -120,10 +120,7 @@ def submit_name(form_data: dict):
 
     nombre_jugador_seteado = participante_juego.get_nombre_participante(form_data.get('jugador'))
     puntaje_jugador = participante_juego.get_score_participante(form_data.get('jugador'))
-    print()
-    print(F'ESTOY EN SUBMIT_NAME() -> "nombre_jugador_seteado" : {nombre_jugador_seteado}')
     print(f'NOMBRE JUGADOR: {nombre_jugador_seteado} - {puntaje_jugador}')
-    print()
     data_to_csv = participante_juego.info_to_csv(form_data.get('jugador'))
     load_data.guardar_info_csv(data_to_csv)
 

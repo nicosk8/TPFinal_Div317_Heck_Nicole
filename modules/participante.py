@@ -169,23 +169,17 @@ def jugar_carta(participante: dict):
     Si hay cartas disponibles en el mazo:
         1 - Obtiene la ultima carta de la lista del mazo actual
         2 - Anexa esa ultima carta a la lista del mazo de cartas usadas """
-   
+    
+    print('Datos de la ronda:')
+    
     if participante.get('cartas_mazo'):
 
         participante_nombre = participante.get('nombre')
         print(f'El jugador {participante_nombre} tiene {len(participante.get('cartas_mazo'))} cartas')
         carta_actual = participante.get('cartas_mazo').pop()
-
-        print(f' PARTICIPANTE.py -> JUGAR_CARTA() -> {participante_nombre} -> Carta actual ANTES : {carta_actual}\n\n')
-        
         carta.cambiar_visibilidad(carta_actual)
-        #carta.asignar_coordenadas_carta(carta_actual, get_coordenadas_mazo_jugado(participante))
-
-        pos_deck_jugado = participante.get('pos_deck_jugado')
-        carta.asignar_coordenadas_carta(carta_actual, pos_deck_jugado)
+        carta.asignar_coordenadas_carta(carta_actual, get_coordenadas_mazo_jugado(participante))
         participante.get('cartas_usadas').append(carta_actual)
-
-        print(f' PARTICIPANTE.py -> JUGAR_CARTA() -> {participante_nombre} -> Carta actual DESP : {carta_actual}\n\n')
         
     else:
         print(f'El jugador {participante_nombre} no tiene cartas')
@@ -194,11 +188,22 @@ def jugar_carta(participante: dict):
 def draw_participante(participante: dict, screen: pg.Surface):
     """ Dibuja las cartas en pantalla del participante """
     
-    if participante.get('cartas_mazo'):
-        print(f' PARTICIPANTE.py -> draw_participante() -> DIBUJAR CARTA DE PARTICIPANTE: {participante.get('nombre')}\n')
+    cartas_mazo = participante.get('cartas_mazo')
+    cartas_usadas = participante.get('cartas_usadas')
+
+    if cartas_mazo:
+#        print('=============  CARTAS MAZO DISPONIBLES  =============')
+#        print(f'PARTICIPANTE.py -> draw_participante() -> DIBUJAR CARTA DE PARTICIPANTE: {participante.get('nombre')}')
+#        print(f'PARTICIPANTE.py -> draw_participante() -> CANTIDAD DE CARTAS EN EL MAZO: {len(participante.get('cartas_mazo'))}')
         carta.draw_carta(participante.get('cartas_mazo')[-1], screen)
             
-    if participante.get('cartas_usadas'):
-        print(f' PARTICIPANTE.py -> draw_participante() -> DIBUJAR CARTA DE PARTICIPANTE: {participante.get('nombre')}\n')
+    if cartas_usadas:
+#        print('=============  CARTAS MAZO USADAS  =============')
+#        print(f'PARTICIPANTE.py -> draw_participante() -> DIBUJAR CARTA DE PARTICIPANTE: {participante.get('nombre')}')
+#        print(f'PARTICIPANTE.py -> draw_participante() -> CANTIDAD DE CARTAS EN EL MAZO: {len(participante.get('cartas_usadas'))}')
+        
+        if participante.get('cartas_usadas')[-1].get('visible') == False:
+            participante.get('cartas_usadas')[-1].get('visible') == True
+
         carta.draw_carta(participante.get('cartas_usadas')[-1], screen)
         

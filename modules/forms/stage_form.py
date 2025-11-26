@@ -68,78 +68,78 @@ def create_form_stage(dict_form_data: dict) -> dict:
 
     # Stats Enemigo
     form['lbl_enemigo_hp'] = Label(
-        x=617, y=85,
+        x=115, y=160,
         text=f'',
         screen= form.get('screen'),
         align='top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=25, color= pg.Color('white')
+        font_size=20, color= pg.Color('white')
     )
     form['lbl_enemigo_atk'] = Label(
-        x=617 , y=120,
+        x=110 , y=178,
         text=f'',
         screen= form.get('screen'),
         align='top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=25, color= pg.Color('white')
+        font_size=20, color= pg.Color('white')
     )
     form['lbl_enemigo_def'] = Label(
-        x=617 , y=155,
+        x=110 , y=198,
         text=f'',
         screen= form.get('screen'),
         align='top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=25, color= pg.Color('white')
+        font_size=20, color= pg.Color('white')
     )
 
     # Stats Jugador
     form['lbl_jugador_hp'] = Label(
-        x=617 , y=365,
+        x=115 , y=435,
         text=f'',
         screen= form.get('screen'),
         align='top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=25, color= pg.Color('white')
+        font_size=20, color= pg.Color('white')
     )
     form['lbl_jugador_atk'] = Label(
-        x=617 , y=395,
+        x=110 , y=455,
         text=f'',
         screen= form.get('screen'),
         align= 'top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=25, color= pg.Color('white')
+        font_size=20, color= pg.Color('white')
     )
     form['lbl_jugador_def'] = Label(
-        x=617 , y=425,
+        x=110 , y=475,
         text=f'',
         screen= form.get('screen'),
         align= 'top-left',
         font_path= var.FONT_ALAGARD,
-        font_size=25, color= pg.Color('white')
+        font_size=20, color= pg.Color('white')
     )
 
     # ================ BUTTONS =================
     form['btn_play'] = Button( 
-        x=616, y=250,
+        x=710, y=310,
         text= 'JUGAR',
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
-        font_size= 20, align='topleft',
+        font_size= 30, align='topleft',
         on_click= jugar_mano, on_click_param= form
     ) 
 
     form['btn_heal'] = Button(
-        x=616, y=280,
+        x=715, y=180,
         text='HEAL', screen=form.get('screen'),
-        font_path=var.FONT_ALAGARD, font_size=20,
+        font_path=var.FONT_ALAGARD, font_size=30,
         on_click=call_wish_form, on_click_param={'form': form, 'wish': 'HEAL'},
         align='topleft'
     )
 
     form['btn_jackpot'] = Button(
-        x=616, y=310,
+        x=710, y=490,
         text='JACKPOT', screen=form.get('screen'),
-        font_path=var.FONT_ALAGARD, font_size=20,
+        font_path=var.FONT_ALAGARD, font_size=23,color=pg.Color('yellow'),
         on_click=call_wish_form, on_click_param={'form': form, 'wish': 'SCORE X3'},
         align='topleft'
     )
@@ -173,56 +173,41 @@ def update_lbls_participante(form_dict_data: dict, tipo_participante: str):
     """ """
     participante = form_dict_data.get('stage').get(tipo_participante)
 
-    form_dict_data[f'lbl_{tipo_participante}_hp'].update_text(text=f'HP: {participante_juego.get_hp_participante(participante)}', color= pg.Color('cyan'))
-    form_dict_data[f'lbl_{tipo_participante}_atk'].update_text(text=f'ATK: {participante_juego.get_atk_participante(participante)}', color= pg.Color('cyan'))
-    form_dict_data[f'lbl_{tipo_participante}_def'].update_text(text=f'DEF: {participante_juego.get_def_participante(participante)}', color= pg.Color('cyan'))
+    form_dict_data[f'lbl_{tipo_participante}_hp'].update_text(text=f'HP: {participante_juego.get_hp_participante(participante)}', color= pg.Color('white'))
+    form_dict_data[f'lbl_{tipo_participante}_atk'].update_text(text=f'ATK: {participante_juego.get_atk_participante(participante)}', color= pg.Color('white'))
+    form_dict_data[f'lbl_{tipo_participante}_def'].update_text(text=f'DEF: {participante_juego.get_def_participante(participante)}', color= pg.Color('white'))
 
-def jugar_mano_NO_USAR_(form_dict_data: dict):
+def jugar_mano(form_dict_data: dict):
     """ Ejecuta la logica principal del juego, solo si los participantes tienen cartas. Caso contrario
         muestra mensaje de juego finalizado y al ganador de la ronda:
             1 - Ejecuta la jugada de cartas 
             2 - compara daños 
             3 - Resta stats a los participantes 
-            4 - Verifica el ganador de la ronda
-            5 - Imprime el ganador de la ronda """
+            4 - Establece el ganador de la ronda
+    """
     stage = form_dict_data.get('stage')
-    if stage_juego.hay_jugadores_con_cartas(stage):
-        critical, ganador_mano = stage_juego.jugar_mano(stage)
-        print(f'El ganador de la mano es : {ganador_mano}')
+    if ((not stage.get('juego_finalizado') or
+        stage.get('stage_timer') > 0) and 
+        (stage.get('jugador').get('hp_actual') > 0 and stage.get('enemigo').get('hp_actual') > 0)):
 
-    elif not stage_juego.hay_jugadores_con_cartas(stage) and stage_juego.esta_finalizado(stage):
-        print('JUEGO TERMINADO')
-        #print(f'Ganador: {stage_juego.obtener_ganador(stage)}')
-
-        if participante_juego.get_nombre_participante(
-            stage_juego.obtener_ganador(stage)) == 'enemigo':
-                win_status = False
-        else:
-                win_status = True
-
-    # ACTIVAR EL FORM PARA ENTER NOMBRE 
-    name_form = var.dict_forms_status.get('form_name')
-    form_name.update_texto_victoria(name_form, win_status)
-    base_form.set_active('form_name')
-
-def jugar_mano(form_dict_data: dict):
-    
-    stage = form_dict_data.get('stage')
-    if stage_juego.hay_jugadores_con_cartas(stage):
         critical, ganador_mano = stage_juego.jugar_mano(stage)
         print(f'El ganador de la mano es: {ganador_mano}')
 
 def verificar_terminado(form_dict_data: dict):
+    """ Si la partida està terminada, obtiene el ganador de la partida
+        y activa el formulario para ingresar el nombre del jugador """
     stage = form_dict_data.get('stage')
-    if not stage_juego.hay_jugadores_con_cartas(stage) and stage_juego.esta_finalizado(stage):
+    if stage_juego.esta_finalizado(stage):
+
         print('EL JUEGO ESTA TERMINADO')
-        # print(f'ganador: {stage_juego.obtener_ganador(stage)}')
-        if participante_juego.get_nombre_participante(
-            stage_juego.obtener_ganador(stage)
-        ) == 'Enemigo':
+        nombre_ganador = participante_juego.get_nombre_participante(stage_juego.obtener_ganador(stage))
+
+        if nombre_ganador == 'Enemigo':
             win_status = False
         else:
             win_status = True
+        print(f'¡EL GANADOR DEL JUEGO ES {nombre_ganador}!') 
+
         # activar el form enter name
         name_form = var.dict_forms_status.get('form_name')
         form_name.update_texto_victoria(name_form, win_status)

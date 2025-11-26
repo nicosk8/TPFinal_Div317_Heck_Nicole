@@ -17,10 +17,11 @@ FONDO_MENU_IMG = 'modules/assets/backgrounds/form_main_menu.png'
 FONDO_RANKING_IMG = 'modules/assets/backgrounds/FONDO_RANKING.jpg' 
 FONDO_OPCIONES_IMG = r'modules\assets\backgrounds\form_options.png' 
 FONDO_PAUSA_IMG = 'modules/assets/backgrounds/fondo_menu.JPG'
-FONDO_STAGE_IMG = r'modules\assets\backgrounds\fondo_5.png'
+FONDO_STAGE_IMG = 'modules/assets/backgrounds/background_cards_simple.png'
 FONDO_WISH_IMG = r'modules\assets\backgrounds\form_wish_select.png' 
 FONDO_DEFEAT_IMG = 'modules/assets/backgrounds/form_enter_name_0.png'
 FONDO_VICTORY_IMG = 'modules/assets/backgrounds/form_enter_name_1.png'
+
 
 # Fuentes
 FONT_ALAGARD = 'modules/assets/fonts/alagard.ttf' 

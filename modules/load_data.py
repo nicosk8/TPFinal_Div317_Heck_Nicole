@@ -4,29 +4,24 @@ import json
 import os
 
 def mapear_valores(matriz: list[list], columna_a_mapear: int, callback):
+    """
+        Localiza la columna del puntaje y le aplica un parseo a entero
     
+    :param matriz: Set de datos 
+    :type matriz: list[list]
+    :param columna_a_mapear: columna 1 -> puntaje
+    :type columna_a_mapear: int
+    :param callback: Llamado y retorno de la funcion -> parsear_valor()
+    """
     for indice_fila in range(len(matriz)):
-            print()
-            print('ESTOY EN LOAD_DATA.py -> MAPEAR_VALORES() -> "for indice_fila in range(len(matriz))..."')
-            print(F'MATRIZ : {matriz}')
-            print(f'INDICE_FILA : {indice_fila}')
-            print(f'COLUMNA_A_MAPEAR : {columna_a_mapear}')
-
-            print()
-            print(f'ANTES DEL PARSEO A INT -> type: {type(matriz[indice_fila][columna_a_mapear])}')
-
-            valor  = matriz[indice_fila][columna_a_mapear] 
-            matriz[indice_fila][columna_a_mapear] = callback(valor)
-            print()
-            print(f'DESPUES DEL PARSEO A INT -> type: {type(matriz[indice_fila][columna_a_mapear])}')
-
+        valor  = matriz[indice_fila][columna_a_mapear] 
+        matriz[indice_fila][columna_a_mapear] = callback(valor)
 
 def parsear_valor(valor: str):
     """ Convierte un valor a entero o flotante segun sea el caso
     :params: valor -> dato sting """
     if valor.isdigit(): 
         return int(valor)
-
 
 def cargar_ranking(file_path: str, top: int = 7) -> list:
     """ Carga datos a una matriz desde una rchivo csv:
@@ -48,19 +43,11 @@ def cargar_ranking(file_path: str, top: int = 7) -> list:
 
         for linea in texto.split('\n'):
             if linea: 
-# NDH           lista_datos_linea = linea.split(';')
                 lista_datos_linea = linea.split(',')
-                ranking.append(lista_datos_linea)
-    print()
-    print('ESTOY EN LOAD_DATA.py -> CARGAR_RANKING()')
-    print(f'ANTES DE MAPEAR VALORES -> lista ranking -> {ranking}\n\n')
-    
+                ranking.append(lista_datos_linea)    
     ranking = ranking[1:] # ignora el encabezado y empieza desde las 2da linea
-
     mapear_valores(ranking, columna_a_mapear=1, callback= parsear_valor) # parseo de datos
-
     ranking.sort(key=lambda fila: fila[1], reverse=True) # ordena DES por puntaje numerico
-
     return ranking[:top] # Devuelve los primeros 7 valores 
 
 def cargar_configs(file_path: str) -> dict:
@@ -82,24 +69,16 @@ def cargar_configs_stage(stage_data: dict):
         stage_data -> datos del stage
      """
     if not stage_data.get('juego_finalizado') and not stage_data.get('data_cargada'):
-
         configs_globales = cargar_configs(var.JSON_CONFIGS_FILE) 
         stage_data['configs'] = configs_globales.get('nivel_1')
         stage_data['ruta_mazo'] = stage_data.get('configs').get('ruta_mazo')
         stage_data['nombre_mazo_enemigo'] = stage_data.get('configs').get('mazo_enemigo')
         stage_data['nombre_mazo_jugador'] = stage_data.get('configs').get('mazo_jugador')
-        stage_data['ruta_mazo_jugador'] = stage_data.get('configs').get('ruta_mazo_player')
-
-        stage_data['coordenada_inicial_mazo_jugador'] = stage_data.get('configs').get('coordenada_inicial_mazo_jugador') # configs.json
-        print(f'\nLOAD_DATA.py -> CARGAR_CONFIGS_STAGE() -> "coordenada_mazo_jugador": {stage_data.get('configs').get('coordenada_inicial_mazo_enemigo')}')
-        
+        stage_data['coordenada_inicial_mazo_jugador'] = stage_data.get('configs').get('coordenada_inicial_mazo_jugador') # configs.json       
         stage_data['coordenada_final_mazo_jugador'] = stage_data.get('configs').get('coordenada_final_mazo_jugador')
-        print(f'\nLOAD_DATA.py -> CARGAR_CONFIGS_STAGE() -> "coordenada_final_mazo_jugador": {stage_data.get('configs').get('coordenada_final_mazo_jugador')}\n')
-
         stage_data['coordenada_inicial_mazo_enemigo'] = stage_data.get('configs').get('coordenada_inicial_mazo_enemigo') # configs.json
         stage_data['coordenada_final_mazo_enemigo'] = stage_data.get('configs').get('coordenada_final_mazo_enemigo')
-        
-               
+                      
 def guardar_info_csv(informacion: str):
     with open(var.RANKING_CSV_FILE, 'a', encoding='utf-8') as file:
         file.write(informacion)

@@ -28,11 +28,11 @@ def inicializar_stage(jugador: dict, pantalla: pg.Surface, nro_stage: int):
 
     stage_data['jugador'] = jugador
 
-    stage_data['coordenada_inicial_mazo_enemigo'] = [20,70]
-    stage_data['coordenada_final_mazo_enemigo'] = [390,70]
+    stage_data['coordenada_inicial_mazo_enemigo'] = [250,90]
+    stage_data['coordenada_final_mazo_enemigo'] = [390,90]
 
-    stage_data['coordenada_inicial_mazo_jugador'] = [20,360]
-    stage_data['coordenada_final_mazo_jugador'] = [390,360]
+    stage_data['coordenada_inicial_mazo_jugador'] = [250,370]
+    stage_data['coordenada_final_mazo_jugador'] = [390,370]
 
     stage_data['heal_available'] = True
     stage_data['jackpot_available'] = True
@@ -106,7 +106,6 @@ def barajar_mazos_stage(stage_data: dict):
     :params:
         stage_data -> datos del juego  
     """  
-    print('stage.py -> barajar_mazos_stage()')
 
     if not stage_data.get('stage_finalizado'):
         asignar_cartas_stage(stage_data, stage_data.get('jugador'))
@@ -114,7 +113,7 @@ def barajar_mazos_stage(stage_data: dict):
         participante_juego.asignar_stats_iniciales_participante(stage_data.get('jugador'))
         participante_juego.asignar_stats_iniciales_participante(stage_data.get('enemigo'))
         stage_data['data_cargada'] = True
-        print(f' *** data cargada : {stage_data.get('data_cargada')}')
+        print(f'     data cargada : {stage_data.get('data_cargada')}')
 
 def inicializar_data_stage(stage_data: dict):
     """ Proceso prncipal del modulo stage: 
@@ -130,7 +129,7 @@ def inicializar_data_stage(stage_data: dict):
     load_data.cargar_bd_data(stage_data) # lee un directorio especifico y empieza  a cargar una lista de dict con los datos de las cartas
     generar_mazo(stage_data)
     barajar_mazos_stage(stage_data)
-    print('\nstage.py -> inicializar_data_stage() -> INICIALIZACION FINALIZADA ')
+    print('stage.py -> inicializar_data_stage() -> INICIALIZACION FINALIZADA \n')
 
 def hay_jugadores_con_cartas(stage_data: dict) -> bool:
 
@@ -148,16 +147,9 @@ def restart_stage(stage_data: dict, jugador: dict, pantalla: pg.Surface, nro_sta
 
 def jugar_mano_stage(stage_data: dict):
     """ Juega la carta actual de los participantes """
-
-    primera_vez = True
-    if primera_vez:
-        contador_ronda = 0
-        primera_vez = False
-
     participante_juego.jugar_carta(stage_data.get('jugador'))
     participante_juego.jugar_carta(stage_data.get('enemigo'))
-    contador_ronda += 1
-    print(f'Ronda nro.: {contador_ronda}')
+    
 
 def es_golpe_critico() -> bool:
     """ Bandera de golpe critico : Setea una funcion para asignar True o False 
@@ -229,21 +221,17 @@ def obtener_ganador(stage_data: dict):
     return stage_data.get('ganador')
 
 def jugar_mano(stage_data: dict) -> str:
-    """ Ejecuta la jugada de cartas, compara daños, resta stats a los participantes, verifica el ganador de la ronda y lo retorna """
-    if not stage_data.get('juego_finalizado'):
-        jugar_mano_stage(stage_data)
-
-        critical, ganador_mano = comparar_damage(stage_data)
-
-        return critical, ganador_mano
-    return None
+    """ Ejecuta la jugada de cartas, compara daños, resta stats a los
+    participantes y verifica el ganador de la ronda y lo retorna """
+    jugar_mano_stage(stage_data)
+    critical, ganador_mano = comparar_damage(stage_data)
+    return critical, ganador_mano
 
 def draw_jugadores(stage_data: dict):
     """ Dibuja en pantalla las cartas del jugador y oponente """
-
-    participante_juego.draw_participante(stage_data.get('jugador'), stage_data.get('screen'))
     participante_juego.draw_participante(stage_data.get('enemigo'), stage_data.get('screen'))
-
+    participante_juego.draw_participante(stage_data.get('jugador'), stage_data.get('screen'))
+    
 def update(stage_data: dict):
     """ Actualiza el stage el tiempo en pantalla y chequea el ganador  """
     timer_update(stage_data)

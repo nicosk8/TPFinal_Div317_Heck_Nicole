@@ -66,21 +66,25 @@ def draw_carta(dict_card: dict, screen: pg.Surface):
     """ Dibuja la superficie de la carta, si 'visible' = True, dibuja la portada,
     caso contrario, si 'visible' = False dibuja la img del reverso """
     
-    if dict_card.get('visible'):
-        dict_card['imagen'] = redimensionar_imagen(dict_card.get('ruta_frente'), 40)
-        
-        
+    visible_resultado = dict_card.get('visible')
+    img_frente = dict_card.get('ruta_frente')
+    img_reverso = dict_card.get('ruta_reverso')
+    
+#    if dict_card.get('visible'):
+    if visible_resultado:
+        dict_card['imagen'] = redimensionar_imagen(img_frente, 35)
+#        print(f'CARTA.PY -> DRAW_CARTA() -> VISIBILIDAD: {dict_card.get('visible')}')
+#        print(f'CARTA.PY -> DRAW_CARTA() -> IMAGEN A DIBUJAR: {img_frente}')
+#        print(f'CARTA.PY -> DRAW_CARTA() -> COORDENADAS DEL RECT A DIBUJAR: {dict_card.get('coordenadas')}\n')
     else:
-        dict_card['imagen'] = redimensionar_imagen(dict_card.get('ruta_reverso'), 40)
+        dict_card['imagen'] = redimensionar_imagen(img_reverso, 35)
+#        print(f'CARTA.PY -> DRAW_CARTA() -> VISIBILIDAD: {dict_card.get('visible')}')
+#        print(f'CARTA.PY -> DRAW_CARTA() -> IMAGEN A DIBUJAR: {img_reverso}')
+#        print(f'CARTA.PY -> DRAW_CARTA() -> COORDENADAS DEL RECT A DIBUJAR: {dict_card.get('coordenadas')}\n')
 
     dict_card['rect'] = dict_card.get('imagen').get_rect()
     dict_card['rect'].topleft = dict_card.get('coordenadas')
-
-    print()
-    print(f'CARTA.PY -> DRAW_CARTA() -> VISIBILIDAD -> {dict_card.get('visible')}')
-    print(f'CARTA.PY -> DRAW_CARTA() -> IMAGEN A DIBUJAR -> {dict_card.get('imagen')}')
-    print(f'CARTA.PY -> DRAW_CARTA() -> COORDENADAS DEL RECT A DIBUJAR -> {dict_card.get('coordenadas')}\n')
-
-    screen.blit(dict_card.get('imagen'), dict_card.get('rect'))
+    superficie_dibujada = screen.blit(dict_card.get('imagen'), dict_card.get('rect'))
+#    print(f'CARTA.PY -> DRAW_CARTA() -> SUPERFICIE DIBUJADA: {superficie_dibujada}')
 
 
