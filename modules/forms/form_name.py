@@ -92,6 +92,13 @@ def update_background_victory_defeat(form_data: dict, win_status: bool):
     else:
         form_data['background'] = var.FONDO_DEFEAT_IMG
 
+    form_data['surface'] = pg.image.load(form_data.get('background')).convert_alpha() # ruta de la imagen de fondo que tiene que cargar
+    form_data['surface'] = pg.transform.scale(form_data.get('surface'), var.DIMENSION_PANTALLA) # <- ajusto la img al tamago de la pantalla 
+    form_data['rect'] = form_data.get('surface').get_rect() # aca seteo la superficie rectangulo 
+
+#    form_data['rect'].x = form_data.get('coord')[0] # seteo desde donde quiero que se empiece a dibujar
+#    form_data['rect'].y = form_data.get('coord')[1]
+
 
 
 def update_texto_victoria(form_data: dict, win_status: bool):
@@ -127,7 +134,7 @@ def submit_name(form_data: dict):
     load_data.guardar_info_csv(data_to_csv)
 
     form_data['info_submitida'] = True
-
+    clear_text(form_data)
     base_form.set_active('form_ranking')
 
 def update(form_dict_data: dict, event_list: list[pg.event.Event]):

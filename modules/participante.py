@@ -3,6 +3,7 @@ import modules.carta as carta
 import modules.variables as var
 import modules.load_data as load_data
 from functools import reduce
+import copy
 
 def inicializar_participante(pantalla: pg.Surface, nombre: str = 'PC'):
     participante = {}
@@ -89,7 +90,7 @@ def set_cartas_participante(participante: dict, lista_cartas: list[dict]):
         carta_base['coordenadas'] = participante.get('pos_deck_inicial')
     
     participante['mazo_asignado'] = lista_cartas      # cartas boca arriba
-    participante['cartas_mazo'] = lista_cartas.copy() # cartas boca abajo
+    participante['cartas_mazo'] = copy.deepcopy(lista_cartas) # cartas boca abajo
 
 def set_score_participante(participante: dict, score: int):
     """ Guarda puntaje del participante en su clave """
@@ -180,7 +181,7 @@ def jugar_carta(participante: dict):
         carta.cambiar_visibilidad(carta_actual)
         carta.asignar_coordenadas_carta(carta_actual, get_coordenadas_mazo_jugado(participante))
         participante.get('cartas_usadas').append(carta_actual)
-        
+#        print(f'Nombre player: {participante_nombre} - Coordenada carta sin usar: {participante.get('cartas_mazo')[-1].get('coordenadas')}') 
     else:
         print(f'El jugador {participante_nombre} no tiene cartas')
 
@@ -202,8 +203,8 @@ def draw_participante(participante: dict, screen: pg.Surface):
 #        print(f'PARTICIPANTE.py -> draw_participante() -> DIBUJAR CARTA DE PARTICIPANTE: {participante.get('nombre')}')
 #        print(f'PARTICIPANTE.py -> draw_participante() -> CANTIDAD DE CARTAS EN EL MAZO: {len(participante.get('cartas_usadas'))}')
         
-        if participante.get('cartas_usadas')[-1].get('visible') == False:
-            participante.get('cartas_usadas')[-1].get('visible') == True
+#        if participante.get('cartas_usadas')[-1].get('visible') == False:
+#            participante.get('cartas_usadas')[-1].get('visible') == True
 
         carta.draw_carta(participante.get('cartas_usadas')[-1], screen)
         

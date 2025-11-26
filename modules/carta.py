@@ -28,7 +28,7 @@ def cambiar_visibilidad(dict_card: dict):
     """ Cambia la visibilidad de la carta actual.
         Valor True -> para dibujar superficie frente
         Valor False -> para dibujar superficie reverso  """
-    dict_card['visible'] = not dict_card.get('visible')
+    dict_card['visible'] = True
 
 def get_hp_carta(dict_card: dict) -> int:
     """ Devuelve el contenido de la clave "hp" """
