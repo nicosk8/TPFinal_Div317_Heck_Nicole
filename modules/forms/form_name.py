@@ -17,7 +17,7 @@ def create_form_name(dict_form_data: dict) -> dict:
     form['lbl_titulo'] = Label(
         x= var.DIMENSION_PANTALLA[0] // 2 , 
         y= 100,
-        text= '¡ VICTORIA !',
+        text= '',
         screen= form.get('screen'), 
         font_path= var.FONT_ALAGARD,
         font_size= 35,
@@ -84,23 +84,25 @@ def create_form_name(dict_form_data: dict) -> dict:
 
     return form
 
-def update_background_victory_defeat(form_data: dict):
+def update_background_victory_defeat(form_data: dict, win_status: bool):
     """ Actualiza el background segùn el jugador haya ganado o perdido la partida """
 
-    fondo_background = var.FONDO_VICTORY_IMG 
-    fondo_background = var.FONDO_DEFEAT_IMG
+    if win_status:
+        form_data['background'] = var.FONDO_VICTORY_IMG 
+    else:
+        form_data['background'] = var.FONDO_DEFEAT_IMG
 
-    form_data['surface'] = pg.image.load(fondo_background.convert_alpha()) # ruta de la imagen de fondo que tiene que cargar
-    form_data['surface'] = pg.transform.scale(form_data.get('surface'), var.DIMENSION_PANTALLA) # <- ajusto la img al tamago de la pantalla 
-    form_data['rect'] = form_data.get('surface').get_rect() # aca seteo la superficie rectangulo
+
 
 def update_texto_victoria(form_data: dict, win_status: bool):
     """ Actualiza el titulo segun el jugador haya ganado o perdido la partida """
+   
     if win_status:
-        mensaje = '¡VICTORIA!'
+        mensaje = 'VICTORIA!'
         color_texto = pg.Color('green')
+
     else: 
-        mensaje = 'DERROTA...'
+        mensaje = 'DERROTA'
         color_texto = pg.Color('red')
 
     form_data.get('widgets_list')[0].update_text(text=mensaje, color=color_texto)

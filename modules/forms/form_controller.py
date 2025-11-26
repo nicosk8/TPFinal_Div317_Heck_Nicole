@@ -93,7 +93,7 @@ def create_form_controller(screen: pg.Surface, datos_juego: dict):
             "active" : False,
             "coord" : (0,0),
             "music_path" : var.MUSICA_RANKING,
-            "background" : var.FONDO_STAGE_IMG,
+            "background" : var.FONDO_FORM_NAME_IMG,
             "screen_dimensions" : var.DIMENSION_PANTALLA,
             "music_config" : controller.get('music_config'),
             "jugador" :  controller.get('player')

@@ -2,7 +2,7 @@ import pygame as pg
 import sys
 import modules.forms.base_form as base_form
 from utn_fra.pygame_widgets import (
-    Label, Button
+    Label, Button, ButtonSound, ButtonImageSound
 )
 import modules.variables as var
 import modules.forms.pause_form as pause_form
@@ -40,7 +40,7 @@ def create_form_stage(dict_form_data: dict) -> dict:
     )
 
     form['lbl_score'] = Label(
-        x=450, y=25,
+        x=600, y=25,
         text=f'Score: 0',
         screen= form.get('screen'),
         align='top-left',
@@ -49,7 +49,7 @@ def create_form_stage(dict_form_data: dict) -> dict:
     )
     
     form['lbl_carta_e'] = Label(
-        x=405, y=300,
+        x=380, y=300,
         text=f'',
         screen= form.get('screen'),
         align='top-left',
@@ -58,7 +58,7 @@ def create_form_stage(dict_form_data: dict) -> dict:
     )
 
     form['lbl_carta_p'] = Label(
-        x=405 , y=330,
+        x=380 , y=575,
         text=f'',
         screen= form.get('screen'),
         align='top-left',
@@ -119,12 +119,12 @@ def create_form_stage(dict_form_data: dict) -> dict:
     )
 
     # ================ BUTTONS =================
-    form['btn_play'] = Button( 
+    form['btn_play'] = ButtonSound( 
         x=710, y=310,
         text= 'JUGAR',
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
-        font_size= 30, align='topleft',
+        font_size= 30, align='topleft', sound_path=var.SONIDO_BTN_PLAY_HAND, #image_path=var.IMG_BTN_PLAY,
         on_click= jugar_mano, on_click_param= form
     ) 
 
@@ -211,6 +211,7 @@ def verificar_terminado(form_dict_data: dict):
         # activar el form enter name
         name_form = var.dict_forms_status.get('form_name')
         form_name.update_texto_victoria(name_form, win_status)
+        form_name.update_background_victory_defeat(name_form, win_status)
         base_form.set_active('form_name')   
 
 def iniciar_nueva_partida(form_dict_data: dict):

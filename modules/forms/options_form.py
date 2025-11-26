@@ -6,8 +6,7 @@ import modules.forms.base_form as base_form
 import modules.load_data as load_data
 import modules.sonido as sonido
 from utn_fra.pygame_widgets import (
-    Label , # <- class
-    Button, # <- boton simple
+    Label , Button, ButtonSound
 )
 
 def create_form_options(dict_form_data: dict) -> dict:
@@ -30,47 +29,47 @@ def create_form_options(dict_form_data: dict) -> dict:
     )
 
     # Aca voy a crear el boton "MUSIC ON"
-    form['btn_music_on'] = Button(
+    form['btn_music_on'] = ButtonSound(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
         y= 270, # <- lo ubico 200 pixeles por debajo del texto "Menu principal"
         text='MUSIC ON',
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD, 
         align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
-        font_size= 30,
+        font_size= 30, sound_path=var.SONIDO_CLICK,
         on_click= activar_musica, # <- llamado a la funcion que ejecuta la logica principal del juego
         on_click_param= form # <- transfiere parametros a la funcion
     )
 
     # Aca voy a crear el boton "MUSIC OFF"
-    form['btn_music_off'] = Button(
+    form['btn_music_off'] = ButtonSound(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
         y= 300, # <- lo ubico 260 pixeles por debajo del texto "Menu principal"
         text='MUSIC OFF', 
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
         align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
-        font_size= 30,
+        font_size= 30, sound_path=var.SONIDO_CLICK,
         on_click= desactivar_musica, # <- llamado a la funcion que ejecuta la logica principal del juego
         on_click_param= form # <- transfiere parametros a la funcion
     )
 
-    form['btn_vol_down'] = Button(
+    form['btn_vol_down'] = ButtonSound(
         x= var.DIMENSION_PANTALLA[0] // 2 - 150,
         y= 335, # <- lo ubico 360 pixeles por debajo del texto "Menu principal"
         text='<', 
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
         align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
-        font_size= 60,
+        font_size= 60, sound_path=var.SONIDO_CLICK,
         color= pg.Color('red'),
         on_click= modificar_volumen, 
         on_click_param=(-10) 
     )
-    form['btn_vol_up'] = Button(
+    form['btn_vol_up'] = ButtonSound(
         x= var.DIMENSION_PANTALLA[0] // 2 + 150 ,
         y= 335, # <- lo ubico 360 pixeles por debajo del texto "Menu principal"
-        text='>', 
+        text='>', sound_path=var.SONIDO_CLICK,
         screen= form.get('screen'), # <- dimension de la pantalla
         font_path= var.FONT_ALAGARD,
         align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
@@ -90,13 +89,13 @@ def create_form_options(dict_form_data: dict) -> dict:
         color= pg.Color('blue'),
     )
     
-    form['btn_volver'] = Button( # <- volver a la pantalla del menu principal
+    form['btn_volver'] = ButtonSound( # <- volver a la pantalla del menu principal
         x= var.DIMENSION_PANTALLA[0] // 2,
         y= 500,
         text= 'VOLVER',
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
-        font_size= 30,
+        font_size= 30, sound_path=var.SONIDO_CLICK,
         on_click= cambiar_pantalla, on_click_param= 'form_menu' # <- tupla de parms con datos del form y nombre del formulario "MENU" = 'menu_form.py'
     )  
 

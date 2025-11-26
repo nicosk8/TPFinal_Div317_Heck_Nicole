@@ -7,8 +7,7 @@ import modules.forms.stage_form as form_stage
 import modules.load_data as load_data
 import modules.sonido as sonido
 from utn_fra.pygame_widgets import (
-    Label , # <- class
-    Button, # <- boton simple
+    Label , Button, ButtonSound
 )
 
 def create_form_pause(dict_form_data: dict) -> dict:
@@ -42,31 +41,31 @@ def create_form_pause(dict_form_data: dict) -> dict:
         color= pg.Color('red'),
     )
 
-    form['btn_resume'] = Button( 
+    form['btn_resume'] = ButtonSound( 
         x= var.DIMENSION_PANTALLA[0] // 2,
         y= 210,
         text= 'RESUME',
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
-        font_size= 30,
+        font_size= 30, sound_path=var.SONIDO_CLICK,
         on_click= cambiar_pantalla, on_click_param= {'form': form, 'form_name': 'form_stage'} )
 
-    form['btn_restart'] = Button( 
+    form['btn_restart'] = ButtonSound( 
         x= var.DIMENSION_PANTALLA[0] // 2,
         y= 270,
         text= 'RESTART STAGE',
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
-        font_size= 30,
+        font_size= 30, sound_path=var.SONIDO_CLICK,
         on_click= restart_stage, on_click_param= {'form': form,'form_name': 'form_stage'})
      
-    form['btn_back_menu'] = Button( 
+    form['btn_back_menu'] = ButtonSound( 
         x= var.DIMENSION_PANTALLA[0] // 2,
         y= 495,
         text= 'BACK TO MENU',
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
-        font_size= 30,
+        font_size= 30, sound_path=var.SONIDO_CLICK,
         on_click= base_form.cambiar_pantalla, on_click_param= 'form_menu') 
     
     form['widgets_list'] = [

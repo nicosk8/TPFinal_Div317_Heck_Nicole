@@ -7,8 +7,7 @@ import modules.stage as stage_juego
 import modules.participante as particip_juego
 
 from utn_fra.pygame_widgets import (
-    Label , # <- class
-    Button, # <- boton simple
+    Label , Button, ButtonSound
 )
 
 def create_form_wish(dict_form_data: dict) -> dict:
@@ -33,17 +32,17 @@ def create_form_wish(dict_form_data: dict) -> dict:
         font_path=var.FONT_ALAGARD, font_size=45, color=pg.Color('blue')
     )
 
-    form['btn_wish'] = Button(
+    form['btn_wish'] = ButtonSound(
         x=var.DIMENSION_PANTALLA[0] // 2 - 200, y=200,
         text='', screen=form.get('screen'),
-        font_path=var.FONT_ALAGARD, font_size=40,
+        font_path=var.FONT_ALAGARD, font_size=40, sound_path=var.SONIDO_CLICK,
         on_click=init_wish, on_click_param=form
     )
 
-    form['btn_cancel'] = Button(
+    form['btn_cancel'] = ButtonSound(
         x=var.DIMENSION_PANTALLA[0] // 2 + 200, y=200,
         text='CANCEL', screen=form.get('screen'),
-        font_path=var.FONT_ALAGARD, font_size=40,
+        font_path=var.FONT_ALAGARD, font_size=40, sound_path=var.SONIDO_CLICK,
         on_click=click_resume, on_click_param='form_stage'
     )
 

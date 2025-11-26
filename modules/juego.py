@@ -2,7 +2,6 @@ import pygame as pg
 import modules.variables as var
 import modules.forms.form_controller as form_controller
 import modules.participante as participante
-import sys
 import modules.sonido as sonido
 
 def dbz_playing_cards():

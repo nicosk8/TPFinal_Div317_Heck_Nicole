@@ -5,8 +5,7 @@ import modules.assets
 import modules.forms.base_form as base_form
 import modules.load_data as load_data
 from utn_fra.pygame_widgets import (
-    Label , # <- class
-    Button, # <- boton simple
+    Label , Button, ButtonSound
 )
 
 def create_form_ranking(dict_form_data: dict) -> dict:
@@ -40,13 +39,13 @@ def create_form_ranking(dict_form_data: dict) -> dict:
     ) 
 
 
-    form['btn_volver'] = Button( # <- volver a la pantalla del menu principal
+    form['btn_volver'] = ButtonSound( # <- volver a la pantalla del menu principal
         x= var.DIMENSION_PANTALLA[0] // 2,
         y= 550,
         text= 'VOLVER',
         screen= form.get('screen'),
         font_path= var.FONT_ALAGARD,
-        font_size= 30,
+        font_size= 30, sound_path=var.SONIDO_CLICK,
         on_click= cambiar_pantalla , on_click_param= (form, 'form_menu') # <- tupla de parms con datos del form y nombre del formulario "MENU" = 'menu_form.py'
     )  
 

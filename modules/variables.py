@@ -21,7 +21,11 @@ FONDO_STAGE_IMG = 'modules/assets/backgrounds/background_cards_simple.png'
 FONDO_WISH_IMG = r'modules\assets\backgrounds\form_wish_select.png' 
 FONDO_DEFEAT_IMG = 'modules/assets/backgrounds/form_enter_name_0.png'
 FONDO_VICTORY_IMG = 'modules/assets/backgrounds/form_enter_name_1.png'
+FONDO_FORM_NAME_IMG = 'modules/assets/backgrounds/fondo_7.png'
 
+# imagenes botones 
+IMG_BTN_PLAY = 'modules/assets/buttons_image/btn_play_hand.png'
+IMG_BTN_HEAL = 'modules/assets/buttons_image/heal.png'
 
 # Fuentes
 FONT_ALAGARD = 'modules/assets/fonts/alagard.ttf' 
@@ -32,6 +36,10 @@ MUSICA_MENU = 'modules/assets/sound/music.ogg'
 MUSICA_OPTIONS = 'modules/assets/sound/level_3.mp3'
 MUSICA_PAUSA = 'modules/assets/sound/music.ogg'
 MUSICA_STAGE = 'modules/assets/sound/music.ogg'
+
+# Sonidos
+SONIDO_CLICK = 'modules/assets/sound/click.mp3'
+SONIDO_BTN_PLAY_HAND = 'modules/assets/sound/ball-dragon-gt-jump.mp3'
 
 # Diccionario de formularios activos en el juego
 dict_forms_status = {}
