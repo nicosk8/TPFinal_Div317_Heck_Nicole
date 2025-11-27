@@ -193,6 +193,11 @@ def jugar_mano(form_dict_data: dict):
         critical, ganador_mano = stage_juego.jugar_mano(stage)
         print(f'El ganador de la mano es: {ganador_mano}')
 
+def clear_lbls_card_info(form_dict_data: dict):
+    """ elimina los lbls de las cartas en pantalla"""
+    form_dict_data['lbl_carta_e'].update_text('', pg.Color('white'))       
+    form_dict_data['lbl_carta_p'].update_text('', pg.Color('white'))
+
 def verificar_terminado(form_dict_data: dict):
     """ Si la partida està terminada, obtiene el ganador de la partida
         y activa el formulario para ingresar el nombre del jugador """
@@ -206,7 +211,10 @@ def verificar_terminado(form_dict_data: dict):
             win_status = False
         else:
             win_status = True
+
         print(f'¡EL GANADOR DEL JUEGO ES {nombre_ganador}!') 
+
+        clear_lbls_card_info(form_dict_data) # <- elimina los lbls de las cartas en pantalla
 
         # activar el form enter name
         name_form = var.dict_forms_status.get('form_name')
@@ -221,6 +229,8 @@ def iniciar_nueva_partida(form_dict_data: dict):
     pantalla = form_dict_data.get('screen')
     nro_stage = stage.get('nro_stage')
     form_dict_data['stage'] = stage_juego.restart_stage(stage, jugador, pantalla, nro_stage)
+    
+    
 
 def update_lbls_card_info(form_dict_data: dict):
     """ Actualiza la info de los labels de las cartas en pantalla """
@@ -232,14 +242,11 @@ def update_lbls_card_info(form_dict_data: dict):
         ultima_carta_e = participante_juego.get_carta_actual_participante(form_dict_data.get('stage').get('enemigo'))
         ultima_carta_p = participante_juego.get_carta_actual_participante(form_dict_data.get('stage').get('jugador'))
 
-        form_dict_data['lbl_carta_e'].update_text(
-            f'HP: {carta_jugador.get_hp_carta(ultima_carta_e)} ATK: {carta_jugador.get_atk_carta(ultima_carta_e)} DEF: {carta_jugador.get_def_carta(ultima_carta_e)}',
-            pg.Color('white')  )
+        form_dict_data['lbl_carta_e'].update_text(f"HP: {carta_jugador.get_hp_carta(ultima_carta_e)} ATK: {carta_jugador.get_atk_carta(ultima_carta_e)} DEF: {carta_jugador.get_def_carta(ultima_carta_e)}",
+        pg.Color('white'))
         
-        form_dict_data['lbl_carta_p'].update_text(
-            f'HP: {carta_jugador.get_hp_carta(ultima_carta_p)} ATK: {carta_jugador.get_atk_carta(ultima_carta_p)} DEF: {carta_jugador.get_def_carta(ultima_carta_p)}',
-            pg.Color('white')
-        )
+        form_dict_data['lbl_carta_p'].update_text(f"HP: {carta_jugador.get_hp_carta(ultima_carta_p)} ATK: {carta_jugador.get_atk_carta(ultima_carta_p)} DEF: {carta_jugador.get_def_carta(ultima_carta_p)}",
+        pg.Color('white'))
 
 def update_score(form_dict_data: dict):
     """ Actualiza el puntaje del jugador en pantalla """
@@ -310,7 +317,6 @@ def update(form_dict_data: dict, eventos: list[pg.event.Event]):
     update_score(form_dict_data)
     update_lbls_participante(form_dict_data, tipo_participante='enemigo')  
     update_bonus_widgets(form_dict_data)
-    
     events_handler(eventos)
     verificar_terminado(form_dict_data)
 

@@ -96,11 +96,6 @@ def update_background_victory_defeat(form_data: dict, win_status: bool):
     form_data['surface'] = pg.transform.scale(form_data.get('surface'), var.DIMENSION_PANTALLA) # <- ajusto la img al tamago de la pantalla 
     form_data['rect'] = form_data.get('surface').get_rect() # aca seteo la superficie rectangulo 
 
-#    form_data['rect'].x = form_data.get('coord')[0] # seteo desde donde quiero que se empiece a dibujar
-#    form_data['rect'].y = form_data.get('coord')[1]
-
-
-
 def update_texto_victoria(form_data: dict, win_status: bool):
     """ Actualiza el titulo segun el jugador haya ganado o perdido la partida """
    

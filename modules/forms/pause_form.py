@@ -92,6 +92,8 @@ def restart_stage(params: dict):
     stage_form = var.dict_forms_status.get(params.get('form_name'))
     cambiar_pantalla(params)
     form_stage.iniciar_nueva_partida(stage_form)
+    form_stage.clear_lbls_card_info(stage_form)
+
 
 
 def set_last_volume(vol: int):

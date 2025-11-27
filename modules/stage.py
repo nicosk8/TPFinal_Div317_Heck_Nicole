@@ -137,6 +137,7 @@ def hay_jugadores_con_cartas(stage_data: dict) -> bool:
     enemigo_con_cartas = participante_juego.get_cartas_restantes_participante(stage_data.get('enemigo'))
     return jugador_con_cartas or enemigo_con_cartas
 
+
 def restart_stage(stage_data: dict, jugador: dict, pantalla: pg.Surface, nro_stage: int):
     """ Restablece el nivel. Devuelve el seteo de las configuraciones a como estaban al inicio 
     :params:  """
