@@ -51,6 +51,7 @@ def inicializar_stage(jugador: dict, pantalla: pg.Surface, nro_stage: int):
     stage_data['last_timer'] = pg.time.get_ticks()
     stage_data['ganador'] = None                    # info del ganador final
     stage_data['data_cargada'] = False              # indicador de datos cargados
+#    stage_data['time_finished'] = None
 
     return stage_data
 
@@ -172,6 +173,8 @@ def comparar_damage(stage_data: dict) -> str:
     carta_jugador = participante_juego.get_carta_actual_participante(jugador)
     carta_enemigo = participante_juego.get_carta_actual_participante(enemigo)
 
+
+
     if carta_enemigo and carta_jugador:
         critical = es_golpe_critico()
         atk_jugador = carta.get_atk_carta(carta_jugador)
@@ -196,6 +199,7 @@ def setear_ganador(stage_data: dict, participante: dict):
     """ Setea al ganador de la ronda """
     stage_data['ganador'] = participante
     stage_data['juego_finalizado'] = True
+#    stage_data['time_finished'] = pg.time.get_ticks()
 
 def chequear_ganador(stage_data: dict):
     """ Si el jugador llegò a 0 de vida o la vida del jugador es menor que la del enemigo,

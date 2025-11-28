@@ -50,53 +50,52 @@ def create_form_menu(dict_form_data: dict) -> dict:
     )
 
     # Aca voy a crear el boton "JUGAR"
-    form['btn_play'] = ButtonSound(
+    form['btn_play'] = ButtonImageSound(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
         y= 350, # <- lo ubico 150 pixeles por debajo del texto "Menu principal"
         text='JUGAR',
         screen= form.get('screen'), # <- dimension de la pantalla
-        font_path= var.FONT_ALAGARD,
         align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
         font_size= 30,
-        sound_path=var.SONIDO_CLICK,
+        sound_path=var.SONIDO_CLICK,image_path=var.IMG_BTN_PLAY, width=100,height=32,
         on_click= iniciar_stage, # <- llamado a la funcion que ejecuta la logica principal del juego
         on_click_param= 'form_stage' # <- transfiere parametros a la funcion
     )
 
     # Aca voy a crear el boton "RANKING"
-    form['btn_ranking'] = ButtonSound(
+    form['btn_ranking'] = ButtonImageSound(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
         y= 390, # <- lo ubico 210 pixeles por debajo del texto "Menu principal"
         text='RANKING',
         screen= form.get('screen'), # <- dimension de la pantalla
-        font_path= var.FONT_ALAGARD,
         align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
         font_size= 30, sound_path=var.SONIDO_CLICK,
+        image_path=var.IMG_BTN_RANKING, width=100,height=32,
         on_click= base_form.cambiar_pantalla, # <- llamado a la funcion que ejecuta el cambio de pantalla a RANKING
         on_click_param= 'form_ranking' # <- transfiere parametros a la funcion
     )
 
     # Aca voy a crear el boton "OPCIONES"
-    form['btn_options'] = ButtonSound(
+    form['btn_options'] = ButtonImageSound(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
         y= 430, # <- lo ubico 400 pixeles por debajo del texto "Menu principal"
         text='OPCIONES',
         screen= form.get('screen'), # <- dimension de la pantalla
-        font_path= var.FONT_ALAGARD,
         align= 'top-left', # <- punto superior izq desde donde se empieza a dibujar la superficie del boton
         font_size= 30, sound_path=var.SONIDO_CLICK,
+        image_path=var.IMG_BTN_OPCIONES, width=100,height=32,
         on_click= base_form.cambiar_pantalla, # <- llamado a la funcion que ejecuta el cambio de pantalla a RANKING
         on_click_param= 'form_options'
     )
 
     # Aca voy a crear el boton "EXIT"
-    form['btn_exit'] = ButtonSound(
+    form['btn_exit'] = ButtonImageSound(
         x= var.DIMENSION_PANTALLA[0] // 2 ,
         y= 495, # <- lo ubico 500 pixeles por debajo del texto "Menu principal"
         text='SALIR',
         screen= form.get('screen'), # <- dimension de la pantalla
-        font_path= var.FONT_ALAGARD,
         font_size= 30, sound_path=var.SONIDO_CLICK,
+        image_path=var.IMG_BTN_SALIR, width=100,height=32,
         on_click= salir_juego, # <- llamado a la funcion que ejecuta la logica principal del juego
         on_click_param= None # <- transfiere parametros a la funcion
     )

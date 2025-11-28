@@ -18,7 +18,7 @@ def create_form_stage(dict_form_data: dict) -> dict:
     form = base_form.create_base_form(dict_form_data)
 
     form['stage_restart'] = False # bandera para saber si debe reiniciar el juego o no
-    form['time_finished'] = False # indicador de finalizacion de tiempo de juego
+#    form['time_finished'] = False # indicador de finalizacion de tiempo de juego
     form['actual_level'] = 1
     
     form['bonus_shield_available'] = True
@@ -202,6 +202,9 @@ def verificar_terminado(form_dict_data: dict):
     """ Si la partida està terminada, obtiene el ganador de la partida
         y activa el formulario para ingresar el nombre del jugador """
     stage = form_dict_data.get('stage')
+    current_time = pg.time.get_ticks()
+
+#    if form_dict_data.get('stage').get('time_finished') and current_time - form_dict_data.get('stage').get('time_finished')> 1500:
     if stage_juego.esta_finalizado(stage):
 
         print('EL JUEGO ESTA TERMINADO')
@@ -229,6 +232,7 @@ def iniciar_nueva_partida(form_dict_data: dict):
     pantalla = form_dict_data.get('screen')
     nro_stage = stage.get('nro_stage')
     form_dict_data['stage'] = stage_juego.restart_stage(stage, jugador, pantalla, nro_stage)
+     
     
     
 

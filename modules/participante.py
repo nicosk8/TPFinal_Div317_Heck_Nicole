@@ -151,6 +151,8 @@ def restar_stats_participante(participante: dict, carta_g: dict, is_critic : boo
     
     participante['atk'] -= carta.get_atk_carta(carta_jugador)
     participante['def'] -= carta.get_def_carta(carta_jugador) 
+    # TO DO AGREGAR LA SUMATORIA DEL % DEL BONUS DE LAS CARTAS QUE VIENE EN EL ULTIMO VALOR
+
 
 def info_to_csv(participante: dict):
     return f'{get_nombre_participante(participante)},{participante.get('score')}\n'

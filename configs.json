@@ -1,8 +1,8 @@
 {
     "nivel_1" : {
         "ruta_mazo" : "modules/assets/decks/",
-        "mazo_enemigo" : "golden_deck_expansion_1",
-        "mazo_jugador" : "golden_deck_expansion_1",
+        "mazo_enemigo" : "purple_deck_expansion_1",
+        "mazo_jugador" : "purple_deck_expansion_1",
         "coordenada_inicial_mazo_jugador": [300,360],
         "coordenada_final_mazo_jugador": [390,360],
         "coordenada_inicial_mazo_enemigo": [300,70],

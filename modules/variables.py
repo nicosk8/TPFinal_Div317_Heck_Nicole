@@ -24,7 +24,12 @@ FONDO_VICTORY_IMG = 'modules/assets/backgrounds/form_enter_name_1.png'
 FONDO_FORM_NAME_IMG = 'modules/assets/backgrounds/fondo_7.png'
 
 # imagenes botones 
-IMG_BTN_PLAY = 'modules/assets/buttons_image/btn_play_hand.png'
+IMG_BTN_PLAY = 'modules/assets/buttons_image/btn_jugar.png'
+IMG_BTN_RANKING = 'modules/assets/buttons_image/btn_ranking.png'
+IMG_BTN_OPCIONES = 'modules/assets/buttons_image/btn_opciones.png'
+IMG_BTN_SALIR = 'modules/assets/buttons_image/btn_salir.png'
+IMG_BTN_VOLVER = 'modules/assets/buttons_image/btn_volver.png'
+IMG_BTN_PLAY_HAND = 'modules/assets/buttons_image/btn_play_hand.png'
 IMG_BTN_HEAL = 'modules/assets/buttons_image/heal.png'
 
 # Fuentes
