@@ -4,6 +4,7 @@ import modules.load_data as load_data
 import random as rd
 import modules.carta as carta
 import modules.participante as participante_juego
+import modules.forms.stage_form as form_stage
 
 def inicializar_stage(jugador: dict, pantalla: pg.Surface, nro_stage: int):
     """ Inicializa el nivel/stage.
@@ -36,6 +37,7 @@ def inicializar_stage(jugador: dict, pantalla: pg.Surface, nro_stage: int):
 
     stage_data['heal_available'] = True
     stage_data['jackpot_available'] = True
+    stage_data['shield_available'] = True
     
     stage_data['enemigo'] = participante_juego.inicializar_participante(stage_data.get('screen'), nombre='Enemigo')
 
@@ -149,8 +151,11 @@ def restart_stage(stage_data: dict, jugador: dict, pantalla: pg.Surface, nro_sta
 
 def jugar_mano_stage(stage_data: dict):
     """ Juega la carta actual de los participantes """
+    
+    print('\nCantidad de cartas de los participantes:')
     participante_juego.jugar_carta(stage_data.get('jugador'))
     participante_juego.jugar_carta(stage_data.get('enemigo'))
+    print()
     
 
 def es_golpe_critico() -> bool:
@@ -164,6 +169,9 @@ def comparar_damage(stage_data: dict) -> str:
         2 - Compara los ataques de estas cartas. Si ataque enemigo mayor al jugador,
             establece al enemigo como ganador de la partida y resta stats al jugador. 
             Caso contrario, misma logica a la inversa.
+        3 - BONUS SHIELD: Se dará un “escudo” que protegerá al participante cuando pierda la jugada, 
+            haciendo que el daño vaya al enemigo en vez de sí mismo. Si en una mano el jugador hubiera perdido (menos atk que el enemigo).
+            el “SHIELD” lo salva y hace que el enemigo pierda todos los stats de su propia carta (sumándole el bonus).
         :returns: 
             ganador_mano -> nombre del ganador """
     ganador_mano = None
@@ -173,16 +181,31 @@ def comparar_damage(stage_data: dict) -> str:
     carta_jugador = participante_juego.get_carta_actual_participante(jugador)
     carta_enemigo = participante_juego.get_carta_actual_participante(enemigo)
 
-
-
     if carta_enemigo and carta_jugador:
         critical = es_golpe_critico()
         atk_jugador = carta.get_atk_carta(carta_jugador)
         atk_enemigo = carta.get_atk_carta(carta_enemigo)
 
         if atk_enemigo > atk_jugador:
-            ganador_mano = 'PC'
-            participante_juego.restar_stats_participante(jugador, carta_enemigo, critical)
+            
+            stage_form = var.dict_forms_status.get('form_stage') # me traigo los datos del stage_form para acceder a las claves del stage_form
+            if form_stage.get_bonus_shield_available(stage_form) and\
+               form_stage.get_bonus_shield_applied(stage_form) == False:
+                
+                participante_juego.restar_stats_participante(enemigo, carta_enemigo, critical)
+                ganador_mano = 'PLAYER'
+                form_stage.set_bonus_shield_available(stage_form)
+                form_stage.set_bonus_shield_applied(stage_form,value=True)
+                print('\n----------------------------------------------------------------------------------')
+                print("BONUS SHIELD active: escudo utilizado")
+                print("BONUS SHIELD active: El jugador PLAYER conserva sus puntos de vida")
+                print("BONUS SHIELD active: Se han restado los stats de la carta enemiga al enemigo...")
+                print("BONUS SHIELD active: Espejito rebotin, todo lo que me hagas te vuelve por mil >:D")
+                print('----------------------------------------------------------------------------------')
+                
+            else:
+                ganador_mano = 'PC'
+                participante_juego.restar_stats_participante(jugador, carta_enemigo, critical)
         else:
             score = atk_jugador - carta.get_def_carta(carta_enemigo)
             ganador_mano = 'PLAYER'
@@ -191,8 +214,7 @@ def comparar_damage(stage_data: dict) -> str:
 
     print(f'Datos de la ronda actual:')
     print(f'{stage_data.get('jugador').get('nombre')} -> Carta -> HP: {carta.get_hp_carta(carta_jugador)} - ATK: {atk_jugador} - DEF: {carta.get_def_carta(carta_jugador)} - Critical: {critical} - Vida total jugador: {stage_data.get('jugador').get('hp_actual')}')
-    print(f'{stage_data.get('enemigo').get('nombre')} -> Carta -> HP: {carta.get_hp_carta(carta_jugador)} - ATK: {atk_enemigo} - DEF: {carta.get_def_carta(carta_enemigo)} - Critical: {critical} - Vida total enemigo: {stage_data.get('enemigo').get('hp_actual')}')
-
+    print(f'{stage_data.get('enemigo').get('nombre')} -> Carta -> HP: {carta.get_hp_carta(carta_jugador)} - ATK: {atk_enemigo} - DEF: {carta.get_def_carta(carta_enemigo)} - Critical: {critical} - Vida total enemigo: {stage_data.get('enemigo').get('hp_actual')}\n')
     return critical, ganador_mano
 
 def setear_ganador(stage_data: dict, participante: dict):

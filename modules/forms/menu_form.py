@@ -97,7 +97,7 @@ def create_form_menu(dict_form_data: dict) -> dict:
         font_size= 30, sound_path=var.SONIDO_CLICK,
         image_path=var.IMG_BTN_SALIR, width=100,height=32,
         on_click= salir_juego, # <- llamado a la funcion que ejecuta la logica principal del juego
-        on_click_param= None # <- transfiere parametros a la funcion
+        on_click_param= '_' # <- transfiere parametros a la funcion
     )
 
     # Lista de widgets a dibujar en pantalla

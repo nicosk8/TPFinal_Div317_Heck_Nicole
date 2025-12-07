@@ -23,7 +23,7 @@ def create_form_stage(dict_form_data: dict) -> dict:
     
     form['bonus_shield_available'] = True
     form['bonus_heal_available'] = True
-    form['bonus_shield_applied'] = False
+    form['bonus_shield_applied'] = None
     form['jugador'] = dict_form_data.get('jugador')
    
     form['stage'] = stage_juego.inicializar_stage(jugador=form.get('jugador'), pantalla=form.get('screen'),
@@ -136,6 +136,14 @@ def create_form_stage(dict_form_data: dict) -> dict:
         align='topleft'
     )
 
+    form['btn_shield'] = Button(
+        x=710, y=215,
+        text='SHIELD', screen=form.get('screen'),
+        font_path=var.FONT_ALAGARD, font_size=25,
+        on_click=call_wish_form, on_click_param={'form': form, 'wish': 'SHIELD'},
+        align='topleft'
+    )
+
     form['btn_jackpot'] = Button(
         x=710, y=490,
         text='JACKPOT', screen=form.get('screen'),
@@ -164,7 +172,8 @@ def create_form_stage(dict_form_data: dict) -> dict:
 
     form['widgets_list_bonus'] = [
         form.get('btn_heal'),
-        form.get('btn_jackpot')
+        form.get('btn_jackpot'),
+        form.get('btn_shield')
     ]
     var.dict_forms_status[form.get('name')] = form 
     return form
@@ -232,10 +241,7 @@ def iniciar_nueva_partida(form_dict_data: dict):
     pantalla = form_dict_data.get('screen')
     nro_stage = stage.get('nro_stage')
     form_dict_data['stage'] = stage_juego.restart_stage(stage, jugador, pantalla, nro_stage)
-     
-    
-    
-
+        
 def update_lbls_card_info(form_dict_data: dict):
     """ Actualiza la info de los labels de las cartas en pantalla """
 
@@ -259,8 +265,29 @@ def update_score(form_dict_data: dict):
     form_dict_data.get('lbl_score').update_text(text=f'Score: {score}', color=pg.Color('white'))
 
 # =========== BONUS WIDGETS =============
+
+def get_bonus_shield_available(form_dict_data: dict) -> bool:
+    resultado = form_dict_data.get('bonus_shield_available')
+    return resultado
+
+def get_bonus_shield_applied(form_dict_data: dict) -> bool:
+    resultado = form_dict_data.get('bonus_shield_applied')
+    return resultado 
+
+def set_bonus_shield_available(form_dict_data: dict):
+    form_dict_data['bonus_shield_available'] = False
+
+def set_bonus_shield_applied(form_dict_data: dict,value: bool):
+    form_dict_data['bonus_shield_applied'] = value
+
 def call_wish_form(params: dict):
-    """'form': form, 'wish': 'SCORE X3'"""
+    """' recibe el los datos del form y el nombre del wish
+    el cual tomara de referencia para actualizar la etiqueta del boton
+    segun el tipo de wish (deseo) que haya hecho click el user en pantalla
+    'wish': -> 'HEAL' (curacion de vida HP)
+    'wish': -> 'SHIELD' (escudo)
+    'wish': -> 'SCORE X3' (jackpot)
+    """
     print('DENTRO DE LA FUNCION CALL_WISH')
 
     form_dict_data = params.get('form')
@@ -280,6 +307,8 @@ def draw_bonus_widgets(form_dict_data: dict):
         widgets_bonus[0].draw()
     if stage.get('jackpot_available'):
         widgets_bonus[1].draw()
+    if stage.get('shield_available'):
+        widgets_bonus[2].draw()
     
 def update_bonus_widgets(form_dict_data: dict):
     widgets_bonus = form_dict_data.get('widgets_list_bonus')
@@ -288,6 +317,8 @@ def update_bonus_widgets(form_dict_data: dict):
         widgets_bonus[0].update()
     if stage.get('jackpot_available'):
         widgets_bonus[1].update()
+    if stage.get('shield_available'):
+        widgets_bonus[2].update()
 # =======================================
 
 def events_handler(events: list[pg.event.Event]):

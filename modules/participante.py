@@ -171,22 +171,16 @@ def jugar_carta(participante: dict):
     """ Logica de jugado de una carta:
     Si hay cartas disponibles en el mazo:
         1 - Obtiene la ultima carta de la lista del mazo actual
-        2 - Anexa esa ultima carta a la lista del mazo de cartas usadas """
-    
-    print('Datos de la ronda:')
-    
+        2 - Anexa esa ultima carta a la lista del mazo de cartas usadas """    
     if participante.get('cartas_mazo'):
-
         participante_nombre = participante.get('nombre')
         print(f'El jugador {participante_nombre} tiene {len(participante.get('cartas_mazo'))} cartas')
         carta_actual = participante.get('cartas_mazo').pop()
         carta.cambiar_visibilidad(carta_actual)
         carta.asignar_coordenadas_carta(carta_actual, get_coordenadas_mazo_jugado(participante))
         participante.get('cartas_usadas').append(carta_actual)
-#        print(f'Nombre player: {participante_nombre} - Coordenada carta sin usar: {participante.get('cartas_mazo')[-1].get('coordenadas')}') 
     else:
         print(f'El jugador {participante_nombre} no tiene cartas')
-
 
 def draw_participante(participante: dict, screen: pg.Surface):
     """ Dibuja las cartas en pantalla del participante """

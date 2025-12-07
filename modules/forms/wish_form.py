@@ -2,7 +2,7 @@ import pygame as pg
 import sys
 import modules.variables as var
 import modules.forms.base_form as base_form
-import modules.forms.stage_form as stage_form
+import modules.forms.stage_form as form_stage
 import modules.stage as stage_juego
 import modules.participante as particip_juego
 
@@ -65,6 +65,11 @@ def click_resume(form_name: str):
     base_form.cambiar_pantalla(form_name)
 
 def init_wish(form_dict_data: dict):
+    """ Recibe el los datos del form y el nombre de la funcion a ejecutar (wish)
+    'wish': -> 'HEAL' (curacion de vida HP)
+    'wish': -> 'SHIELD' (escudo)
+    'wish': -> 'SCORE X3' (jackpot)
+    """
     wish_type = form_dict_data.get('wish_type')
     jugador = form_dict_data.get('jugador')
     
@@ -73,8 +78,10 @@ def init_wish(form_dict_data: dict):
 
     if wish_type == 'HEAL':
         wish = 'heal'
-    else:
+    elif wish_type == 'SCORE X3':
         wish = 'jackpot'
+    else:
+        wish = 'shield'
     
     stage_juego.modificar_estado_bonus(stage, wish)
 
@@ -85,7 +92,7 @@ def init_wish(form_dict_data: dict):
         particip_juego.set_score_participante(
            jugador , nuevo_score
         )
-    else: # HEAL
+    elif wish_type == 'HEAL':
         hp_inicial = particip_juego.get_hp_inicial_participante(jugador)
         hp_actual = particip_juego.get_hp_participante(jugador)
         hp_perdida = hp_inicial - hp_actual
@@ -95,7 +102,13 @@ def init_wish(form_dict_data: dict):
 
         print(f'Anterior HP: {hp_actual} | Actual HP: {nuevo_hp}')
         particip_juego.set_hp_participante(jugador, nuevo_hp)
-    
+    else:
+        # Imprime mensaje de escudo BONUS SHIELD activado -para el jugador
+        # Si el escudo està disponible, seteo su uso en False para la ronda en que se vaya a usar 
+        if form_stage.get_bonus_shield_available(stage_form) == True:
+            form_stage.set_bonus_shield_applied(stage_form,value=False)
+            print("BONUS SHIELD active: escudo activo para el jugador en la siguiente ronda")
+            
     click_resume('form_stage')
 
 def update(form_dict_data: dict):
